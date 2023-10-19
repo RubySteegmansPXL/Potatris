@@ -50,6 +50,7 @@ public static class EventManager
     public static void FullRow(CustomEventArgs e)
     {
         OnFullRow?.Invoke();
+        Debug.Log("FullRow called by " + e.Sender.name, e.Sender);
     }
 
     public static void BlockPlaced(CustomEventArgs e)
