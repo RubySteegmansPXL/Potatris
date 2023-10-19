@@ -8,7 +8,7 @@ public class Block : MonoBehaviour
     public int y;
 
     public bool isOccupied = false;
-    // TODO: Occupied by what?
+    public ShapeSegment segment;
 
     public Block(int x, int y)
     {
@@ -29,8 +29,22 @@ public class Block : MonoBehaviour
         transform.position = new Vector3(x, y, 0);
     }
 
-    public void SetOccupied(bool occupied)
+    public void SetOccupied(ShapeSegment segment)
     {
-        isOccupied = occupied;
+        this.segment = segment;
+        isOccupied = true;
+        GetComponent<SpriteRenderer>().color = isOccupied ? Color.red : Color.white;
+    }
+
+    public void SetUnoccupied()
+    {
+        isOccupied = false;
+        this.segment = null;
+        GetComponent<SpriteRenderer>().color = isOccupied ? Color.red : Color.white;
+    }
+
+    public void ChangeToYellow()
+    {
+        GetComponent<SpriteRenderer>().color = Color.yellow;
     }
 }
