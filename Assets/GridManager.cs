@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,12 @@ public class GridManager : MonoBehaviour
 
     private void Start()
     {
+        CreateGrid();
+    }
+
+
+    private void CreateGrid()
+    {
         grid = new Block[gridSize.x, gridSize.y];
         for (int x = 0; x < gridSize.x; x++)
         {
@@ -36,6 +43,8 @@ public class GridManager : MonoBehaviour
                 grid[x, y].SetPosition(x, y);
             }
         }
+
+        EventManager.GridCreate(new CustomEventArgs(gameObject));
     }
 
     private void OnDrawGizmosSelected()

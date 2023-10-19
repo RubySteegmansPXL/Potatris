@@ -14,49 +14,73 @@ public static class EventManager
     public static event Action OnFullRow;
     public static event Action OnBlockPlaced;
     public static event Action OnAchievementUnlocked;
+    public static event Action OnGridCreate;
+    public static event Action OnGridUpdate;
 
-    public static void Movement()
+    public static void Movement(CustomEventArgs e)
     {
         OnMove?.Invoke();
     }
 
-    public static void MoveDown()
+    public static void MovementDown(CustomEventArgs e)
     {
         OnMoveDown?.Invoke();
     }
 
-    public static void MoveLeft()
+    public static void MovementLeft(CustomEventArgs e)
     {
         OnMoveLeft?.Invoke();
     }
 
-    public static void MoveRight()
+    public static void MovementRight(CustomEventArgs e)
     {
         OnMoveRight?.Invoke();
     }
 
-    public static void GameStart()
+    public static void GameStart(CustomEventArgs e)
     {
         OnGameStart?.Invoke();
     }
 
-    public static void GameOver()
+    public static void GameOver(CustomEventArgs e)
     {
         OnGameOver?.Invoke();
     }
-    
-    public static void FullRow()
+
+    public static void FullRow(CustomEventArgs e)
     {
         OnFullRow?.Invoke();
     }
 
-    public static void BlockPlaced()
+    public static void BlockPlaced(CustomEventArgs e)
     {
         OnBlockPlaced?.Invoke();
     }
 
-    public static void AchievementUnlocked()
+    public static void AchievementUnlocked(CustomEventArgs e)
     {
         OnAchievementUnlocked?.Invoke();
+    }
+
+    public static void GridCreate(CustomEventArgs e)
+    {
+        OnGridCreate?.Invoke();
+        Debug.Log("GridCreate called by " + e.Sender.name, e.Sender);
+    }
+
+    public static void GridUpdate(CustomEventArgs e)
+    {
+        OnGridUpdate?.Invoke();
+    }
+}
+
+
+public class CustomEventArgs : EventArgs
+{
+    public GameObject Sender { get; }
+
+    public CustomEventArgs(GameObject sender)
+    {
+        Sender = sender;
     }
 }
