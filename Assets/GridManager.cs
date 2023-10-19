@@ -6,8 +6,24 @@ public class GridManager : MonoBehaviour
 {
     public GameObject blockPrefab;
     public Block[,] grid = new Block[10, 20];
-
     public Vector2Int gridSize = new Vector2Int(10, 20);
+
+    public static GridManager instance;
+
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(this);
+
+        }
+    }
 
     private void Start()
     {

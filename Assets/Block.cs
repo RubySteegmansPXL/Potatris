@@ -8,6 +8,7 @@ public class Block : MonoBehaviour
     public int y;
 
     public bool isOccupied = false;
+    // TODO: Occupied by what?
 
     public Block(int x, int y)
     {
@@ -31,21 +32,5 @@ public class Block : MonoBehaviour
     public void SetOccupied(bool occupied)
     {
         isOccupied = occupied;
-
-        if (isOccupied)
-        {
-            GetComponent<SpriteRenderer>().color = Color.red;
-        }
-        else
-        {
-            GetComponent<SpriteRenderer>().color = Color.white;
-        }
     }
-
-    private void OnMouseEnter()
-    {
-        SetOccupied(!isOccupied);
-    }
-
-
 }
