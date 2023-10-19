@@ -185,12 +185,37 @@ public class Shape : MonoBehaviour
             int xOffset = segment.x - centerSegment.x;
             int yOffset = segment.y - centerSegment.y;
 
+            // Check if we're trying to rotate the shape outside the bounds of the grid
+            if (!GridManager.instance.IsInsideBounds(centerSegment.x + yOffset, centerSegment.y - xOffset))
+            {
+                // TODO: Attempt to move the object left/right to yeet it back onto the grid
+                return;
+            }
+
+            // Do a collision check on that square to see if we can rotate it
+            Block block = GridManager.instance.GetBlockAt(centerSegment.x + yOffset, centerSegment.y - xOffset);
+            if (block != null && block.segment != null && !segments.Contains(block.segment))
+            {
+                Debug.Log("Collision detected, stopping rotation");
+                return;
+            }
+        }
+
+        // Actually move the shape if all the checks pass
+        foreach (ShapeSegment segment in segments)
+        {
+            int xOffset = segment.x - centerSegment.x;
+            int yOffset = segment.y - centerSegment.y;
+
             segment.Move(centerSegment.x + yOffset, centerSegment.y - xOffset);
         }
     }
 
     public void MoveRight()
     {
+        // Sort by x position in descending order
+        segments.Sort((a, b) => b.x.CompareTo(a.x));
+
         // Check if any of the blocks in the shape are not moveable
         foreach (ShapeSegment segment in segments)
         {
@@ -210,6 +235,9 @@ public class Shape : MonoBehaviour
 
     public void MoveLeft()
     {
+        // Sort by x position in ascending order
+        segments.Sort((a, b) => a.x.CompareTo(b.x));
+
         // Check if any of the blocks in the shape are not moveable
         foreach (ShapeSegment segment in segments)
         {

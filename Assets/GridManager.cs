@@ -107,6 +107,11 @@ public class GridManager : MonoBehaviour
         return grid[x - 1, y];
     }
 
+    public Block GetBlockAt(int x, int y)
+    {
+        return grid[x, y];
+    }
+
     public List<int> CheckForLines()
     {
         List<int> lines = new List<int>();
@@ -129,5 +134,10 @@ public class GridManager : MonoBehaviour
         }
 
         return lines;
+    }
+
+    public bool IsInsideBounds(int x, int y)
+    {
+        return x >= 0 && x < gridSize.x && y >= 0 && y < gridSize.y;
     }
 }
