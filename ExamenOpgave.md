@@ -21,7 +21,7 @@ Je kiest uit onderstaande lijst minstens voor 3 sterren aan uitbreidingen:
 * Je voorziet minstens 3 modifiers die de speler kan aan- of uitzetten. Bijvoorbeeld: de volgende blok is steeds onzichtbaar, geen lange blokken meer, een blok kan meer 2x gedraaid worden, etc. (1 ster)
 * Het spel is volledig speelbaar op Android (2 sterren)
 * De verschillende blokken in het spel zijn data-assets (scriptable objects) in je Unity project. Je voorziet een interne tool in Unity zodat de designer extra blokken kan aanmaken of bestaande blokken kan wijzigen. (2 sterren) 
-* Het spel kan gespeeld worden met 2 spelers. Elke keer als een speler een lijn vormt, krijgt de andere speler een nadelig effect (bijvoorbeeld een zeer bizar blokje, distortie op het scherm, tijdelijke verhoging van de snelheid). (3 sterren)
+* Het spel kan gespeeld worden met 2 spelers. Elke keer als een speler een lijn vormt, krijgt de andere speler een nadelig effect (bijvoorbeeld een zeer bizar blokje, distortie op het scherm, tijdelijke verhoging van de snelheid). (2 sterren)
 
 ## Indienen
 Je deelt je repository met sam.agten@pxl.be. Deze opgave zet je mee in de repository. Je deelt ook een build van het spel (.exe of .apk).
