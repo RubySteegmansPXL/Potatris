@@ -47,4 +47,5 @@ MonoBehaviour:
   segments: []
   centerSegmentIndex: 0
   bodySprite: {fileID: 21300000, guid: a289e0d5e3eb7ce458635e074700e6f0, type: 3}
+  defaultMoveSpeed: 1
   isMoving: 0

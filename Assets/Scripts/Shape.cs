@@ -8,6 +8,7 @@ public class Shape : MonoBehaviour
     public List<ShapeSegment> segments;
     public int centerSegmentIndex;
     public Sprite bodySprite;
+    public float defaultMoveSpeed = 1f;
 
     public bool isMoving = false;
 
@@ -54,9 +55,15 @@ public class Shape : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        MoveDownSmoothly();
+
+        if (Input.GetKey(KeyCode.DownArrow))
         {
-            MoveDownSmoothly();
+            defaultMoveSpeed = 4f;
+        }
+        else
+        {
+            defaultMoveSpeed = 1f;
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -91,19 +98,26 @@ public class Shape : MonoBehaviour
     private IEnumerator MoveDownSmoothlyCoroutine()
     {
         isMoving = true;
-        float time = 0;
-        float duration = 0.5f;
+        float accumulatedMove = 0f;
         Vector3 startPosition = transform.position;
-        Vector3 endPosition = new Vector3(startPosition.x, startPosition.y - 1, startPosition.z);
 
-        while (time < duration)
+        while (accumulatedMove < 1f)
         {
-            time += Time.deltaTime;
-            transform.position = Vector3.Lerp(startPosition, endPosition, time / duration);
+            float distanceToMoveThisFrame = defaultMoveSpeed * Time.deltaTime;
+            accumulatedMove += distanceToMoveThisFrame;
+
+            // Avoid overshooting the target
+            if (accumulatedMove > 1f)
+            {
+                distanceToMoveThisFrame -= accumulatedMove - 1f;
+            }
+
+            transform.position -= new Vector3(0, distanceToMoveThisFrame, 0);
             yield return null;
         }
 
-        transform.position = endPosition;
+        // Make sure to end up exactly 1 unit lower to avoid floating point errors
+        transform.position = new Vector3(startPosition.x, startPosition.y - 1, startPosition.z);
         isMoving = false;
 
         // Then, reset own position and change positions of all segments in the shape
@@ -115,9 +129,8 @@ public class Shape : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
 
         CheckBottomCollision();
-
-
     }
+
 
     public void CheckBottomCollision()
     {
