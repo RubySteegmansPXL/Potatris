@@ -32,13 +32,33 @@ public class Block : MonoBehaviour
 
     public void SetOccupied(ShapeSegment segment)
     {
+        GetComponent<SpriteRenderer>().color = Color.red;
         this.segment = segment;
         isOccupied = true;
     }
 
     public void SetUnoccupied()
     {
+        GetComponent<SpriteRenderer>().color = Color.white;
         isOccupied = false;
         this.segment = null;
+    }
+
+    public void MoveDownSegment()
+    {
+        if (segment != null)
+        {
+            segment.MoveDown();
+        }
+    }
+
+    public void SetLine()
+    {
+        GetComponent<SpriteRenderer>().color = Color.green;
+        if (segment != null)
+        {
+            Destroy(segment.gameObject);
+            segment = null;
+        }
     }
 }

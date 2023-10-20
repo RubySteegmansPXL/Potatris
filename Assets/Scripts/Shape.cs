@@ -15,12 +15,15 @@ public class Shape : MonoBehaviour
 
     public bool isMoving = false;
 
+
     public void CreateSegment(int x, int y, bool isCenter)
     {
         ShapeSegment newSegment = new GameObject().AddComponent<ShapeSegment>();
         newSegment.transform.parent = transform;
         newSegment.Create(x, y);
         newSegment.SetSprite(bodySprite);
+        // Transparent 50   
+        newSegment.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
 
         segments.Add(newSegment);
 
@@ -37,7 +40,7 @@ public class Shape : MonoBehaviour
         CreateSegment(0, 1, true);
         CreateSegment(0, 2, false);
         CreateSegment(1, 1, false);
-        CreateSegment(0, 3, false);
+        //CreateSegment(0, 3, false);
 
         SetPosition(5, 10);
         CheckBottomCollision();
@@ -268,14 +271,12 @@ public class Shape : MonoBehaviour
             Block blockBelow = GridManager.instance.GetBlockBelow(segment.x, segment.y);
             if (blockBelow != null && blockBelow.segment != null && segments.Contains(blockBelow.segment))
             {
-                Debug.Log("Block below is part of this shape, meaning it will move down with this shape.");
                 segment.SetMoveable(true);
                 continue;
             }
 
             else if (GridManager.instance.CheckForLowerCollision(segment.x, segment.y))
             {
-                Debug.Log("Collision detected, stopping shape.");
                 segment.SetMoveable(false);
 
                 // TODO: Give like a one second window to still move left/right
@@ -284,7 +285,6 @@ public class Shape : MonoBehaviour
 
             else
             {
-                Debug.Log("No collision detected.");
                 segment.SetMoveable(true);
             }
         }

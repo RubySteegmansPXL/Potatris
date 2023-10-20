@@ -83,7 +83,17 @@ public class GridManager : MonoBehaviour
         Block originalBlock = grid[originalX, originalY];
         Block newBlock = grid[newX, newY];
 
-        originalBlock.SetUnoccupied();
+        if (originalBlock == null || newBlock == null)
+        {
+            Debug.LogError("Block is null");
+            return;
+        }
+
+        if (originalBlock == newBlock) return;
+
+        if (originalBlock.segment == segment)
+            originalBlock.SetUnoccupied();
+
         newBlock.SetOccupied(segment);
     }
 
@@ -109,6 +119,7 @@ public class GridManager : MonoBehaviour
     public Block GetBlockAt(int x, int y)
     {
         if (x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y) return null;
+        grid[x, y].GetComponent<SpriteRenderer>().color = Color.yellow;
         return grid[x, y];
     }
 
@@ -130,6 +141,23 @@ public class GridManager : MonoBehaviour
             if (line)
             {
                 lines.Add(y);
+            }
+        }
+
+        foreach (int line in lines)
+        {
+            for (int x = 0; x < gridSize.x; x++)
+            {
+                grid[x, line].SetLine();
+            }
+
+            // Move all blocks above the line down
+            for (int y = line + 1; y < gridSize.y; y++)
+            {
+                for (int x = 0; x < gridSize.x; x++)
+                {
+                    grid[x, y].MoveDownSegment();
+                }
             }
         }
 
