@@ -9,18 +9,22 @@ public class Shape : MonoBehaviour
     public List<ShapeSegment> segments;
     public ShapeSegment centerSegment;
     public Sprite bodySprite;
-    public float defaultMoveSpeed = 1f;
+    public float defaultMoveSpeed = 3f;
+    public bool canRotate;
 
     public bool pauseMovement;
 
     public bool isMoving = false;
 
-    public void CreateSegment(int x, int y, bool isCenter)
+
+
+    public void CreateSegment(int x, int y, bool isCenter, SpriteData data, Sprite[] sprites, Sprite[] faces)
     {
         ShapeSegment newSegment = new GameObject().AddComponent<ShapeSegment>();
         newSegment.transform.parent = transform;
+        newSegment.Instantiate(data, sprites, faces);
         newSegment.Create(x, y);
-        newSegment.SetSprite(bodySprite);
+        // Transparent 50  
 
         segments.Add(newSegment);
 
@@ -28,19 +32,6 @@ public class Shape : MonoBehaviour
         {
             centerSegment = newSegment;
         }
-    }
-
-    private void Start()
-    {
-        // Test shape
-        CreateSegment(0, 0, false);
-        CreateSegment(0, 1, true);
-        CreateSegment(0, 2, false);
-        CreateSegment(1, 1, false);
-        CreateSegment(0, 3, false);
-
-        SetPosition(5, 10);
-        CheckBottomCollision();
     }
 
     public void SetPosition(int x, int y)
@@ -62,14 +53,14 @@ public class Shape : MonoBehaviour
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            defaultMoveSpeed = 4f;
+            defaultMoveSpeed = 8f;
         }
         else
         {
-            defaultMoveSpeed = 1f;
+            defaultMoveSpeed = 3f;
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) && canRotate)
         {
             RotateShapeRight();
         }
@@ -199,7 +190,6 @@ public class Shape : MonoBehaviour
             List<Vector2Int> shiftedLeft = newPositions.Select(pos => new Vector2Int(pos.x - 1, pos.y)).ToList();
 
             bool canShiftRight = false;
-            bool canShiftLeft = false;
             int maxHorizontalShift = segments.Max(s => Mathf.Abs(s.x - centerSegment.x));  // roughly the width of the shape
 
             // Try shifting right
@@ -225,7 +215,6 @@ public class Shape : MonoBehaviour
                     List<Vector2Int> shiftedPositions = newPositions.Select(pos => new Vector2Int(pos.x - shift, pos.y)).ToList();
                     if (!shiftedPositions.Any(pos => !IsValidPosition(pos.x, pos.y)))
                     {
-                        canShiftLeft = true;
                         for (int i = 0; i < segments.Count; i++)
                         {
                             segments[i].Move(shiftedPositions[i].x, shiftedPositions[i].y);
@@ -268,14 +257,12 @@ public class Shape : MonoBehaviour
             Block blockBelow = GridManager.instance.GetBlockBelow(segment.x, segment.y);
             if (blockBelow != null && blockBelow.segment != null && segments.Contains(blockBelow.segment))
             {
-                Debug.Log("Block below is part of this shape, meaning it will move down with this shape.");
                 segment.SetMoveable(true);
                 continue;
             }
 
             else if (GridManager.instance.CheckForLowerCollision(segment.x, segment.y))
             {
-                Debug.Log("Collision detected, stopping shape.");
                 segment.SetMoveable(false);
 
                 // TODO: Give like a one second window to still move left/right
@@ -284,7 +271,6 @@ public class Shape : MonoBehaviour
 
             else
             {
-                Debug.Log("No collision detected.");
                 segment.SetMoveable(true);
             }
         }
@@ -298,10 +284,16 @@ public class Shape : MonoBehaviour
             segment.transform.parent = null;
         }
 
+
+
         if (GridManager.instance.CheckForLines().Count > 0)
         {
             Debug.Log("Full row detected!");
         }
+
+        GridManager.instance.CheckForGameOver();
+
+        ShapeFactory.instance.StartNewShape();
 
         // Destroy the shape gameobject
         Destroy(gameObject);

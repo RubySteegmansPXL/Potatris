@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1133904748031659064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4981565441551488403}
+  - component: {fileID: 5033756091974223217}
+  m_Layer: 0
+  m_Name: ShapeFactorio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4981565441551488403
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133904748031659064}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.81170386, y: 1.3687396, z: 0.08808787}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5033756091974223217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133904748031659064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6abd976a404ea14092ea5373053f304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteBuildingBlocks:
+  - {fileID: 21300000, guid: d94f1f2ba27c05a4b83d59f7aa62406c, type: 3}
+  - {fileID: 21300000, guid: ff064023a184c874fa62d16d48059bf2, type: 3}
+  - {fileID: 21300000, guid: c8a283031dcd61a4f9f05268c2d90d2c, type: 3}
+  - {fileID: 21300000, guid: a5a12cc12af82e2478b07296bd99c472, type: 3}
+  faces:
+  - {fileID: 21300000, guid: 2393524ac86973e4c9dd7f1ba187bd01, type: 3}
+  - {fileID: 21300000, guid: 752f3425f9b6ef94ba55b829c36b013f, type: 3}
+  shapePrefab: {fileID: 3609273577574163131, guid: ed4b9c7e35319ce468a4c77d7e3a2f4a,
+    type: 3}
+  shapes:
+  - {fileID: 11400000, guid: 547eee7437ea3a64e8d9a33886f38656, type: 2}
+  - {fileID: 11400000, guid: 1cc7f6e0fc314994da732bdbd25ae2b6, type: 2}
+  - {fileID: 11400000, guid: e4166cea1a7b3c5438eeba6e37cac00e, type: 2}
+  sprites:
+  - {fileID: 11400000, guid: f36e732088f00c140a3e05f74fe5a6e3, type: 2}
+  - {fileID: 11400000, guid: c600a9dc7d86f6c489f31c8758e8338f, type: 2}
+  - {fileID: 11400000, guid: 73800834c71a1264d9076ec08dec0579, type: 2}

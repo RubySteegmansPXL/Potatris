@@ -13,6 +13,8 @@ public class GridManager : MonoBehaviour
     public static GridManager instance;
 
 
+    public bool isResetting = false;
+
     private void Awake()
     {
         if (instance == null)
@@ -80,10 +82,31 @@ public class GridManager : MonoBehaviour
 
     public void MoveBlock(ShapeSegment segment, int originalX, int originalY, int newX, int newY)
     {
-        Block originalBlock = grid[originalX, originalY];
+        if (!IsInsideBounds(newX, newY))
+        {
+            Debug.LogError("Block is outside of bounds");
+            return;
+        }
+
+        Block originalBlock = null;
+
+        if (IsInsideBounds(originalX, originalY))
+        {
+            originalBlock = grid[originalX, originalY];
+        }
         Block newBlock = grid[newX, newY];
 
-        originalBlock.SetUnoccupied();
+        if (newBlock == null)
+        {
+            Debug.LogError("Block is null");
+            return;
+        }
+
+        if (originalBlock == newBlock) return;
+
+        if (originalBlock != null && originalBlock.segment == segment)
+            originalBlock.SetUnoccupied();
+
         newBlock.SetOccupied(segment);
     }
 
@@ -109,6 +132,7 @@ public class GridManager : MonoBehaviour
     public Block GetBlockAt(int x, int y)
     {
         if (x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y) return null;
+        grid[x, y].GetComponent<SpriteRenderer>().color = Color.yellow;
         return grid[x, y];
     }
 
@@ -133,6 +157,23 @@ public class GridManager : MonoBehaviour
             }
         }
 
+        foreach (int line in lines)
+        {
+            for (int x = 0; x < gridSize.x; x++)
+            {
+                grid[x, line].SetLine();
+            }
+
+            // Move all blocks above the line down
+            for (int y = line + 1; y < gridSize.y; y++)
+            {
+                for (int x = 0; x < gridSize.x; x++)
+                {
+                    grid[x, y].MoveDownSegment();
+                }
+            }
+        }
+
         return lines;
     }
 
@@ -149,6 +190,49 @@ public class GridManager : MonoBehaviour
             return 1;
         else
             return 0;
+    }
+
+    public void CheckForGameOver()
+    {
+        // If the middle 5 squares of line 17 or higher are reached
+        for (int x = 3; x < 7; x++)
+        {
+            if (grid[x, 16].isOccupied)
+            {
+                EventManager.GameOver(new CustomEventArgs(gameObject));
+                Debug.LogWarning("Game Over");
+                StartCoroutine(ResetGame());
+                return;
+            }
+        }
+    }
+
+    IEnumerator ResetGame()
+    {
+        isResetting = true;
+        // for every line, set all blocks to unoccupied
+        for (int y = 0; y < gridSize.y; y++)
+        {
+            for (int x = 0; x < gridSize.x; x++)
+            {
+                grid[x, y].StartReset();
+            }
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        for (int x = 0; x < gridSize.x; x++)
+        {
+            for (int y = 0; y < gridSize.y; y++)
+            {
+                grid[x, y].Reset();
+            }
+        }
+
+        isResetting = false;
+
+        ShapeFactory.instance.StartNewShape();
     }
 
 }

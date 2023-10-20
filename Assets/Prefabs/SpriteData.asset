@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0bb9753fb81c144cbe15d0986adaa6b, type: 3}
-  m_Name: BlockData
+  m_Name: SpriteData
   m_EditorClassIdentifier: 
-  baseColor: {r: 1, g: 0.6030953, b: 0.35534585, a: 0}
-  accentColor: {r: 1, g: 0.4671101, b: 0.09119487, a: 0}
-  lightColor: {r: 1, g: 0.8047945, b: 0.6289308, a: 0}
+  baseColor: {r: 1, g: 0.14509805, b: 0.14509805, a: 1}
+  accentColor: {r: 0.6698113, g: 0.009478444, b: 0.009478444, a: 1}
+  lightColor: {r: 1, g: 0.6462264, b: 0.6462264, a: 1}

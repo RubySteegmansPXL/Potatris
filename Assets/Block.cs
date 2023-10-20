@@ -9,7 +9,6 @@ public class Block : MonoBehaviour
 
     public bool isOccupied = false;
     public ShapeSegment segment;
-    public BlockData blockData;
 
     public Block(int x, int y)
     {
@@ -32,13 +31,52 @@ public class Block : MonoBehaviour
 
     public void SetOccupied(ShapeSegment segment)
     {
+        GetComponent<SpriteRenderer>().color = Color.red;
         this.segment = segment;
         isOccupied = true;
     }
 
     public void SetUnoccupied()
     {
+        GetComponent<SpriteRenderer>().color = Color.white;
         isOccupied = false;
         this.segment = null;
+    }
+
+    public void MoveDownSegment()
+    {
+        if (segment != null)
+        {
+            segment.MoveDown();
+            SetUnoccupied();
+        }
+    }
+
+    public void SetLine()
+    {
+        GetComponent<SpriteRenderer>().color = Color.green;
+        if (segment != null)
+        {
+            Destroy(segment.gameObject);
+            segment = null;
+        }
+        SetUnoccupied();
+    }
+
+    public void StartReset()
+    {
+        GetComponent<SpriteRenderer>().color = Color.red;
+        if (segment != null)
+        {
+            Destroy(segment.gameObject);
+            segment = null;
+        }
+
+    }
+
+    public void Reset()
+    {
+        GetComponent<SpriteRenderer>().color = Color.white;
+        SetUnoccupied();
     }
 }
