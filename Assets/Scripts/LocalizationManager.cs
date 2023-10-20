@@ -30,16 +30,6 @@ public class LocalizationManager : MonoBehaviour
             return instance;
         }
     }
-
-    // private void OnEnable()
-    // {
-    //     EventManager.OnLanguageChanged += SetLanguage;
-    // }
-
-    // void OnDisable() 
-    // {
-    //     EventManager.OnMove -= SetLanguage;
-    // }
     private void Awake()
     {
         if (instance == null)
@@ -53,13 +43,6 @@ public class LocalizationManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    
-
-    // public void SetLanguage()
-    // {
-    //     currentLanguageCode = GameManager.instance.languageCode;
-    // }
 
     public void LoadTranslations()
     {
@@ -88,7 +71,7 @@ public class LocalizationManager : MonoBehaviour
                     string key = parts[0].Trim();
                     string nlTranslation = parts[2].Trim();
                     string enTranslation = parts[3].Trim();
-                    Debug.Log("Key: " + key + " NL: " + nlTranslation + " EN: " + enTranslation);
+                    //Debug.Log("Key: " + key + " NL: " + nlTranslation + " EN: " + enTranslation);
 
                     translations[key] = new Dictionary<string, string>
                     {
@@ -131,7 +114,6 @@ public class LocalizationManager : MonoBehaviour
     public string GetTranslation(string key)
         {
             string currentLanguageCode = GameManager.instance.languageCode; 
-            Debug.Log("Current language code: " + currentLanguageCode);
             if (translations.ContainsKey(key) && translations[key].ContainsKey(currentLanguageCode))
             {
                 return translations[key][currentLanguageCode];
