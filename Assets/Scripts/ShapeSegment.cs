@@ -19,10 +19,13 @@ public class ShapeSegment : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < spriteRenderers.Length; i++)
+        for (int i = 0; i < 5; i++)
         {
-            spriteRenderers[i] = gameObject.AddComponent<SpriteRenderer>();
-            spriteRenderers[i].sortingOrder = 1;
+            GameObject childObject = new GameObject();
+            childObject.transform.parent = transform;
+            childObject.AddComponent<SpriteRenderer>();
+            childObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
+            spriteRenderers[i] = childObject.GetComponent<SpriteRenderer>();
         }
     }
 
