@@ -17,12 +17,12 @@ public class Shape : MonoBehaviour
 
 
 
-    public void CreateSegment(int x, int y, bool isCenter)
+    public void CreateSegment(int x, int y, bool isCenter, SpriteRenderer[] renderers)
     {
         ShapeSegment newSegment = new GameObject().AddComponent<ShapeSegment>();
         newSegment.transform.parent = transform;
         newSegment.Create(x, y);
-        newSegment.SetSprite(bodySprite);
+        newSegment.SetSprites(renderers);
         // Transparent 50   
         newSegment.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
 
@@ -36,11 +36,6 @@ public class Shape : MonoBehaviour
 
     private void Start()
     {
-        // Test shape
-        CreateSegment(0, 0, false);
-        CreateSegment(0, 1, true);
-        CreateSegment(0, 2, false);
-        CreateSegment(1, 1, false);
         //CreateSegment(0, 3, false);
 
         SetPosition(5, 10);

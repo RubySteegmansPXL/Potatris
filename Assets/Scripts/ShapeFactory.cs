@@ -29,7 +29,7 @@ public class ShapeFactory : MonoBehaviour
         foreach(ShapeSegmentData segment in shapeData.segments)
         {
             FacePicker();
-            //shape.CreateSegment(segment.x, segment.y, segment.isCenter, spriteRenderers);
+            shape.CreateSegment(segment.x, segment.y, segment.isCenter, spriteRenderers);
         }
     }
 
