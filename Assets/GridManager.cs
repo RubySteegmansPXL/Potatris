@@ -84,7 +84,6 @@ public class GridManager : MonoBehaviour
     {
         if (!IsInsideBounds(newX, newY))
         {
-            Debug.LogError("Block is outside of bounds");
             return;
         }
 
@@ -105,7 +104,11 @@ public class GridManager : MonoBehaviour
         if (originalBlock == newBlock) return;
 
         if (originalBlock != null && originalBlock.segment == segment)
+        {
             originalBlock.SetUnoccupied();
+
+        }
+
 
         newBlock.SetOccupied(segment);
     }
@@ -230,9 +233,21 @@ public class GridManager : MonoBehaviour
             }
         }
 
+        RemoveBrokenBlocks();
         isResetting = false;
 
+
         ShapeFactory.instance.StartNewShape();
+    }
+
+    public void RemoveBrokenBlocks()
+    {
+        // Check if any blocks are floating 
+        GameObject[] blocks = GameObject.FindGameObjectsWithTag("TetrisBlock");
+        foreach (GameObject block in blocks)
+        {
+            Destroy(block);
+        }
     }
 
 }
