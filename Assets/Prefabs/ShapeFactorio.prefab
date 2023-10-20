@@ -56,5 +56,9 @@ MonoBehaviour:
     type: 3}
   shapes:
   - {fileID: 11400000, guid: 547eee7437ea3a64e8d9a33886f38656, type: 2}
+  - {fileID: 11400000, guid: 1cc7f6e0fc314994da732bdbd25ae2b6, type: 2}
+  - {fileID: 11400000, guid: e4166cea1a7b3c5438eeba6e37cac00e, type: 2}
   sprites:
   - {fileID: 11400000, guid: f36e732088f00c140a3e05f74fe5a6e3, type: 2}
+  - {fileID: 11400000, guid: c600a9dc7d86f6c489f31c8758e8338f, type: 2}
+  - {fileID: 11400000, guid: 73800834c71a1264d9076ec08dec0579, type: 2}

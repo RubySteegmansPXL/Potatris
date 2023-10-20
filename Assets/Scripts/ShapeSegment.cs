@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor.Build.Pipeline.Interfaces;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class ShapeSegment : MonoBehaviour
     public bool canMove { get; private set; } = true;
 
 
-    private SpriteRenderer[] spriteRenderers;
+    private SpriteRenderer[] spriteRenderers = new SpriteRenderer[5];
     private SpriteData spriteData;
     private Sprite[] sprites;
     private Sprite[] faces;
@@ -19,14 +20,16 @@ public class ShapeSegment : MonoBehaviour
 
     private void Awake()
     {
+        spriteRenderers = new SpriteRenderer[5];
         for (int i = 0; i < 5; i++)
         {
             GameObject childObject = new GameObject();
             childObject.transform.parent = transform;
-            childObject.AddComponent<SpriteRenderer>();
-            childObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
-            spriteRenderers[i] = childObject.GetComponent<SpriteRenderer>();
+            SpriteRenderer rend = childObject.AddComponent<SpriteRenderer>();
+            rend.sortingOrder = 1;
+            spriteRenderers[i] = rend;
         }
+
     }
 
     public void Create(int x, int y)
@@ -73,7 +76,7 @@ public class ShapeSegment : MonoBehaviour
         spriteRenderers[1].color = spriteData.accentColor;
         spriteRenderers[2].color = spriteData.lightColor;
 
-        for (int i = 0; i < spriteRenderers.Length - 1; i++)    
+        for (int i = 0; i < spriteRenderers.Length - 1; i++)
         {
             spriteRenderers[i].sprite = sprites[i];
         }
@@ -85,11 +88,11 @@ public class ShapeSegment : MonoBehaviour
         {
             if (Random.Range(0, 2) == 0)
             {
-                spriteRenderers[4].sprite = faces[4];
+                spriteRenderers[4].sprite = faces[0];
             }
             else
             {
-                spriteRenderers[4].sprite = faces[5];
+                spriteRenderers[4].sprite = faces[1];
             }
         }
     }

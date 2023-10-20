@@ -9,20 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0093c9160588f9042b2b56008f02755d, type: 3}
-  m_Name: ShapeData
+  m_Script: {fileID: 11500000, guid: c0bb9753fb81c144cbe15d0986adaa6b, type: 3}
+  m_Name: SpriteData 1
   m_EditorClassIdentifier: 
-  segments:
-  - x: 0
-    y: 0
-    isCenter: 1
-  - x: -1
-    y: 0
-    isCenter: 0
-  - x: 1
-    y: 0
-    isCenter: 0
-  - x: 0
-    y: 1
-    isCenter: 0
-  canRotate: 1
+  baseColor: {r: 0.14509803, g: 1, b: 0.3838919, a: 1}
+  accentColor: {r: 0, g: 0.7264151, b: 0.26184726, a: 1}
+  lightColor: {r: 0.8726415, g: 1, b: 0.9048852, a: 1}

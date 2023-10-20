@@ -26,6 +26,7 @@ public class ShapeFactory : MonoBehaviour
         shape = Instantiate(shapePrefab, transform.position, Quaternion.identity).GetComponent<Shape>();
         ChooseColor();
         BuildShape();
+
         shape.SetPosition(5, 15);
     }
 
@@ -34,8 +35,11 @@ public class ShapeFactory : MonoBehaviour
         int randomShapeIndex = Random.Range(0, shapes.Count);
         ShapeData shapeData = shapes[randomShapeIndex];
 
+        shape.canRotate = shapeData.canRotate;
+
         foreach (ShapeSegmentData segment in shapeData.segments)
         {
+            Debug.Log(shape.name);
             shape.CreateSegment(segment.x, segment.y, segment.isCenter, spriteData, spriteBuildingBlocks, faces);
         }
     }

@@ -10,6 +10,7 @@ public class Shape : MonoBehaviour
     public ShapeSegment centerSegment;
     public Sprite bodySprite;
     public float defaultMoveSpeed = 1f;
+    public bool canRotate;
 
     public bool pauseMovement;
 
@@ -23,8 +24,7 @@ public class Shape : MonoBehaviour
         newSegment.transform.parent = transform;
         newSegment.Instantiate(data, sprites, faces);
         newSegment.Create(x, y);
-        // Transparent 50   
-        newSegment.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
+        // Transparent 50  
 
         segments.Add(newSegment);
 
@@ -32,14 +32,6 @@ public class Shape : MonoBehaviour
         {
             centerSegment = newSegment;
         }
-    }
-
-    private void Start()
-    {
-        //CreateSegment(0, 3, false);
-
-        SetPosition(5, 10);
-        CheckBottomCollision();
     }
 
     public void SetPosition(int x, int y)
@@ -68,7 +60,7 @@ public class Shape : MonoBehaviour
             defaultMoveSpeed = 1f;
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) && canRotate)
         {
             RotateShapeRight();
         }

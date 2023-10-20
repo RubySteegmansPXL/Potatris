@@ -4,6 +4,7 @@ using UnityEngine;
 public class ShapeData : ScriptableObject
 {
     public ShapeSegmentData[] segments;
+    public bool canRotate;
 }
 
 [System.Serializable]

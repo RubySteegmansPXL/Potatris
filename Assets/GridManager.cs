@@ -80,10 +80,21 @@ public class GridManager : MonoBehaviour
 
     public void MoveBlock(ShapeSegment segment, int originalX, int originalY, int newX, int newY)
     {
-        Block originalBlock = grid[originalX, originalY];
+        if (!IsInsideBounds(newX, newY))
+        {
+            Debug.LogError("Block is outside of bounds");
+            return;
+        }
+
+        Block originalBlock = null;
+
+        if (IsInsideBounds(originalX, originalY))
+        {
+            originalBlock = grid[originalX, originalY];
+        }
         Block newBlock = grid[newX, newY];
 
-        if (originalBlock == null || newBlock == null)
+        if (newBlock == null)
         {
             Debug.LogError("Block is null");
             return;
@@ -91,7 +102,7 @@ public class GridManager : MonoBehaviour
 
         if (originalBlock == newBlock) return;
 
-        if (originalBlock.segment == segment)
+        if (originalBlock != null && originalBlock.segment == segment)
             originalBlock.SetUnoccupied();
 
         newBlock.SetOccupied(segment);
