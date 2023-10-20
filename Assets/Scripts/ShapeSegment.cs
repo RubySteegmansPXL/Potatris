@@ -10,12 +10,15 @@ public class ShapeSegment : MonoBehaviour
     public bool canMove { get; private set; } = true;
 
 
-    private SpriteRenderer spriteRenderer;
-
+    private SpriteRenderer[] spriteRenderers;
+    
     private void Awake()
     {
-        spriteRenderer = gameObject.GetOrAddComponent<SpriteRenderer>();
-        spriteRenderer.sortingOrder = 1;
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            spriteRenderers[i] = gameObject.AddComponent<SpriteRenderer>();
+            spriteRenderers[i].sortingOrder = 1;
+        }
     }
 
     public void Create(int x, int y)
@@ -24,8 +27,6 @@ public class ShapeSegment : MonoBehaviour
         this.y = y;
 
         transform.localPosition = new Vector3(x, y, 0);
-
-        GridManager.instance.CreateBlock(this, x, y);
     }
 
     public void Move(int x, int y)
@@ -45,9 +46,9 @@ public class ShapeSegment : MonoBehaviour
         Move(x, y - 1);
     }
 
-    public void SetSprite(Sprite sprite)
+    public void SetSprites(SpriteRenderer[] spriteRenderers)
     {
-        spriteRenderer.sprite = sprite;
+        this.spriteRenderers = spriteRenderers;
     }
 
     public void SetMoveable(bool moveable)
