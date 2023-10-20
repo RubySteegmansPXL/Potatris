@@ -9,7 +9,6 @@ public class Block : MonoBehaviour
 
     public bool isOccupied = false;
     public ShapeSegment segment;
-    public BlockData blockData;
 
     public Block(int x, int y)
     {

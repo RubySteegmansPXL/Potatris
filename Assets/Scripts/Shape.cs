@@ -16,6 +16,7 @@ public class Shape : MonoBehaviour
     public bool isMoving = false;
 
 
+
     public void CreateSegment(int x, int y, bool isCenter)
     {
         ShapeSegment newSegment = new GameObject().AddComponent<ShapeSegment>();
