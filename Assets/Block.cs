@@ -34,18 +34,11 @@ public class Block : MonoBehaviour
     {
         this.segment = segment;
         isOccupied = true;
-        GetComponent<SpriteRenderer>().color = isOccupied ? Color.red : Color.white;
     }
 
     public void SetUnoccupied()
     {
         isOccupied = false;
         this.segment = null;
-        GetComponent<SpriteRenderer>().color = isOccupied ? Color.red : Color.white;
-    }
-
-    public void ChangeToYellow()
-    {
-        GetComponent<SpriteRenderer>().color = Color.yellow;
     }
 }

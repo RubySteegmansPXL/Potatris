@@ -57,21 +57,18 @@ public class GridManager : MonoBehaviour
     public bool CheckForLowerCollision(int x, int y)
     {
         if (y <= 0) return true;
-        grid[x, y - 1].ChangeToYellow();
         return grid[x, y - 1].isOccupied;
     }
 
     public bool CheckForLeftCollision(int x, int y)
     {
         if (x <= 0) return true;
-        grid[x - 1, y].ChangeToYellow();
         return grid[x - 1, y].isOccupied;
     }
 
     public bool CheckForRightCollision(int x, int y)
     {
         if (x >= gridSize.x - 1) return true;
-        grid[x + 1, y].ChangeToYellow();
         return grid[x + 1, y].isOccupied;
     }
 
@@ -97,18 +94,21 @@ public class GridManager : MonoBehaviour
 
     public Block GetBlockRight(int x, int y)
     {
-        if (x >= gridSize.x - 1) return null;
-        return grid[x + 1, y];
+        x += 1;
+        if (x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y) return null;
+        return grid[x, y];
     }
 
     public Block GetBlockLeft(int x, int y)
     {
-        if (x <= 0) return null;
-        return grid[x - 1, y];
+        x -= 1;
+        if (x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y) return null;
+        return grid[x, y];
     }
 
     public Block GetBlockAt(int x, int y)
     {
+        if (x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y) return null;
         return grid[x, y];
     }
 
@@ -140,4 +140,15 @@ public class GridManager : MonoBehaviour
     {
         return x >= 0 && x < gridSize.x && y >= 0 && y < gridSize.y;
     }
+
+    public int SideOfBoard(int x)
+    {
+        if (x < gridSize.x / 2)
+            return -1;
+        else if (x > gridSize.x / 2)
+            return 1;
+        else
+            return 0;
+    }
+
 }

@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using System.Linq;
 
 public class Shape : MonoBehaviour
 {
     public List<ShapeSegment> segments;
-    public int centerSegmentIndex;
+    public ShapeSegment centerSegment;
     public Sprite bodySprite;
     public float defaultMoveSpeed = 1f;
+
+    public bool pauseMovement;
 
     public bool isMoving = false;
 
@@ -23,7 +26,7 @@ public class Shape : MonoBehaviour
 
         if (isCenter)
         {
-            centerSegmentIndex = segments.Count - 1;
+            centerSegment = newSegment;
         }
     }
 
@@ -34,6 +37,7 @@ public class Shape : MonoBehaviour
         CreateSegment(0, 1, true);
         CreateSegment(0, 2, false);
         CreateSegment(1, 1, false);
+        CreateSegment(0, 3, false);
 
         SetPosition(5, 10);
         CheckBottomCollision();
@@ -42,8 +46,7 @@ public class Shape : MonoBehaviour
     public void SetPosition(int x, int y)
     {
         transform.position = new Vector3(0, 0, 0);
-        // Set the position of the shape according to the center segment
-        ShapeSegment centerSegment = segments[centerSegmentIndex];
+        // Set the position of the shape according to the center segment;
         int xOffset = x - centerSegment.x;
         int yOffset = y - centerSegment.y;
 
@@ -80,6 +83,11 @@ public class Shape : MonoBehaviour
         {
             MoveLeft();
         }
+
+        if (pauseMovement)
+        {
+            defaultMoveSpeed = 0f;
+        }
     }
 
     public void MoveDownSmoothly()
@@ -90,6 +98,7 @@ public class Shape : MonoBehaviour
         foreach (ShapeSegment segment in segments)
         {
             if (!segment.canMove) return;
+            segment.MoveDown();
         }
 
         StartCoroutine(MoveDownSmoothlyCoroutine());
@@ -97,6 +106,7 @@ public class Shape : MonoBehaviour
 
     private IEnumerator MoveDownSmoothlyCoroutine()
     {
+        transform.position = new Vector3(0, 1, 0);
         isMoving = true;
         float accumulatedMove = 0f;
         Vector3 startPosition = transform.position;
@@ -121,15 +131,129 @@ public class Shape : MonoBehaviour
         isMoving = false;
 
         // Then, reset own position and change positions of all segments in the shape
-        foreach (ShapeSegment segment in segments)
-        {
-            segment.MoveDown();
-        }
 
         transform.position = new Vector3(0, 0, 0);
 
         CheckBottomCollision();
     }
+
+    public void RotateShapeRight()
+    {
+        // Store the original positions in case we need to revert the rotation
+        List<Vector2Int> originalPositions = new List<Vector2Int>();
+        foreach (ShapeSegment segment in segments)
+        {
+            originalPositions.Add(new Vector2Int(segment.x, segment.y));
+        }
+
+        List<Vector2Int> newPositions = new List<Vector2Int>();
+
+        // Calculate the hypothetical positions after rotation
+        foreach (ShapeSegment segment in segments)
+        {
+            if (segment != centerSegment)  // No need to rotate the center segment
+            {
+                int relativeX = segment.x - centerSegment.x;
+                int relativeY = segment.y - centerSegment.y;
+
+                int rotatedX = relativeY;
+                int rotatedY = -relativeX;
+
+                int newX = rotatedX + centerSegment.x;
+                int newY = rotatedY + centerSegment.y;
+
+                newPositions.Add(new Vector2Int(newX, newY));
+            }
+            else
+            {
+                // Center segment remains the same
+                newPositions.Add(new Vector2Int(segment.x, segment.y));
+            }
+        }
+
+        // Check for collisions at the new positions
+        bool collisionFound = false;
+        foreach (Vector2Int pos in newPositions)
+        {
+            if (!IsValidPosition(pos.x, pos.y))
+            {
+                collisionFound = true;
+                break;
+            }
+        }
+
+        if (!collisionFound)
+        {
+            // If no collisions, move to the new positions
+            for (int i = 0; i < segments.Count; i++)
+            {
+                segments[i].Move(newPositions[i].x, newPositions[i].y);
+            }
+        }
+
+        else
+        {
+            // Handle wall kicks: left, right, up, etc.
+            // For simplicity, let's just try a move to the right and then to the left
+            List<Vector2Int> shiftedRight = newPositions.Select(pos => new Vector2Int(pos.x + 1, pos.y)).ToList();
+            List<Vector2Int> shiftedLeft = newPositions.Select(pos => new Vector2Int(pos.x - 1, pos.y)).ToList();
+
+            bool canShiftRight = false;
+            bool canShiftLeft = false;
+            int maxHorizontalShift = segments.Max(s => Mathf.Abs(s.x - centerSegment.x));  // roughly the width of the shape
+
+            // Try shifting right
+            for (int shift = 1; shift <= maxHorizontalShift; shift++)
+            {
+                List<Vector2Int> shiftedPositions = newPositions.Select(pos => new Vector2Int(pos.x + shift, pos.y)).ToList();
+                if (!shiftedPositions.Any(pos => !IsValidPosition(pos.x, pos.y)))
+                {
+                    canShiftRight = true;
+                    for (int i = 0; i < segments.Count; i++)
+                    {
+                        segments[i].Move(shiftedPositions[i].x, shiftedPositions[i].y);
+                    }
+                    break;
+                }
+            }
+
+            // If couldn't shift right, try shifting left
+            if (!canShiftRight)
+            {
+                for (int shift = 1; shift <= maxHorizontalShift; shift++)
+                {
+                    List<Vector2Int> shiftedPositions = newPositions.Select(pos => new Vector2Int(pos.x - shift, pos.y)).ToList();
+                    if (!shiftedPositions.Any(pos => !IsValidPosition(pos.x, pos.y)))
+                    {
+                        canShiftLeft = true;
+                        for (int i = 0; i < segments.Count; i++)
+                        {
+                            segments[i].Move(shiftedPositions[i].x, shiftedPositions[i].y);
+                        }
+                        break;
+                    }
+                }
+            }
+
+
+            // If still colliding after horizontal wall kicks, try vertical wall kicks (move upwards)
+            int maxVerticalShift = segments.Max(s => Mathf.Abs(s.y - centerSegment.y));  // roughly the height of the shape
+
+            for (int verticalShift = 1; verticalShift <= maxVerticalShift; verticalShift++)
+            {
+                List<Vector2Int> shiftedUp = newPositions.Select(pos => new Vector2Int(pos.x, pos.y + verticalShift)).ToList();
+                if (!shiftedUp.Any(pos => !IsValidPosition(pos.x, pos.y)))
+                {
+                    for (int i = 0; i < segments.Count; i++)
+                    {
+                        segments[i].Move(shiftedUp[i].x, shiftedUp[i].y);
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
 
 
     public void CheckBottomCollision()
@@ -184,45 +308,7 @@ public class Shape : MonoBehaviour
 
     }
 
-    public void RotateShapeRight()
-    {
-        // Rotate the shape around the center segment
-        // Calculate the offset of each segment from the center segment
-        // Then, rotate each segment around the center segment by the offset 90 degrees clockwise
-        ShapeSegment centerSegment = segments[centerSegmentIndex];
 
-        foreach (ShapeSegment segment in segments)
-        {
-            if (segment == centerSegment) continue;
-
-            int xOffset = segment.x - centerSegment.x;
-            int yOffset = segment.y - centerSegment.y;
-
-            // Check if we're trying to rotate the shape outside the bounds of the grid
-            if (!GridManager.instance.IsInsideBounds(centerSegment.x + yOffset, centerSegment.y - xOffset))
-            {
-                // TODO: Attempt to move the object left/right to yeet it back onto the grid
-                return;
-            }
-
-            // Do a collision check on that square to see if we can rotate it
-            Block block = GridManager.instance.GetBlockAt(centerSegment.x + yOffset, centerSegment.y - xOffset);
-            if (block != null && block.segment != null && !segments.Contains(block.segment))
-            {
-                Debug.Log("Collision detected, stopping rotation");
-                return;
-            }
-        }
-
-        // Actually move the shape if all the checks pass
-        foreach (ShapeSegment segment in segments)
-        {
-            int xOffset = segment.x - centerSegment.x;
-            int yOffset = segment.y - centerSegment.y;
-
-            segment.Move(centerSegment.x + yOffset, centerSegment.y - xOffset);
-        }
-    }
 
     public void MoveRight()
     {
@@ -275,19 +361,14 @@ public class Shape : MonoBehaviour
             Block blockLeft = GridManager.instance.GetBlockLeft(segment.x, segment.y);
             if (blockLeft != null && blockLeft.segment != null && segments.Contains(blockLeft.segment))
             {
-                Debug.Log("Block left is part of this shape, meaning it will move left with this shape.");
+
                 return false;
             }
 
             else if (GridManager.instance.CheckForLeftCollision(segment.x, segment.y))
             {
-                Debug.Log("Collision detected, stopping shape.");
-                return true;
-            }
 
-            else
-            {
-                Debug.Log("No collision detected.");
+                return true;
             }
         }
 
@@ -301,22 +382,25 @@ public class Shape : MonoBehaviour
             Block blockRight = GridManager.instance.GetBlockRight(segment.x, segment.y);
             if (blockRight != null && blockRight.segment != null && segments.Contains(blockRight.segment))
             {
-                Debug.Log("Block right is part of this shape, meaning it will move right with this shape.");
+
                 return false;
             }
 
             else if (GridManager.instance.CheckForRightCollision(segment.x, segment.y))
             {
-                Debug.Log("Collision detected, stopping shape.");
-                return true;
-            }
 
-            else
-            {
-                Debug.Log("No collision detected.");
+                return true;
             }
         }
 
         return false;
+    }
+
+    public bool IsValidPosition(int x, int y)
+    {
+        Block block = GridManager.instance.GetBlockAt(x, y);
+        if (block == null) return false;
+        if (block.isOccupied && !segments.Contains(block.segment)) return false;
+        return true;
     }
 }
