@@ -17,12 +17,12 @@ public class Shape : MonoBehaviour
 
 
 
-    public void CreateSegment(int x, int y, bool isCenter, SpriteRenderer[] renderers)
+    public void CreateSegment(int x, int y, bool isCenter, SpriteData data, Sprite[] sprites, Sprite[] faces)
     {
         ShapeSegment newSegment = new GameObject().AddComponent<ShapeSegment>();
         newSegment.transform.parent = transform;
+        newSegment.Instantiate(data, sprites, faces);
         newSegment.Create(x, y);
-        newSegment.SetSprites(renderers);
         // Transparent 50   
         newSegment.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
 

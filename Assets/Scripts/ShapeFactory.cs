@@ -12,7 +12,6 @@ public class ShapeFactory : MonoBehaviour
 
     private Shape shape;
     private SpriteData spriteData;
-    private SpriteRenderer[] spriteRenderers = new SpriteRenderer[5];
 
     private void Update()
     {
@@ -26,7 +25,6 @@ public class ShapeFactory : MonoBehaviour
     {
         shape = Instantiate(shapePrefab, transform.position, Quaternion.identity).GetComponent<Shape>();
         ChooseColor();
-        ColorSprites();
         BuildShape();
     }
 
@@ -37,41 +35,12 @@ public class ShapeFactory : MonoBehaviour
 
         foreach (ShapeSegmentData segment in shapeData.segments)
         {
-            FacePicker();
-            shape.CreateSegment(segment.x, segment.y, segment.isCenter, spriteRenderers);
+            shape.CreateSegment(segment.x, segment.y, segment.isCenter, spriteData, spriteBuildingBlocks, faces);
         }
     }
-
     void ChooseColor()
     {
         int randomSpriteIndex = Random.Range(0, sprites.Count);
         spriteData = sprites[randomSpriteIndex];
-    }
-
-    void ColorSprites()
-    {
-        spriteRenderers[0].color = spriteData.baseColor;
-        spriteRenderers[1].color = spriteData.accentColor;
-        spriteRenderers[2].color = spriteData.lightColor;
-
-        for (int i = 0; i < spriteRenderers.Length - 1; i++)
-        {
-            spriteRenderers[i].sprite = spriteBuildingBlocks[i];
-        }
-    }
-
-    void FacePicker()
-    {
-        if (Random.Range(0, 4) == 1)
-        {
-            if (Random.Range(0, 2) == 0)
-            {
-                spriteRenderers[4].sprite = spriteBuildingBlocks[4];
-            }
-            else
-            {
-                spriteRenderers[4].sprite = spriteBuildingBlocks[5];
-            }
-        }
     }
 }

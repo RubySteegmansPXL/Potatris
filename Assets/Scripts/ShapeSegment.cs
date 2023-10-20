@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Pipeline.Interfaces;
 using UnityEngine;
 
 public class ShapeSegment : MonoBehaviour
@@ -11,7 +12,11 @@ public class ShapeSegment : MonoBehaviour
 
 
     private SpriteRenderer[] spriteRenderers;
-    
+    private SpriteData spriteData;
+    private Sprite[] sprites;
+    private Sprite[] faces;
+
+
     private void Awake()
     {
         for (int i = 0; i < spriteRenderers.Length; i++)
@@ -27,6 +32,8 @@ public class ShapeSegment : MonoBehaviour
         this.y = y;
 
         transform.localPosition = new Vector3(x, y, 0);
+        ColorSprites();
+        FacePicker();
     }
 
     public void Move(int x, int y)
@@ -46,13 +53,41 @@ public class ShapeSegment : MonoBehaviour
         Move(x, y - 1);
     }
 
-    public void SetSprites(SpriteRenderer[] spriteRenderers)
-    {
-        this.spriteRenderers = spriteRenderers;
-    }
-
     public void SetMoveable(bool moveable)
     {
         canMove = moveable;
+    }
+    public void Instantiate(SpriteData spriteData, Sprite[] sprites, Sprite[] faces)
+    {
+        this.spriteData = spriteData;
+        this.sprites = sprites;
+        this.faces = faces;
+    }
+
+    void ColorSprites()
+    {
+        spriteRenderers[0].color = spriteData.baseColor;
+        spriteRenderers[1].color = spriteData.accentColor;
+        spriteRenderers[2].color = spriteData.lightColor;
+
+        for (int i = 0; i < spriteRenderers.Length - 1; i++)    
+        {
+            spriteRenderers[i].sprite = sprites[i];
+        }
+    }
+
+    void FacePicker()
+    {
+        if (Random.Range(0, 4) == 1)
+        {
+            if (Random.Range(0, 2) == 0)
+            {
+                spriteRenderers[4].sprite = faces[4];
+            }
+            else
+            {
+                spriteRenderers[4].sprite = faces[5];
+            }
+        }
     }
 }
