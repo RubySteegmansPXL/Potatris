@@ -9,7 +9,7 @@ public class Shape : MonoBehaviour
     public List<ShapeSegment> segments;
     public ShapeSegment centerSegment;
     public Sprite bodySprite;
-    public float defaultMoveSpeed = 1f;
+    public float defaultMoveSpeed = 3f;
     public bool canRotate;
 
     public bool pauseMovement;
@@ -53,11 +53,11 @@ public class Shape : MonoBehaviour
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            defaultMoveSpeed = 4f;
+            defaultMoveSpeed = 8f;
         }
         else
         {
-            defaultMoveSpeed = 1f;
+            defaultMoveSpeed = 3f;
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && canRotate)

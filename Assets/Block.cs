@@ -48,6 +48,7 @@ public class Block : MonoBehaviour
         if (segment != null)
         {
             segment.MoveDown();
+            SetUnoccupied();
         }
     }
 
@@ -59,5 +60,6 @@ public class Block : MonoBehaviour
             Destroy(segment.gameObject);
             segment = null;
         }
+        SetUnoccupied();
     }
 }
