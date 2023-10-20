@@ -62,4 +62,21 @@ public class Block : MonoBehaviour
         }
         SetUnoccupied();
     }
+
+    public void StartReset()
+    {
+        GetComponent<SpriteRenderer>().color = Color.red;
+        if (segment != null)
+        {
+            Destroy(segment.gameObject);
+            segment = null;
+        }
+
+    }
+
+    public void Reset()
+    {
+        GetComponent<SpriteRenderer>().color = Color.white;
+        SetUnoccupied();
+    }
 }

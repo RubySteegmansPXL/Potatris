@@ -13,6 +13,19 @@ public class ShapeFactory : MonoBehaviour
     private Shape shape;
     private SpriteData spriteData;
 
+    public static ShapeFactory instance;
+    private Coroutine shapeRoutine;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else Destroy(this);
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -21,13 +34,29 @@ public class ShapeFactory : MonoBehaviour
         }
     }
 
-    void CreateShape()
+    public void StartNewShape()
+    {
+        if (shapeRoutine == null && !GridManager.instance.isResetting)
+        {
+            shapeRoutine = StartCoroutine(CreateShapeCoroutine());
+        }
+    }
+
+    IEnumerator CreateShapeCoroutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        CreateShape();
+        StopCoroutine(shapeRoutine);
+        shapeRoutine = null;
+    }
+
+    public void CreateShape()
     {
         shape = Instantiate(shapePrefab, transform.position, Quaternion.identity).GetComponent<Shape>();
         ChooseColor();
         BuildShape();
 
-        shape.SetPosition(5, 15);
+        shape.SetPosition(4, 17);
     }
 
     void BuildShape()

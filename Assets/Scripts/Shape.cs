@@ -190,7 +190,6 @@ public class Shape : MonoBehaviour
             List<Vector2Int> shiftedLeft = newPositions.Select(pos => new Vector2Int(pos.x - 1, pos.y)).ToList();
 
             bool canShiftRight = false;
-            bool canShiftLeft = false;
             int maxHorizontalShift = segments.Max(s => Mathf.Abs(s.x - centerSegment.x));  // roughly the width of the shape
 
             // Try shifting right
@@ -216,7 +215,6 @@ public class Shape : MonoBehaviour
                     List<Vector2Int> shiftedPositions = newPositions.Select(pos => new Vector2Int(pos.x - shift, pos.y)).ToList();
                     if (!shiftedPositions.Any(pos => !IsValidPosition(pos.x, pos.y)))
                     {
-                        canShiftLeft = true;
                         for (int i = 0; i < segments.Count; i++)
                         {
                             segments[i].Move(shiftedPositions[i].x, shiftedPositions[i].y);
@@ -286,10 +284,16 @@ public class Shape : MonoBehaviour
             segment.transform.parent = null;
         }
 
+
+
         if (GridManager.instance.CheckForLines().Count > 0)
         {
             Debug.Log("Full row detected!");
         }
+
+        GridManager.instance.CheckForGameOver();
+
+        ShapeFactory.instance.StartNewShape();
 
         // Destroy the shape gameobject
         Destroy(gameObject);

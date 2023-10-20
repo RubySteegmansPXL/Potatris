@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -422,36 +422,55 @@ PrefabInstance:
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
       propertyPath: shapes.Array.size
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
-      propertyPath: sprites.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
-        type: 3}
-      propertyPath: shapes.Array.data[1]
+      propertyPath: shapes.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 1cc7f6e0fc314994da732bdbd25ae2b6,
         type: 2}
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
+      propertyPath: shapes.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: afc088e857b97ee46ba7f119c6d44fd3,
+        type: 2}
+    - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
+        type: 3}
       propertyPath: shapes.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 526cb33e6fe050a4ea93139815a37a2b,
+        type: 2}
+    - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
+        type: 3}
+      propertyPath: shapes.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: e4166cea1a7b3c5438eeba6e37cac00e,
         type: 2}
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
-      propertyPath: sprites.Array.data[1]
+      propertyPath: shapes.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: c600a9dc7d86f6c489f31c8758e8338f,
+      objectReference: {fileID: 11400000, guid: 791a3e2a6b31a3f4b8fec74112354d43,
         type: 2}
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
-      propertyPath: sprites.Array.data[2]
+      propertyPath: shapes.Array.data[5]
       value: 
-      objectReference: {fileID: 11400000, guid: 73800834c71a1264d9076ec08dec0579,
+      objectReference: {fileID: 11400000, guid: 547eee7437ea3a64e8d9a33886f38656,
+        type: 2}
+    - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
+        type: 3}
+      propertyPath: shapes.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: c53e49054f98ce34d83567fc7187f13c,
+        type: 2}
+    - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
+        type: 3}
+      propertyPath: shapes.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 20f42d62ace04b349a7bb94ec36ca5bb,
         type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

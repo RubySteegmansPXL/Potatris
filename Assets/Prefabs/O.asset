@@ -10,13 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0093c9160588f9042b2b56008f02755d, type: 3}
-  m_Name: ShapeData
+  m_Name: O
   m_EditorClassIdentifier: 
   segments:
   - x: 0
-    y: 0
-    isCenter: 1
-  - x: -1
     y: 0
     isCenter: 0
   - x: 1
@@ -24,5 +21,8 @@ MonoBehaviour:
     isCenter: 0
   - x: 0
     y: 1
+    isCenter: 1
+  - x: 1
+    y: 1
     isCenter: 0
-  canRotate: 1
+  canRotate: 0

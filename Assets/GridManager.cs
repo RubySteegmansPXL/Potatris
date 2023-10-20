@@ -13,6 +13,8 @@ public class GridManager : MonoBehaviour
     public static GridManager instance;
 
 
+    public bool isResetting = false;
+
     private void Awake()
     {
         if (instance == null)
@@ -188,6 +190,49 @@ public class GridManager : MonoBehaviour
             return 1;
         else
             return 0;
+    }
+
+    public void CheckForGameOver()
+    {
+        // If the middle 5 squares of line 17 or higher are reached
+        for (int x = 3; x < 7; x++)
+        {
+            if (grid[x, 16].isOccupied)
+            {
+                EventManager.GameOver(new CustomEventArgs(gameObject));
+                Debug.LogWarning("Game Over");
+                StartCoroutine(ResetGame());
+                return;
+            }
+        }
+    }
+
+    IEnumerator ResetGame()
+    {
+        isResetting = true;
+        // for every line, set all blocks to unoccupied
+        for (int y = 0; y < gridSize.y; y++)
+        {
+            for (int x = 0; x < gridSize.x; x++)
+            {
+                grid[x, y].StartReset();
+            }
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        for (int x = 0; x < gridSize.x; x++)
+        {
+            for (int y = 0; y < gridSize.y; y++)
+            {
+                grid[x, y].Reset();
+            }
+        }
+
+        isResetting = false;
+
+        ShapeFactory.instance.StartNewShape();
     }
 
 }
