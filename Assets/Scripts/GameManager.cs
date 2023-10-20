@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +11,31 @@ public enum GameState
     GAMEOVER
 }
 
+public enum Language 
+{
+    [StringValue("en")]
+    ENGLISH,
+
+    [StringValue("nl")]
+    DUTCH
+}
+
+[AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
+sealed class StringValueAttribute : Attribute
+{
+    public string Value { get; }
+
+    public StringValueAttribute(string value)
+    {
+        Value = value;
+    }
+}
+
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public Language language = Language.ENGLISH; // Default language
 
     private void Awake()
     {
@@ -61,5 +84,11 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void SetLanguage(string language)
+    {
+        this.language = (Language)Enum.Parse(typeof(Language), language);
+        Debug.Log(this.language);
     }
 }

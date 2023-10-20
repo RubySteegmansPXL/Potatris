@@ -58,6 +58,7 @@ public class LocalizationManager : MonoBehaviour
         {
             currentLanguage = "en"; // Fallback to English if the requested language is not found.
         }
+        Debug.Log(currentLanguage);
     }
 
     public void LoadTranslations()

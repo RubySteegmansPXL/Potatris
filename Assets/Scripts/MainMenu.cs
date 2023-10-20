@@ -21,7 +21,6 @@ public class MainMenu : MonoBehaviour
 
         startButton.onClick.AddListener(StartButtonClicked);
         quitButton.onClick.AddListener(QuitButtonClicked);
-
     }
 
     private void StartButtonClicked()
