@@ -24,6 +24,7 @@ public class Shape : MonoBehaviour
         newSegment.transform.parent = transform;
         newSegment.Instantiate(data, sprites, faces);
         newSegment.Create(x, y);
+        newSegment.tag = "TetrisBlock";
         // Transparent 50  
 
         segments.Add(newSegment);
