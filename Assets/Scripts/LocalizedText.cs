@@ -12,6 +12,16 @@ public class LocalizedText : MonoBehaviour
         UpdateText();
     }
 
+    private void OnEnable()
+    {
+        EventManager.OnLanguageChanged += UpdateText;
+    }
+
+    void OnDisable() 
+    {
+        EventManager.OnMove -= UpdateText;
+    }
+
     public void UpdateText()
     {
         if (textMeshPro != null)

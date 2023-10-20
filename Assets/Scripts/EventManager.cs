@@ -16,6 +16,7 @@ public static class EventManager
     public static event Action OnAchievementUnlocked;
     public static event Action OnGridCreate;
     public static event Action OnGridUpdate;
+    public static event Action OnLanguageChanged;
 
     public static void Movement(CustomEventArgs e)
     {
@@ -72,6 +73,11 @@ public static class EventManager
     public static void GridUpdate(CustomEventArgs e)
     {
         OnGridUpdate?.Invoke();
+    }
+
+    public static void LanguageChanged(CustomEventArgs e)
+    {
+        OnLanguageChanged?.Invoke();
     }
 }
 

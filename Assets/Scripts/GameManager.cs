@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +11,11 @@ public enum GameState
     GAMEOVER
 }
 
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public string languageCode = "en"; // Default language
 
     private void Awake()
     {
@@ -61,5 +64,13 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void SetLanguageCode(string languageName)
+    {
+        // Convert the language name to a language code.
+        languageCode = LanguageManager.Instance.GetLanguageCode(languageName);
+        // Call the LanguageChanged event.
+        EventManager.LanguageChanged(new CustomEventArgs(gameObject));
     }
 }

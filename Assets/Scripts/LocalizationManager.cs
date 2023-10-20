@@ -7,7 +7,6 @@ using UnityEngine;
 public class LocalizationManager : MonoBehaviour
 {
     private Dictionary<string, Dictionary<string, string>> translations;
-    public string currentLanguage = "en"; // Default language
     private string csvFilePath = "Assets/Localization/translations.csv";
 
     private static LocalizationManager instance;
@@ -31,7 +30,6 @@ public class LocalizationManager : MonoBehaviour
             return instance;
         }
     }
-
     private void Awake()
     {
         if (instance == null)
@@ -43,20 +41,6 @@ public class LocalizationManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
-    }
-
-    
-
-    public void SetLanguage(string languageCode)
-    {
-        if (translations.ContainsKey(languageCode))
-        {
-            currentLanguage = languageCode;
-        }
-        else
-        {
-            currentLanguage = "en"; // Fallback to English if the requested language is not found.
         }
     }
 
@@ -87,7 +71,7 @@ public class LocalizationManager : MonoBehaviour
                     string key = parts[0].Trim();
                     string nlTranslation = parts[2].Trim();
                     string enTranslation = parts[3].Trim();
-                    Debug.Log("Key: " + key + " NL: " + nlTranslation + " EN: " + enTranslation);
+                    //Debug.Log("Key: " + key + " NL: " + nlTranslation + " EN: " + enTranslation);
 
                     translations[key] = new Dictionary<string, string>
                     {
@@ -129,9 +113,10 @@ public class LocalizationManager : MonoBehaviour
 
     public string GetTranslation(string key)
         {
-            if (translations.ContainsKey(key) && translations[key].ContainsKey(currentLanguage))
+            string currentLanguageCode = GameManager.instance.languageCode; 
+            if (translations.ContainsKey(key) && translations[key].ContainsKey(currentLanguageCode))
             {
-                return translations[key][currentLanguage];
+                return translations[key][currentLanguageCode];
             }
             else
             {
