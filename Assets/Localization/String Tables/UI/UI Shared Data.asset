@@ -19,6 +19,14 @@ MonoBehaviour:
     m_Key: main_menu_credits
     m_Metadata:
       m_Items: []
+  - m_Id: 271410388586496
+    m_Key: main_menu_start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292290787332096
+    m_Key: main_menu_quit
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -22,6 +22,14 @@ MonoBehaviour:
     m_Localized: By Ben, Ruby and Kaylie
     m_Metadata:
       m_Items: []
+  - m_Id: 271410388586496
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292290787332096
+    m_Localized: Quit
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
