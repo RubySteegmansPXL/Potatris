@@ -84,7 +84,6 @@ public class GridManager : MonoBehaviour
     {
         if (!IsInsideBounds(newX, newY))
         {
-            Debug.LogError("Block is outside of bounds");
             return;
         }
 

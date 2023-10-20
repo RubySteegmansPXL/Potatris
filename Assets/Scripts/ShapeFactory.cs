@@ -8,7 +8,6 @@ public class ShapeFactory : MonoBehaviour
     public Sprite[] faces;
     public GameObject shapePrefab;
     public List<ShapeData> shapes;
-    public List<SpriteData> sprites;
 
     private Shape shape;
     private SpriteData spriteData;
@@ -53,7 +52,6 @@ public class ShapeFactory : MonoBehaviour
     public void CreateShape()
     {
         shape = Instantiate(shapePrefab, transform.position, Quaternion.identity).GetComponent<Shape>();
-        ChooseColor();
         BuildShape();
 
         shape.SetPosition(4, 17);
@@ -69,12 +67,7 @@ public class ShapeFactory : MonoBehaviour
         foreach (ShapeSegmentData segment in shapeData.segments)
         {
             Debug.Log(shape.name);
-            shape.CreateSegment(segment.x, segment.y, segment.isCenter, spriteData, spriteBuildingBlocks, faces);
+            shape.CreateSegment(segment.x, segment.y, segment.isCenter, shapeData.spriteData, spriteBuildingBlocks, faces);
         }
-    }
-    void ChooseColor()
-    {
-        int randomSpriteIndex = Random.Range(0, sprites.Count);
-        spriteData = sprites[randomSpriteIndex];
     }
 }

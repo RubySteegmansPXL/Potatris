@@ -5,6 +5,7 @@ public class ShapeData : ScriptableObject
 {
     public ShapeSegmentData[] segments;
     public bool canRotate;
+    public SpriteData spriteData;
 }
 
 [System.Serializable]
