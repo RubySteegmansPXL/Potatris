@@ -11,31 +11,11 @@ public enum GameState
     GAMEOVER
 }
 
-public enum Language 
-{
-    [StringValue("en")]
-    ENGLISH,
-
-    [StringValue("nl")]
-    DUTCH
-}
-
-[AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
-sealed class StringValueAttribute : Attribute
-{
-    public string Value { get; }
-
-    public StringValueAttribute(string value)
-    {
-        Value = value;
-    }
-}
-
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public Language language = Language.ENGLISH; // Default language
+    public string languageCode = "en"; // Default language
 
     private void Awake()
     {
@@ -86,9 +66,11 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void SetLanguage(string language)
+    public void SetLanguageCode(string languageName)
     {
-        this.language = (Language)Enum.Parse(typeof(Language), language);
-        Debug.Log(this.language);
+        // Convert the language name to a language code.
+        languageCode = LanguageManager.Instance.GetLanguageCode(languageName);
+        // Call the LanguageChanged event.
+        EventManager.LanguageChanged(new CustomEventArgs(gameObject));
     }
 }

@@ -11,6 +11,6 @@ public class LanguageDropdownHandler : MonoBehaviour
         string selectedLanguage = languageDropdown.options[index].text;
         
         // Set the selected language in the GameManager.
-        GameManager.instance.SetLanguage(selectedLanguage.ToUpper());
+        GameManager.instance.SetLanguageCode(selectedLanguage);
     }
 }

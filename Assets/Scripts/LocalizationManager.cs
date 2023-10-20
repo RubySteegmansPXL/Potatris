@@ -7,7 +7,6 @@ using UnityEngine;
 public class LocalizationManager : MonoBehaviour
 {
     private Dictionary<string, Dictionary<string, string>> translations;
-    public string currentLanguage = "en"; // Default language
     private string csvFilePath = "Assets/Localization/translations.csv";
 
     private static LocalizationManager instance;
@@ -32,6 +31,15 @@ public class LocalizationManager : MonoBehaviour
         }
     }
 
+    // private void OnEnable()
+    // {
+    //     EventManager.OnLanguageChanged += SetLanguage;
+    // }
+
+    // void OnDisable() 
+    // {
+    //     EventManager.OnMove -= SetLanguage;
+    // }
     private void Awake()
     {
         if (instance == null)
@@ -48,18 +56,10 @@ public class LocalizationManager : MonoBehaviour
 
     
 
-    public void SetLanguage(string languageCode)
-    {
-        if (translations.ContainsKey(languageCode))
-        {
-            currentLanguage = languageCode;
-        }
-        else
-        {
-            currentLanguage = "en"; // Fallback to English if the requested language is not found.
-        }
-        Debug.Log(currentLanguage);
-    }
+    // public void SetLanguage()
+    // {
+    //     currentLanguageCode = GameManager.instance.languageCode;
+    // }
 
     public void LoadTranslations()
     {
@@ -130,9 +130,11 @@ public class LocalizationManager : MonoBehaviour
 
     public string GetTranslation(string key)
         {
-            if (translations.ContainsKey(key) && translations[key].ContainsKey(currentLanguage))
+            string currentLanguageCode = GameManager.instance.languageCode; 
+            Debug.Log("Current language code: " + currentLanguageCode);
+            if (translations.ContainsKey(key) && translations[key].ContainsKey(currentLanguageCode))
             {
-                return translations[key][currentLanguage];
+                return translations[key][currentLanguageCode];
             }
             else
             {
