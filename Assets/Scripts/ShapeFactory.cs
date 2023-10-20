@@ -26,6 +26,7 @@ public class ShapeFactory : MonoBehaviour
         shape = Instantiate(shapePrefab, transform.position, Quaternion.identity).GetComponent<Shape>();
         ChooseColor();
         BuildShape();
+        shape.SetPosition(5, 15);
     }
 
     void BuildShape()
