@@ -4,6 +4,9 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
+/// <summary>
+/// Manages localization and loads translations from a CSV file.
+/// </summary>
 public class LocalizationManager : MonoBehaviour
 {
     private Dictionary<string, Dictionary<string, string>> translations;
@@ -44,6 +47,9 @@ public class LocalizationManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Loads translations from a CSV file and populates the translations dictionary.
+    /// </summary>
     public void LoadTranslations()
     {
         // Load translations from the CSV file
@@ -83,6 +89,9 @@ public class LocalizationManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Parses a line of CSV data, handling quoted strings.
+    /// </summary>
     private string[] ParseCSVLine(string line)
     {
         List<string> parts = new List<string>();
@@ -111,6 +120,10 @@ public class LocalizationManager : MonoBehaviour
         return parts.ToArray();
     } 
 
+    /// <summary>
+    /// Retrieves a translation for a given key and current language.
+    /// </summary>
+    /// <returns>The translated text or "Translation not found" if not found.</returns>
     public string GetTranslation(string key)
         {
             string currentLanguageCode = GameManager.instance.languageCode; 

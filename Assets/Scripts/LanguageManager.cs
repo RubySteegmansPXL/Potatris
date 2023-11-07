@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages supported languages and their codes.
+/// </summary>
 public class LanguageManager : MonoBehaviour
 {
-    private Dictionary<string, string> languageDictionary = new Dictionary<string, string>();
+    private Dictionary<string, string> languageDictionary = new Dictionary<string, string>(); // Stores language codes and their corresponding names.
 
     private static LanguageManager instance;
 
@@ -44,16 +47,21 @@ public class LanguageManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Initializes the language dictionary with language code and name pairs.
+    /// </summary>
     private void InitializeLanguageDictionary()
     {
-        // Add your language code and name pairs to the dictionary.
         languageDictionary["en"] = "English";
         languageDictionary["nl"] = "Dutch";
         // Add more languages as needed.
-
-        // You can also load this data from a file or another source.
     }
 
+    /// <summary>
+    /// Retrieves the language name for a given language code.
+    /// </summary>
+    /// <param name="languageCode">The language code (e.g., "en").</param>
+    /// <returns>The language name or "Unknown Language" if not found.</returns>
     public string GetLanguageName(string languageCode)
     {
         if (languageDictionary.ContainsKey(languageCode))
@@ -66,6 +74,11 @@ public class LanguageManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Retrieves the language code for a given language name.
+    /// </summary>
+    /// <param name="languageName">The language name (e.g., "English").</param>
+    /// <returns>The language code or "Unknown Language" if not found.</returns>
     public string GetLanguageCode(string languageName)
     {
         foreach (var pair in languageDictionary)
