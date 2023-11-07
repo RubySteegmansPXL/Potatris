@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class ShapeCreatorWindow : EditorWindow
 {
+    private ShapeData loadedShapeData; // Field to hold the loaded ShapeData
     private bool[,] grid = new bool[5, 5];
     private bool isRotatable = true;
     private Vector2Int center = new Vector2Int(-1, -1);
@@ -14,6 +15,8 @@ public class ShapeCreatorWindow : EditorWindow
     private bool useExistingColor = false;
     private bool showColorSettings = true; // Variable to track the foldout state
     private SpriteData existingSpriteData = null; // Field to hold the existing SpriteData
+    private bool shapeLoadedSuccessfully = false; // Add this field
+    private ShapeData previousLoadedShapeData = null; // Add this field
 
     private string errorMessage = string.Empty; // Field to store the error message
 
@@ -28,8 +31,33 @@ public class ShapeCreatorWindow : EditorWindow
 
     private void OnGUI()
     {
-        GUILayout.Label("Create New Tetris Shape", EditorStyles.boldLabel);
+        GUILayout.Label("Load Existing Tetris Shape", EditorStyles.boldLabel);
+        EditorGUI.BeginChangeCheck(); // Start checking for changes
+        loadedShapeData = (ShapeData)EditorGUILayout.ObjectField("Existing Shape", loadedShapeData, typeof(ShapeData), false);
+        if (EditorGUI.EndChangeCheck()) // Check if the ObjectField has changed
+        {
+            // If changed, reset the loaded flag and store the new value as previous
+            if (previousLoadedShapeData != loadedShapeData)
+            {
+                shapeLoadedSuccessfully = false;
+                previousLoadedShapeData = loadedShapeData;
+            }
+        }
 
+        if (GUILayout.Button("Load Existing Shape"))
+        {
+            LoadShape();
+        }
+
+        if (shapeLoadedSuccessfully)
+        {
+            EditorGUILayout.HelpBox("Shape Loaded Successfully!", MessageType.Info);
+        }
+
+        // Space
+        EditorGUILayout.Space(50);
+
+        GUILayout.Label("Create New Tetris Shape", EditorStyles.boldLabel);
         for (int y = 0; y < 5; y++)
         {
             EditorGUILayout.BeginHorizontal();
@@ -120,6 +148,8 @@ public class ShapeCreatorWindow : EditorWindow
             grid[x, y] = true;
         }
 
+        // When the user modifies the grid, reset the shape loaded flag
+        shapeLoadedSuccessfully = false;
         GUI.changed = true; // Mark the GUI as changed so it will repaint
     }
 
@@ -233,6 +263,96 @@ public class ShapeCreatorWindow : EditorWindow
         ResetGrid();
     }
 
+    private void LoadShape()
+    {
+        if (loadedShapeData != null)
+        {
+
+            errorMessage = string.Empty; // Clear any error message
+            // Reset the grid first
+            grid = new bool[5, 5];
+
+            // Find the center of the loaded shape to correctly offset the segments
+            Vector2Int loadedCenter = new Vector2Int(-1, -1);
+            foreach (var segment in loadedShapeData.segments)
+            {
+                if (segment.isCenter)
+                {
+                    loadedCenter = new Vector2Int(segment.x, segment.y);
+                    break;
+                }
+            }
+
+            // Make sure we found a center before proceeding
+            if (loadedCenter.x == -1 || loadedCenter.y == -1)
+            {
+                Debug.LogError("Loaded shape does not have a defined center.");
+                return;
+            }
+
+            // Set the new center for the editor grid
+            center = new Vector2Int(2, 2); // Assuming center of the editor grid is at (2, 2)
+
+            // Offset to translate loaded shape coordinates to the editor grid
+            int offsetX = center.x - loadedCenter.x;
+            int offsetY = center.y - loadedCenter.y;
+
+            // Load the grid
+            foreach (ShapeSegmentData segment in loadedShapeData.segments)
+            {
+                int x = segment.x + offsetX;
+                int y = segment.y + offsetY;
+                if (x >= 0 && x < grid.GetLength(0) && y >= 0 && y < grid.GetLength(1))
+                {
+                    grid[x, y] = true;
+                    if (segment.isCenter)
+                    {
+                        center = new Vector2Int(x, y);
+                    }
+                }
+                else
+                {
+                    Debug.LogError($"Segment at ({segment.x}, {segment.y}) is out of bounds after offset. Adjusted position: ({x}, {y})");
+                }
+            }
+            // Set the shape name
+            shapeName = loadedShapeData.name;
+
+            // Assuming there is a way to get the colors from the SpriteData, set them here
+            if (loadedShapeData.spriteData != null)
+            {
+                existingSpriteData = loadedShapeData.spriteData; // Reference the existing sprite data
+                useExistingColor = true; // Set to use the existing colors
+            }
+            else
+            {
+                useExistingColor = false; // Set to use the existing colors
+                existingSpriteData = null; // Reference the existing sprite data
+            }
+            // Set rotatable
+            isRotatable = loadedShapeData.canRotate;
+
+            // Force the GUI to refresh
+            GUI.changed = true;
+            Repaint();
+        }
+        else
+        {
+            errorMessage = "No shape data loaded.";
+        }
+
+        // At the end of the LoadShape method
+        if (!string.IsNullOrEmpty(errorMessage))
+        {
+            shapeLoadedSuccessfully = false;
+        }
+        else
+        {
+            shapeLoadedSuccessfully = true;
+        }
+    }
+
+
 
     private void ResetGrid()
     {
@@ -245,8 +365,12 @@ public class ShapeCreatorWindow : EditorWindow
         existingSpriteData = null; // Reset the existing sprite data reference
         useExistingColor = false; // Reset the toggle for using existing color
         showColorSettings = true; // Reset the foldout to be open
+        existingSpriteData = null; // Reset the existing sprite data reference
 
         errorMessage = string.Empty; // Clear any error message
+
+        // Reset the shape loaded flag
+        shapeLoadedSuccessfully = false;
 
         GUI.changed = true; // Mark the GUI as changed so it will repaint
         Repaint(); // Request the GUI to repaint if necessary

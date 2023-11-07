@@ -375,49 +375,49 @@ PrefabInstance:
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
       propertyPath: shapes.Array.size
-      value: 8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
       propertyPath: shapes.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 1cc7f6e0fc314994da732bdbd25ae2b6,
+      objectReference: {fileID: 11400000, guid: a927a30e0eb8eba4aa6c1498885c02e5,
         type: 2}
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
       propertyPath: shapes.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: afc088e857b97ee46ba7f119c6d44fd3,
+      objectReference: {fileID: 11400000, guid: 526cb33e6fe050a4ea93139815a37a2b,
         type: 2}
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
       propertyPath: shapes.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 526cb33e6fe050a4ea93139815a37a2b,
+      objectReference: {fileID: 11400000, guid: e4166cea1a7b3c5438eeba6e37cac00e,
         type: 2}
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
       propertyPath: shapes.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: e4166cea1a7b3c5438eeba6e37cac00e,
+      objectReference: {fileID: 11400000, guid: 791a3e2a6b31a3f4b8fec74112354d43,
         type: 2}
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
       propertyPath: shapes.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: 791a3e2a6b31a3f4b8fec74112354d43,
+      objectReference: {fileID: 11400000, guid: 547eee7437ea3a64e8d9a33886f38656,
         type: 2}
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
       propertyPath: shapes.Array.data[5]
       value: 
-      objectReference: {fileID: 11400000, guid: 547eee7437ea3a64e8d9a33886f38656,
+      objectReference: {fileID: 11400000, guid: c53e49054f98ce34d83567fc7187f13c,
         type: 2}
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
       propertyPath: shapes.Array.data[6]
       value: 
-      objectReference: {fileID: 11400000, guid: c53e49054f98ce34d83567fc7187f13c,
+      objectReference: {fileID: 11400000, guid: 20f42d62ace04b349a7bb94ec36ca5bb,
         type: 2}
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
