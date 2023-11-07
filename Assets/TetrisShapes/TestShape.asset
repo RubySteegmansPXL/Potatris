@@ -13,20 +13,26 @@ MonoBehaviour:
   m_Name: TestShape
   m_EditorClassIdentifier: 
   segments:
+  - x: 1
+    y: 2
+    isCenter: 0
+  - x: 1
+    y: 0
+    isCenter: 0
   - x: 2
-    y: 1
+    y: 3
     isCenter: 0
   - x: 2
     y: 2
     isCenter: 1
   - x: 2
-    y: 3
+    y: 0
     isCenter: 0
   - x: 3
     y: 2
     isCenter: 0
   - x: 4
-    y: 0
+    y: 4
     isCenter: 0
   canRotate: 1
   spriteData: {fileID: 11400000, guid: 84a7e02e7bf8f0b47a7f9104bef3de3e, type: 2}

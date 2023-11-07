@@ -242,17 +242,20 @@ public class ShapeCreatorWindow : EditorWindow
             {
                 if (grid[x, y])
                 {
+                    // Rotate 180° and then flip horizontally
+                    int rotatedAndFlippedX = x; // This both rotates and flips horizontally
+                    int rotatedY = 4 - y; // Rotate vertically
+
                     ShapeSegmentData segment = new ShapeSegmentData
                     {
-                        x = x,
-                        y = y,
+                        x = rotatedAndFlippedX,
+                        y = rotatedY,
                         isCenter = (x == center.x && y == center.y)
                     };
                     segmentList.Add(segment);
                 }
             }
         }
-
 
         shapeData.segments = segmentList.ToArray();
         shapeData.spriteData = spriteDataToUse; // Assign the sprite data
@@ -279,28 +282,26 @@ public class ShapeCreatorWindow : EditorWindow
             // Reset the grid
             grid = new bool[5, 5];
 
-            // Load the shape into the grid at the exact coordinates
             foreach (ShapeSegmentData segment in loadedShapeData.segments)
             {
-                int x = segment.x;
-                int y = segment.y;
+                // Flip horizontally and then rotate 180° back to original orientation
+                int flippedAndRotatedX = segment.x; // This both rotates and flips horizontally
+                int rotatedY = 4 - segment.y; // Rotate vertically
 
-                if (x >= 0 && x < grid.GetLength(0) && y >= 0 && y < grid.GetLength(1))
+                if (flippedAndRotatedX >= 0 && flippedAndRotatedX < grid.GetLength(0) && rotatedY >= 0 && rotatedY < grid.GetLength(1))
                 {
-                    grid[x, y] = true; // Set the grid cell to true where there's a segment
+                    grid[flippedAndRotatedX, rotatedY] = true; // Set the grid cell to true where there's a segment
 
                     if (segment.isCenter)
                     {
-                        // Set the editor's center variable to the loaded center
-                        center = new Vector2Int(x, y);
+                        center = new Vector2Int(flippedAndRotatedX, rotatedY);
                     }
                 }
                 else
                 {
-                    Debug.LogError($"Segment at ({x}, {y}) is out of bounds.");
+                    Debug.LogError($"Segment at ({segment.x}, {segment.y}) is out of bounds after flipping and rotating.");
                 }
             }
-
             // Assuming there is a way to get the colors from the SpriteData, set them here
             if (loadedShapeData.spriteData != null)
             {
