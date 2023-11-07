@@ -115,6 +115,13 @@ public class ShapeCreatorWindow : EditorWindow
             GenerateShape();
         }
 
+        // Red reset button
+        GUI.backgroundColor = Color.red;
+        if (GUILayout.Button("Reset"))
+        {
+            ResetGrid();
+        }
+
         // Display the error message if it's not empty
         if (!string.IsNullOrEmpty(errorMessage))
         {
