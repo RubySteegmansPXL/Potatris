@@ -177,6 +177,7 @@ public class GridManager : MonoBehaviour
             }
         }
 
+        EventManager.FullRow(new CustomEventArgs(gameObject), lines.Count);
         return lines;
     }
 

@@ -11,7 +11,7 @@ public static class EventManager
     public static event Action OnMoveRight;
     public static event Action OnGameStart;
     public static event Action OnGameOver;
-    public static event Action OnFullRow;
+    public static event Action<int> OnFullRow;
     public static event Action OnBlockPlaced;
     public static event Action OnAchievementUnlocked;
     public static event Action OnGridCreate;
@@ -48,9 +48,9 @@ public static class EventManager
         OnGameOver?.Invoke();
     }
 
-    public static void FullRow(CustomEventArgs e)
+    public static void FullRow(CustomEventArgs e, int lines)
     {
-        OnFullRow?.Invoke();
+        OnFullRow?.Invoke(lines);
         Debug.Log("FullRow called by " + e.Sender.name, e.Sender);
     }
 

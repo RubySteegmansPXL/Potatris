@@ -7,7 +7,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip movementSound;
     public AudioClip gameStartSound;
     public AudioClip gameOverSound;
-    public AudioClip fullRownSound;
+    public AudioClip fullRowSound;
+    public AudioClip tetrisSound;
     public AudioClip blockPlacedSound;
     public AudioClip achievementUnlockedSound;
 
@@ -45,9 +46,13 @@ public class AudioManager : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(gameOverSound, transform.position);
     }
-    private void PlayFullRow()
+    private void PlayFullRow(int lines)
     {
-        AudioSource.PlayClipAtPoint(fullRownSound, transform.position);
+        if(lines == 4)
+        {
+            AudioSource.PlayClipAtPoint(tetrisSound, transform.position);
+        }
+        AudioSource.PlayClipAtPoint(fullRowSound, transform.position);
     }
     private void PlayBlockPlaced()
     {
