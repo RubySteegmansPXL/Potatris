@@ -11,7 +11,7 @@ public class ShapeCreatorWindow : EditorWindow
     private string shapeName = "NewShape";
     private Color baseColor = Color.white; // Default color for the shape
     private Color accentColor = Color.grey; // Default accent color
-    private Color lightColor = Color.clear; // Default light color, can be set to transparent
+    private Color lightColor = Color.black; // Default light color, can be set to transparent
     private bool useExistingColor = false;
     private bool showColorSettings = true; // Variable to track the foldout state
     private SpriteData existingSpriteData = null; // Field to hold the existing SpriteData
@@ -20,6 +20,11 @@ public class ShapeCreatorWindow : EditorWindow
 
     private string errorMessage = string.Empty; // Field to store the error message
 
+
+    private void OnEnable()
+    {
+        this.minSize = new Vector2(275, 650);
+    }
 
     [MenuItem("Tetris/Shape Creator")]
     private static void ShowWindow()
@@ -354,7 +359,7 @@ public class ShapeCreatorWindow : EditorWindow
         shapeName = "NewShape"; // Reset the shape name to default
         baseColor = Color.white; // Reset the base color to white
         accentColor = Color.grey; // Reset the accent color to grey
-        lightColor = Color.clear; // Reset the light color to clear (transparent)
+        lightColor = Color.black; // Reset the light color to clear (transparent)
         existingSpriteData = null; // Reset the existing sprite data reference
         useExistingColor = false; // Reset the toggle for using existing color
         showColorSettings = true; // Reset the foldout to be open
