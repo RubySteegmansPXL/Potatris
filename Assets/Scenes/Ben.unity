@@ -381,26 +381,23 @@ PrefabInstance:
         type: 3}
       propertyPath: shapes.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: a927a30e0eb8eba4aa6c1498885c02e5,
+      objectReference: {fileID: 11400000, guid: 1c4b2f6ccde7735419b0c946b12a386b,
         type: 2}
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
       propertyPath: shapes.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 526cb33e6fe050a4ea93139815a37a2b,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
       propertyPath: shapes.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: e4166cea1a7b3c5438eeba6e37cac00e,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
       propertyPath: shapes.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 791a3e2a6b31a3f4b8fec74112354d43,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 5033756091974223217, guid: f15115a694d3af44897cab827f24a497,
         type: 3}
       propertyPath: shapes.Array.data[4]

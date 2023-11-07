@@ -11,7 +11,7 @@ public class ShapeCreatorWindow : EditorWindow
     private string shapeName = "NewShape";
     private Color baseColor = Color.white; // Default color for the shape
     private Color accentColor = Color.grey; // Default accent color
-    private Color lightColor = Color.clear; // Default light color, can be set to transparent
+    private Color lightColor = Color.black; // Default light color, can be set to transparent
     private bool useExistingColor = false;
     private bool showColorSettings = true; // Variable to track the foldout state
     private SpriteData existingSpriteData = null; // Field to hold the existing SpriteData
@@ -20,6 +20,11 @@ public class ShapeCreatorWindow : EditorWindow
 
     private string errorMessage = string.Empty; // Field to store the error message
 
+
+    private void OnEnable()
+    {
+        this.minSize = new Vector2(275, 650);
+    }
 
     [MenuItem("Tetris/Shape Creator")]
     private static void ShowWindow()
@@ -115,6 +120,13 @@ public class ShapeCreatorWindow : EditorWindow
             GenerateShape();
         }
 
+        // Red reset button
+        GUI.backgroundColor = Color.red;
+        if (GUILayout.Button("Reset"))
+        {
+            ResetGrid();
+        }
+
         // Display the error message if it's not empty
         if (!string.IsNullOrEmpty(errorMessage))
         {
@@ -148,8 +160,6 @@ public class ShapeCreatorWindow : EditorWindow
             grid[x, y] = true;
         }
 
-        // When the user modifies the grid, reset the shape loaded flag
-        shapeLoadedSuccessfully = false;
         GUI.changed = true; // Mark the GUI as changed so it will repaint
     }
 
@@ -194,40 +204,28 @@ public class ShapeCreatorWindow : EditorWindow
             errorMessage = "At least one square must be selected to create a shape.";
             return;
         }
-        SpriteData spriteDataToUse = null;
 
-        // Check if using existing color and if the provided SpriteData is not null
-        if (useExistingColor)
+        SpriteData spriteDataToUse = useExistingColor ? existingSpriteData : CreateNewSpriteData();
+
+        // The path where the asset will be created or updated
+        string shapeAssetPath = $"Assets/TetrisShapes/{GetValidFileName(shapeName)}.asset";
+
+        // Attempt to load the existing ShapeData asset at the specified path
+        ShapeData shapeData = AssetDatabase.LoadAssetAtPath<ShapeData>(shapeAssetPath);
+
+        // If the asset does not exist, create a new ShapeData instance
+        if (shapeData == null)
         {
-            if (existingSpriteData == null)
-            {
-                errorMessage = "Please select an existing color.";
-                return;
-            }
-            spriteDataToUse = existingSpriteData;
+            shapeData = ScriptableObject.CreateInstance<ShapeData>();
+            AssetDatabase.CreateAsset(shapeData, shapeAssetPath);
         }
         else
         {
-            // Check if the colors are valid (not completely transparent or default)
-            if (baseColor.a == 0 && accentColor.a == 0 && lightColor.a == 0)
-            {
-                errorMessage = "Please specify at least one color.";
-                return;
-            }
-
-            // Create new SpriteData with the specified colors
-            spriteDataToUse = ScriptableObject.CreateInstance<SpriteData>();
-            spriteDataToUse.baseColor = baseColor;
-            spriteDataToUse.accentColor = accentColor;
-            spriteDataToUse.lightColor = lightColor;
-
-            // Save the new SpriteData asset
-            string spriteDataAssetPath = $"Assets/TetrisShapes/{GetValidFileName(shapeName)}_SpriteData.asset";
-            AssetDatabase.CreateAsset(spriteDataToUse, spriteDataAssetPath);
+            // If the asset already exists, prepare it for updates
+            Undo.RecordObject(shapeData, "Updating Shape Data");
         }
 
-        // Proceed to create the shape data
-        ShapeData shapeData = ScriptableObject.CreateInstance<ShapeData>();
+        // Update the shapeData properties
         shapeData.canRotate = isRotatable;
         List<ShapeSegmentData> segmentList = new List<ShapeSegmentData>();
 
@@ -239,8 +237,8 @@ public class ShapeCreatorWindow : EditorWindow
                 {
                     ShapeSegmentData segment = new ShapeSegmentData
                     {
-                        x = x - center.x,
-                        y = y - center.y,
+                        x = x,
+                        y = 4 - y,
                         isCenter = (x == center.x && y == center.y)
                     };
                     segmentList.Add(segment);
@@ -249,13 +247,14 @@ public class ShapeCreatorWindow : EditorWindow
         }
 
         shapeData.segments = segmentList.ToArray();
-        shapeData.spriteData = spriteDataToUse; // Assign the sprite data
+        shapeData.spriteData = spriteDataToUse;
 
-        // Save the shape asset
-        string shapeAssetPath = $"Assets/TetrisShapes/{GetValidFileName(shapeName)}.asset";
-        AssetDatabase.CreateAsset(shapeData, shapeAssetPath);
+        // Apply the changes to the existing or new asset
+        EditorUtility.SetDirty(shapeData);
         AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
 
+        // After saving, focus on the project window and select the new or updated asset
         EditorUtility.FocusProjectWindow();
         Selection.activeObject = shapeData;
 
@@ -263,61 +262,58 @@ public class ShapeCreatorWindow : EditorWindow
         ResetGrid();
     }
 
+    private SpriteData CreateNewSpriteData()
+    {
+        // Validation for color fields
+        if (baseColor.a == 0 && accentColor.a == 0 && lightColor.a == 0)
+        {
+            errorMessage = "Please specify at least one color.";
+            return null;
+        }
+
+        // Create new SpriteData with the specified colors
+        SpriteData newSpriteData = ScriptableObject.CreateInstance<SpriteData>();
+        newSpriteData.baseColor = baseColor;
+        newSpriteData.accentColor = accentColor;
+        newSpriteData.lightColor = lightColor;
+
+        // Save the new SpriteData asset
+        string spriteDataAssetPath = $"Assets/TetrisShapes/Colors/{GetValidFileName(shapeName)}_SpriteData.asset";
+        AssetDatabase.CreateAsset(newSpriteData, spriteDataAssetPath);
+
+        return newSpriteData;
+    }
+
     private void LoadShape()
     {
         if (loadedShapeData != null)
         {
+            // Clear any error message
+            errorMessage = string.Empty;
 
-            errorMessage = string.Empty; // Clear any error message
-            // Reset the grid first
+            // Reset the grid
             grid = new bool[5, 5];
 
-            // Find the center of the loaded shape to correctly offset the segments
-            Vector2Int loadedCenter = new Vector2Int(-1, -1);
-            foreach (var segment in loadedShapeData.segments)
-            {
-                if (segment.isCenter)
-                {
-                    loadedCenter = new Vector2Int(segment.x, segment.y);
-                    break;
-                }
-            }
-
-            // Make sure we found a center before proceeding
-            if (loadedCenter.x == -1 || loadedCenter.y == -1)
-            {
-                Debug.LogError("Loaded shape does not have a defined center.");
-                return;
-            }
-
-            // Set the new center for the editor grid
-            center = new Vector2Int(2, 2); // Assuming center of the editor grid is at (2, 2)
-
-            // Offset to translate loaded shape coordinates to the editor grid
-            int offsetX = center.x - loadedCenter.x;
-            int offsetY = center.y - loadedCenter.y;
-
-            // Load the grid
             foreach (ShapeSegmentData segment in loadedShapeData.segments)
             {
-                int x = segment.x + offsetX;
-                int y = segment.y + offsetY;
-                if (x >= 0 && x < grid.GetLength(0) && y >= 0 && y < grid.GetLength(1))
+                // Flip horizontally and then rotate 180° back to original orientation
+                int flippedAndRotatedX = segment.x; // This both rotates and flips horizontally
+                int rotatedY = 4 - segment.y; // Rotate vertically
+
+                if (flippedAndRotatedX >= 0 && flippedAndRotatedX < grid.GetLength(0) && rotatedY >= 0 && rotatedY < grid.GetLength(1))
                 {
-                    grid[x, y] = true;
+                    grid[flippedAndRotatedX, rotatedY] = true; // Set the grid cell to true where there's a segment
+
                     if (segment.isCenter)
                     {
-                        center = new Vector2Int(x, y);
+                        center = new Vector2Int(flippedAndRotatedX, rotatedY);
                     }
                 }
                 else
                 {
-                    Debug.LogError($"Segment at ({segment.x}, {segment.y}) is out of bounds after offset. Adjusted position: ({x}, {y})");
+                    Debug.LogError($"Segment at ({segment.x}, {segment.y}) is out of bounds after flipping and rotating.");
                 }
             }
-            // Set the shape name
-            shapeName = loadedShapeData.name;
-
             // Assuming there is a way to get the colors from the SpriteData, set them here
             if (loadedShapeData.spriteData != null)
             {
@@ -329,8 +325,10 @@ public class ShapeCreatorWindow : EditorWindow
                 useExistingColor = false; // Set to use the existing colors
                 existingSpriteData = null; // Reference the existing sprite data
             }
-            // Set rotatable
-            isRotatable = loadedShapeData.canRotate;
+
+            // Other properties you might want to set
+            shapeName = loadedShapeData.name; // Set the shape name
+            isRotatable = loadedShapeData.canRotate; // Set if it's rotatable
 
             // Force the GUI to refresh
             GUI.changed = true;
@@ -361,7 +359,7 @@ public class ShapeCreatorWindow : EditorWindow
         shapeName = "NewShape"; // Reset the shape name to default
         baseColor = Color.white; // Reset the base color to white
         accentColor = Color.grey; // Reset the accent color to grey
-        lightColor = Color.clear; // Reset the light color to clear (transparent)
+        lightColor = Color.black; // Reset the light color to clear (transparent)
         existingSpriteData = null; // Reset the existing sprite data reference
         useExistingColor = false; // Reset the toggle for using existing color
         showColorSettings = true; // Reset the foldout to be open
