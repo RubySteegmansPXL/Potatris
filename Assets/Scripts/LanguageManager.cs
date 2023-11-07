@@ -90,4 +90,20 @@ public class LanguageManager : MonoBehaviour
         }
         return "Unknown Language";
     }
+
+    /// <summary>
+    /// Retrieves a list of available languages.
+    /// </summary>
+    /// <returns>A list of available language names.</returns>
+    public List<string> GetAvailableLanguagesNames()
+    {
+        List<string> availableLanguages = new List<string>();
+
+        foreach (var languageName in languageDictionary.Values)
+        {
+            availableLanguages.Add(languageName);
+        }
+
+        return availableLanguages;
+    }
 }
