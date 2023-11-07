@@ -155,8 +155,6 @@ public class ShapeCreatorWindow : EditorWindow
             grid[x, y] = true;
         }
 
-        // When the user modifies the grid, reset the shape loaded flag
-        shapeLoadedSuccessfully = false;
         GUI.changed = true; // Mark the GUI as changed so it will repaint
     }
 
@@ -246,14 +244,15 @@ public class ShapeCreatorWindow : EditorWindow
                 {
                     ShapeSegmentData segment = new ShapeSegmentData
                     {
-                        x = x - center.x,
-                        y = y - center.y,
+                        x = x,
+                        y = y,
                         isCenter = (x == center.x && y == center.y)
                     };
                     segmentList.Add(segment);
                 }
             }
         }
+
 
         shapeData.segments = segmentList.ToArray();
         shapeData.spriteData = spriteDataToUse; // Assign the sprite data
@@ -274,56 +273,33 @@ public class ShapeCreatorWindow : EditorWindow
     {
         if (loadedShapeData != null)
         {
+            // Clear any error message
+            errorMessage = string.Empty;
 
-            errorMessage = string.Empty; // Clear any error message
-            // Reset the grid first
+            // Reset the grid
             grid = new bool[5, 5];
 
-            // Find the center of the loaded shape to correctly offset the segments
-            Vector2Int loadedCenter = new Vector2Int(-1, -1);
-            foreach (var segment in loadedShapeData.segments)
-            {
-                if (segment.isCenter)
-                {
-                    loadedCenter = new Vector2Int(segment.x, segment.y);
-                    break;
-                }
-            }
-
-            // Make sure we found a center before proceeding
-            if (loadedCenter.x == -1 || loadedCenter.y == -1)
-            {
-                Debug.LogError("Loaded shape does not have a defined center.");
-                return;
-            }
-
-            // Set the new center for the editor grid
-            center = new Vector2Int(2, 2); // Assuming center of the editor grid is at (2, 2)
-
-            // Offset to translate loaded shape coordinates to the editor grid
-            int offsetX = center.x - loadedCenter.x;
-            int offsetY = center.y - loadedCenter.y;
-
-            // Load the grid
+            // Load the shape into the grid at the exact coordinates
             foreach (ShapeSegmentData segment in loadedShapeData.segments)
             {
-                int x = segment.x + offsetX;
-                int y = segment.y + offsetY;
+                int x = segment.x;
+                int y = segment.y;
+
                 if (x >= 0 && x < grid.GetLength(0) && y >= 0 && y < grid.GetLength(1))
                 {
-                    grid[x, y] = true;
+                    grid[x, y] = true; // Set the grid cell to true where there's a segment
+
                     if (segment.isCenter)
                     {
+                        // Set the editor's center variable to the loaded center
                         center = new Vector2Int(x, y);
                     }
                 }
                 else
                 {
-                    Debug.LogError($"Segment at ({segment.x}, {segment.y}) is out of bounds after offset. Adjusted position: ({x}, {y})");
+                    Debug.LogError($"Segment at ({x}, {y}) is out of bounds.");
                 }
             }
-            // Set the shape name
-            shapeName = loadedShapeData.name;
 
             // Assuming there is a way to get the colors from the SpriteData, set them here
             if (loadedShapeData.spriteData != null)
@@ -336,8 +312,10 @@ public class ShapeCreatorWindow : EditorWindow
                 useExistingColor = false; // Set to use the existing colors
                 existingSpriteData = null; // Reference the existing sprite data
             }
-            // Set rotatable
-            isRotatable = loadedShapeData.canRotate;
+
+            // Other properties you might want to set
+            shapeName = loadedShapeData.name; // Set the shape name
+            isRotatable = loadedShapeData.canRotate; // Set if it's rotatable
 
             // Force the GUI to refresh
             GUI.changed = true;

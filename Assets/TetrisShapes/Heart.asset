@@ -13,38 +13,38 @@ MonoBehaviour:
   m_Name: Heart
   m_EditorClassIdentifier: 
   segments:
-  - x: -2
-    y: 0
-    isCenter: 0
-  - x: -1
-    y: -1
-    isCenter: 0
-  - x: -1
-    y: 0
-    isCenter: 0
-  - x: -1
-    y: 1
-    isCenter: 0
-  - x: 0
-    y: 0
-    isCenter: 1
-  - x: 0
-    y: 1
-    isCenter: 0
   - x: 0
     y: 2
     isCenter: 0
   - x: 1
-    y: -1
-    isCenter: 0
-  - x: 1
-    y: 0
-    isCenter: 0
-  - x: 1
     y: 1
     isCenter: 0
+  - x: 1
+    y: 2
+    isCenter: 0
+  - x: 1
+    y: 3
+    isCenter: 0
   - x: 2
-    y: 0
+    y: 2
+    isCenter: 1
+  - x: 2
+    y: 3
+    isCenter: 0
+  - x: 2
+    y: 4
+    isCenter: 0
+  - x: 3
+    y: 1
+    isCenter: 0
+  - x: 3
+    y: 2
+    isCenter: 0
+  - x: 3
+    y: 3
+    isCenter: 0
+  - x: 4
+    y: 2
     isCenter: 0
   canRotate: 1
   spriteData: {fileID: 11400000, guid: 562e69ca8e4901046bdfbc6e49d4e861, type: 2}

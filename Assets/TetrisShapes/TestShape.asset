@@ -10,12 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0093c9160588f9042b2b56008f02755d, type: 3}
-  m_Name: Cross
+  m_Name: TestShape
   m_EditorClassIdentifier: 
   segments:
-  - x: 1
-    y: 2
-    isCenter: 0
   - x: 2
     y: 1
     isCenter: 0
@@ -28,5 +25,8 @@ MonoBehaviour:
   - x: 3
     y: 2
     isCenter: 0
-  canRotate: 0
-  spriteData: {fileID: 11400000, guid: 9e63e295b87ada74a857be345fb5eaf2, type: 2}
+  - x: 4
+    y: 0
+    isCenter: 0
+  canRotate: 1
+  spriteData: {fileID: 11400000, guid: 84a7e02e7bf8f0b47a7f9104bef3de3e, type: 2}
