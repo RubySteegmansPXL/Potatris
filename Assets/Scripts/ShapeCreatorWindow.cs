@@ -199,40 +199,28 @@ public class ShapeCreatorWindow : EditorWindow
             errorMessage = "At least one square must be selected to create a shape.";
             return;
         }
-        SpriteData spriteDataToUse = null;
 
-        // Check if using existing color and if the provided SpriteData is not null
-        if (useExistingColor)
+        SpriteData spriteDataToUse = useExistingColor ? existingSpriteData : CreateNewSpriteData();
+
+        // The path where the asset will be created or updated
+        string shapeAssetPath = $"Assets/TetrisShapes/{GetValidFileName(shapeName)}.asset";
+
+        // Attempt to load the existing ShapeData asset at the specified path
+        ShapeData shapeData = AssetDatabase.LoadAssetAtPath<ShapeData>(shapeAssetPath);
+
+        // If the asset does not exist, create a new ShapeData instance
+        if (shapeData == null)
         {
-            if (existingSpriteData == null)
-            {
-                errorMessage = "Please select an existing color.";
-                return;
-            }
-            spriteDataToUse = existingSpriteData;
+            shapeData = ScriptableObject.CreateInstance<ShapeData>();
+            AssetDatabase.CreateAsset(shapeData, shapeAssetPath);
         }
         else
         {
-            // Check if the colors are valid (not completely transparent or default)
-            if (baseColor.a == 0 && accentColor.a == 0 && lightColor.a == 0)
-            {
-                errorMessage = "Please specify at least one color.";
-                return;
-            }
-
-            // Create new SpriteData with the specified colors
-            spriteDataToUse = ScriptableObject.CreateInstance<SpriteData>();
-            spriteDataToUse.baseColor = baseColor;
-            spriteDataToUse.accentColor = accentColor;
-            spriteDataToUse.lightColor = lightColor;
-
-            // Save the new SpriteData asset
-            string spriteDataAssetPath = $"Assets/TetrisShapes/{GetValidFileName(shapeName)}_SpriteData.asset";
-            AssetDatabase.CreateAsset(spriteDataToUse, spriteDataAssetPath);
+            // If the asset already exists, prepare it for updates
+            Undo.RecordObject(shapeData, "Updating Shape Data");
         }
 
-        // Proceed to create the shape data
-        ShapeData shapeData = ScriptableObject.CreateInstance<ShapeData>();
+        // Update the shapeData properties
         shapeData.canRotate = isRotatable;
         List<ShapeSegmentData> segmentList = new List<ShapeSegmentData>();
 
@@ -242,14 +230,10 @@ public class ShapeCreatorWindow : EditorWindow
             {
                 if (grid[x, y])
                 {
-                    // Rotate 180° and then flip horizontally
-                    int rotatedAndFlippedX = x; // This both rotates and flips horizontally
-                    int rotatedY = 4 - y; // Rotate vertically
-
                     ShapeSegmentData segment = new ShapeSegmentData
                     {
-                        x = rotatedAndFlippedX,
-                        y = rotatedY,
+                        x = x,
+                        y = 4 - y,
                         isCenter = (x == center.x && y == center.y)
                     };
                     segmentList.Add(segment);
@@ -258,18 +242,41 @@ public class ShapeCreatorWindow : EditorWindow
         }
 
         shapeData.segments = segmentList.ToArray();
-        shapeData.spriteData = spriteDataToUse; // Assign the sprite data
+        shapeData.spriteData = spriteDataToUse;
 
-        // Save the shape asset
-        string shapeAssetPath = $"Assets/TetrisShapes/{GetValidFileName(shapeName)}.asset";
-        AssetDatabase.CreateAsset(shapeData, shapeAssetPath);
+        // Apply the changes to the existing or new asset
+        EditorUtility.SetDirty(shapeData);
         AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
 
+        // After saving, focus on the project window and select the new or updated asset
         EditorUtility.FocusProjectWindow();
         Selection.activeObject = shapeData;
 
         // Reset the grid after generating the shape
         ResetGrid();
+    }
+
+    private SpriteData CreateNewSpriteData()
+    {
+        // Validation for color fields
+        if (baseColor.a == 0 && accentColor.a == 0 && lightColor.a == 0)
+        {
+            errorMessage = "Please specify at least one color.";
+            return null;
+        }
+
+        // Create new SpriteData with the specified colors
+        SpriteData newSpriteData = ScriptableObject.CreateInstance<SpriteData>();
+        newSpriteData.baseColor = baseColor;
+        newSpriteData.accentColor = accentColor;
+        newSpriteData.lightColor = lightColor;
+
+        // Save the new SpriteData asset
+        string spriteDataAssetPath = $"Assets/TetrisShapes/{GetValidFileName(shapeName)}_SpriteData.asset";
+        AssetDatabase.CreateAsset(newSpriteData, spriteDataAssetPath);
+
+        return newSpriteData;
     }
 
     private void LoadShape()
