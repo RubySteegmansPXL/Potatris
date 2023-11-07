@@ -273,7 +273,7 @@ public class ShapeCreatorWindow : EditorWindow
         newSpriteData.lightColor = lightColor;
 
         // Save the new SpriteData asset
-        string spriteDataAssetPath = $"Assets/TetrisShapes/{GetValidFileName(shapeName)}_SpriteData.asset";
+        string spriteDataAssetPath = $"Assets/TetrisShapes/Colors/{GetValidFileName(shapeName)}_SpriteData.asset";
         AssetDatabase.CreateAsset(newSpriteData, spriteDataAssetPath);
 
         return newSpriteData;

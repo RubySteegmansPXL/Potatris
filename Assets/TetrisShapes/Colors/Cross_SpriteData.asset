@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0bb9753fb81c144cbe15d0986adaa6b, type: 3}
   m_Name: Cross_SpriteData
   m_EditorClassIdentifier: 
-  baseColor: {r: 1, g: 0.8832581, b: 0.21226418, a: 1}
-  accentColor: {r: 1, g: 0.42338085, b: 0.023584902, a: 1}
-  lightColor: {r: 0.9957662, g: 1, b: 0.504717, a: 1}
+  baseColor: {r: 0.6792453, g: 0.3236027, b: 0.3236027, a: 1}
+  accentColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lightColor: {r: 0, g: 0, b: 0, a: 0}
