@@ -77,8 +77,9 @@ public class LocalizationManager : MonoBehaviour
                     string key = parts[0].Trim();
                     string nlTranslation = parts[2].Trim();
                     string enTranslation = parts[3].Trim();
+                    // Add more languages as needed.
                     //Debug.Log("Key: " + key + " NL: " + nlTranslation + " EN: " + enTranslation);
-
+                    
                     translations[key] = new Dictionary<string, string>
                     {
                         { "nl", nlTranslation },
