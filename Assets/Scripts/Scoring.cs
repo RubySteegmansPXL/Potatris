@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Scoring : MonoBehaviour
@@ -7,13 +8,21 @@ public class Scoring : MonoBehaviour
     public int Score { get; private set; }
     public int Level { get; private set; }
 
+    public TextMeshProUGUI scoreText;
+
     private bool lastClearWasTetris;
 
     private void OnEnable()
     {
         EventManager.OnFullRow += FullRow;
     }
-    
+
+    private void Start()
+    {
+        Level = 1;
+        Score = 0;
+        scoreText.text = Score.ToString();
+    }
     private void OnDisable()
     {
         EventManager.OnFullRow -= FullRow;
@@ -46,5 +55,6 @@ public class Scoring : MonoBehaviour
                 break;
         }
         Score += baseScore * Level;
+        scoreText.text = Score.ToString();
     }
 }
