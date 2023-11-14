@@ -26,4 +26,4 @@ MonoBehaviour:
     y: 2
     isCenter: 0
   canRotate: 1
-  spriteData: {fileID: 11400000, guid: 73800834c71a1264d9076ec08dec0579, type: 2}
+  spriteData: {fileID: 11400000, guid: 55fa276c89d2d6b459dac1333ced600b, type: 2}

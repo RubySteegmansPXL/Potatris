@@ -52,7 +52,7 @@ public class AudioManager : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(tetrisSound, transform.position);
         }
-        AudioSource.PlayClipAtPoint(fullRowSound, transform.position);
+        //AudioSource.PlayClipAtPoint(fullRowSound, transform.position);
     }
     private void PlayBlockPlaced()
     {
