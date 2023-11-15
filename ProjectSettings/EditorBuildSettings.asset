@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ben.unity
     guid: 91ccbf1c522431a478b693580f6ade50
+  - enabled: 1
+    path: Assets/Scenes/Achievements.unity
+    guid: 016fdc023fd9075439310a1e633299e9
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 7e44af64dea20be4dbdaa60c32220bbc,
       type: 2}

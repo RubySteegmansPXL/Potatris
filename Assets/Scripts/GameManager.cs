@@ -41,6 +41,11 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<SceneFader>().LoadScene(1);
     }
 
+    public void AchievementsPage() 
+    {
+        FindObjectOfType<SceneFader>().LoadScene(2);
+    }
+
     public void PauseGame()
     {
         gameState = GameState.PAUSE;
@@ -59,6 +64,7 @@ public class GameManager : MonoBehaviour
     public void MainMenu()
     {
         gameState = GameState.MENU;
+        FindObjectOfType<SceneFader>().LoadScene(0);
     }
 
     public void QuitGame()
