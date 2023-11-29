@@ -1,4 +1,24 @@
-ï»¿Key,Id,Dutch(nl),English(en)
-"main_menu_credits",1404266913792,"Door Ben, Ruby en Kaylie","By Ben, Ruby and Kaylie"
-"main_menu_start",271410388586496,"Start","Start"
-"main_menu_quit",292290787332096,"Stop","Quit"
+Key;Dutch(nl);English(en)
+main_menu_credits;Door Ben, Ruby en Kaylie;By Ben, Ruby and Kaylie
+main_menu_start;Start;Start
+main_menu_quit;Stop;Quit
+ach_title_1;Beginnende Bouwer;Novice Builder
+ach_desc_1;Speel 5 spellen waarin je minstens 1 lijn leeg hebt gemaakt;Play 5 games and clear at least one line in each game
+ach_title_2;Betrouwbare Opruimer;Consistent Clearer
+ach_desc_2;Verwijder in totaal 50 lijnen over meerdere spellen.;Clear a total of 50 lines across multiple games.
+ach_title_3;Snelheidsduivel;Line Speedster
+ach_desc_3;Verwijder 5 lijnen binnen de eerste 60 seconden van elk spel gedurende 3 spellen.;Clear 5 lines within the first 60 seconds of each game for 3 games.
+ach_title_4;Snelle Reflexen;Quick Reflexes
+ach_desc_4;Verwijder een lijn binnen 30 seconden na het starten van een spel gedurende 5 spellen.;Clear a line within 30 seconds of starting a game for 5 games
+ach_title_5;Topscorer;High Scorer
+ach_desc_5;Behaal een score van 500 of meer in 5 opeenvolgende spellen.;Achieve a score of 500 or more in 5 consecutive games.
+ach_title_6;Rotatie Expert;Rotational Expert
+ach_desc_6;Draai Tetrimino's in totaal 100 keer over alle spellen;Rotate Tetriminos a total of 100 times across all games.
+ach_title_7;Combo Initiator;Combo Initiate
+ach_desc_7;Voer een combo uit (twee of meer lijnen wissen met één Tetrimino) in 3 verschillende spellen.;Perform a combo (clearing two or more lines with a single Tetrimino) in 3 different games.
+ach_title_8;Punt Verzamelaar;Point Collector
+ach_desc_8;Bereik een totaalscore van 5.000 punten.;Reach a lifetime score of 5,000 points.
+ach_title_9;Meester van de Punten;Master of Points
+ach_desc_9;Verzamel een grandioze totaalscore van 20.000 punten.;Accumulate a grand total of 20,000 points. 
+ach_title_10;Perfect Tien;Perfect Ten
+ach_desc_10;Speel 10 spellen.;Play 10 games.

@@ -860,7 +860,6 @@ GameObject:
   - component: {fileID: 267124040}
   - component: {fileID: 267124039}
   - component: {fileID: 267124037}
-  - component: {fileID: 267124041}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -1041,19 +1040,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267124035}
   m_CullTransparentMesh: 1
---- !u!114 &267124041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 267124035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd15c1598d188924f86339377e6526f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  translationKey: 
 --- !u!1 &290134747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1812,7 +1798,6 @@ GameObject:
   - component: {fileID: 429433935}
   - component: {fileID: 429433937}
   - component: {fileID: 429433936}
-  - component: {fileID: 429433938}
   m_Layer: 5
   m_Name: TextShadow
   m_TagString: Untagged
@@ -1937,19 +1922,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 429433934}
   m_CullTransparentMesh: 1
---- !u!114 &429433938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 429433934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd15c1598d188924f86339377e6526f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  translationKey: 
 --- !u!1 &445237789
 GameObject:
   m_ObjectHideFlags: 0
@@ -2000,7 +1972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd15c1598d188924f86339377e6526f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  translationKey: 
+  translationKey: ach_desc_2
 --- !u!114 &445237792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2409,7 +2381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd15c1598d188924f86339377e6526f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  translationKey: 
+  translationKey: ach_title_2
 --- !u!114 &611773123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4292,7 +4264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd15c1598d188924f86339377e6526f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  translationKey: 
+  translationKey: ach_title_2
 --- !u!114 &1157723946
 MonoBehaviour:
   m_ObjectHideFlags: 0

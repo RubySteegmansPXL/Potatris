@@ -52,6 +52,7 @@ public class LocalizationManager : MonoBehaviour
     /// </summary>
     public void LoadTranslations()
     {
+        Debug.Log("Loading translations");
         // Load translations from the CSV file
         translations = new Dictionary<string, Dictionary<string, string>>();
 
@@ -62,6 +63,7 @@ public class LocalizationManager : MonoBehaviour
             while (!file.EndOfStream)
             {
                 string line = file.ReadLine();
+                Debug.Log("Line: " + line);
 
                 if (firstLine)
                 {
@@ -71,14 +73,15 @@ public class LocalizationManager : MonoBehaviour
 
                 // Use a custom CSV parsing method to handle quoted strings
                 var parts = ParseCSVLine(line);
+                Debug.Log("Parts: " + parts.Length);
 
-                if (parts.Length >= 4)
+                if (parts.Length >= 3)
                 {
                     string key = parts[0].Trim();
-                    string nlTranslation = parts[2].Trim();
-                    string enTranslation = parts[3].Trim();
+                    string nlTranslation = parts[1].Trim();
+                    string enTranslation = parts[2].Trim();
                     // Add more languages as needed.
-                    //Debug.Log("Key: " + key + " NL: " + nlTranslation + " EN: " + enTranslation);
+                    Debug.Log("Key: " + key + " NL: " + nlTranslation + " EN: " + enTranslation);
                     
                     translations[key] = new Dictionary<string, string>
                     {
@@ -91,9 +94,9 @@ public class LocalizationManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Parses a line of CSV data, handling quoted strings.
+    /// Parses a line of CSV
     /// </summary>
-    private string[] ParseCSVLine(string line)
+   private string[] ParseCSVLine(string line)
     {
         List<string> parts = new List<string>();
         StringBuilder currentPart = new StringBuilder();
@@ -101,25 +104,27 @@ public class LocalizationManager : MonoBehaviour
 
         foreach (char c in line)
         {
-            if (c == '"')
+            if (c == ';')
+            {
+                if (!insideQuotes)
+                {
+                    parts.Add(currentPart.ToString());
+                    currentPart.Clear();
+                    continue;
+                }
+            }
+            else if (c == '"')
             {
                 insideQuotes = !insideQuotes;
+                continue;
             }
-            else if (c == ',' && !insideQuotes)
-            {
-                parts.Add(currentPart.ToString());
-                currentPart.Clear();
-            }
-            else
-            {
-                currentPart.Append(c);
-            }
+
+            currentPart.Append(c);
         }
 
         parts.Add(currentPart.ToString());
-
         return parts.ToArray();
-    } 
+    }
 
     /// <summary>
     /// Retrieves a translation for a given key and current language.
