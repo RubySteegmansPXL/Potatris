@@ -94,36 +94,45 @@ public class LocalizationManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Parses a line of CSV
+    /// Parses a line of CSV data considering quoted strings and escaped double quotes.
     /// </summary>
-   private string[] ParseCSVLine(string line)
+    /// <param name="line">The line of CSV data to parse.</param>
+    /// <returns>An array containing the parsed segments.</returns>
+    private string[] ParseCSVLine(string line)
     {
-        List<string> parts = new List<string>();
-        StringBuilder currentPart = new StringBuilder();
-        bool insideQuotes = false;
+        List<string> parts = new List<string>(); // List to store parsed segments
+        StringBuilder currentPart = new StringBuilder(); // String builder to construct each segment
+        bool insideQuotes = false; // Flag to track if currently inside quoted string
 
-        foreach (char c in line)
+        for (int i = 0; i < line.Length; i++)
         {
-            if (c == ';')
+            char c = line[i];
+
+            if (c == '"')
             {
-                if (!insideQuotes)
+                // Check for two consecutive double quotes to interpret as a single double quote within a string
+                if (i + 1 < line.Length && line[i + 1] == '"')
                 {
-                    parts.Add(currentPart.ToString());
-                    currentPart.Clear();
+                    currentPart.Append('"'); // Add a single double quote to the segment
+                    i++; // Skip the next quote
                     continue;
                 }
+
+                insideQuotes = !insideQuotes; // Toggle insideQuotes flag when encountering a double quote
             }
-            else if (c == '"')
+            else if (c == ';' && !insideQuotes)
             {
-                insideQuotes = !insideQuotes;
+                parts.Add(currentPart.ToString()); // Add the completed segment to the list
+                currentPart.Clear(); // Clear the StringBuilder for the next segment
                 continue;
             }
 
-            currentPart.Append(c);
+            currentPart.Append(c); // Append the character to the current segment being built
         }
 
-        parts.Add(currentPart.ToString());
-        return parts.ToArray();
+        parts.Add(currentPart.ToString()); // Add the last segment after the loop ends
+
+        return parts.ToArray(); // Convert the list of segments to an array and return
     }
 
     /// <summary>
