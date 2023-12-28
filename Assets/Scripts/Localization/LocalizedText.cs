@@ -22,7 +22,7 @@ public class LocalizedText : MonoBehaviour
 
     void OnDisable() 
     {
-        EventManager.OnMove -= UpdateText;
+        EventManager.OnLanguageChanged -= UpdateText;
     }
 
     /// <summary>
