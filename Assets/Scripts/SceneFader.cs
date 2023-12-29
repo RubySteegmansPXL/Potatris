@@ -99,6 +99,11 @@ public class SceneFader : MonoBehaviour
     IEnumerator LoadSceneRoutine(int sceneIndex)
     {
         yield return FadeOut();
-        SceneManager.LoadScene(sceneIndex);
+
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneIndex);
+        while (!asyncOperation.isDone)
+        {
+            yield return null;
+        }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -32,6 +33,21 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("GAMEMANAGER" + scene.buildIndex);
+    }
+
     public GameState gameState;
 
     public void StartGame()
@@ -44,6 +60,7 @@ public class GameManager : MonoBehaviour
     public void AchievementsPage() 
     {
         FindObjectOfType<SceneFader>().LoadScene(2);
+        Debug.Log("Achievements Page");
     }
 
     public void PauseGame()
