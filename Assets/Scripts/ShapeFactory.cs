@@ -47,27 +47,8 @@ public class ShapeFactory : MonoBehaviour
         }
     }
 
-    public void StartNewShape()
-    {
-        if (shapeRoutine == null && !GridManager.instance.isResetting)
-        {
-            shapeRoutine = StartCoroutine(CreateShapeCoroutine());
-        }
-    }
-
-    IEnumerator CreateShapeCoroutine()
-    {
-        yield return new WaitForSeconds(0.5f);
-        CreateShape();
-        StopCoroutine(shapeRoutine);
-        shapeRoutine = null;
-    }
-
     public void CreateShape()
     {
-        // Spawn an empty shape (shape prefab)
-        shape = Instantiate(shapePrefab, Vector3.zero, Quaternion.identity).GetComponent<Shape>();
-
         // Get the next shape, remove it from the list, and add a new random shape to the list
         ShapeData nextShape = upcomingShapes[0];
         upcomingShapes.RemoveAt(0);
@@ -88,6 +69,12 @@ public class ShapeFactory : MonoBehaviour
     void BuildShape(ShapeData nextShape, Vector2 centerBlockPosition)
     {
 
+        if (nextShape == null || nextShape.segments == null)
+        {
+            Debug.LogError("nextShape or nextShape.segments is null");
+            return;
+        }
+
         // Grab the center position of the shape
         int centerSegmentX = nextShape.segments.Where(x => x.isCenter).FirstOrDefault().x;
         // Get the highest y value of the shape
@@ -97,17 +84,44 @@ public class ShapeFactory : MonoBehaviour
         Vector2 centerOffset = new Vector2(centerSegmentX, highestY);
 
 
-
-
-        shape.canRotate = nextShape.canRotate;
-
         Debug.Log("Center Offset: " + centerOffset);
         Debug.Log("Center Spawn location: " + (centerBlockPosition - centerOffset));
+
+        bool isValidPosition = true;
+
+        foreach (ShapeSegmentData segment in nextShape.segments)
+        {
+            int spawnPositionX = (int)centerBlockPosition.x + segment.x - (int)centerOffset.x;
+            int spawnPositionY = (int)centerBlockPosition.y + segment.y - (int)centerOffset.y;
+
+            // If any of the blocks are occupied, the shape is not in a valid position
+            if (GridManager.instance.GetBlockAt(spawnPositionX, spawnPositionY).isOccupied)
+            {
+                isValidPosition = false;
+                break;
+            }
+        }
+
+        // If the shape is not in a valid position (occupied), game over
+        if (!isValidPosition)
+        {
+            // Game over, topped out.
+            Debug.Log("Game Over, topped out.");
+            EventManager.GameOver(new CustomEventArgs(gameObject));
+            return;
+        }
+
+        shape = Instantiate(shapePrefab, Vector3.zero, Quaternion.identity).GetComponent<Shape>();
+        shape.canRotate = nextShape.canRotate;
 
         // Generate the shape around the center position
         foreach (ShapeSegmentData segment in nextShape.segments)
         {
-            shape.CreateSegment((int)centerBlockPosition.x + segment.x - (int)centerOffset.x, (int)centerBlockPosition.y + segment.y - (int)centerOffset.y, segment.isCenter, nextShape.spriteData, spriteBuildingBlocks, faces);
+            int spawnPositionX = (int)centerBlockPosition.x + segment.x - (int)centerOffset.x;
+            int spawnPositionY = (int)centerBlockPosition.y + segment.y - (int)centerOffset.y;
+
+
+            shape.CreateSegment(spawnPositionX, spawnPositionY, segment.isCenter, nextShape.spriteData, spriteBuildingBlocks, faces);
         }
     }
 }
