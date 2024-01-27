@@ -84,9 +84,6 @@ public class ShapeFactory : MonoBehaviour
         Vector2 centerOffset = new Vector2(centerSegmentX, highestY);
 
 
-        Debug.Log("Center Offset: " + centerOffset);
-        Debug.Log("Center Spawn location: " + (centerBlockPosition - centerOffset));
-
         bool isValidPosition = true;
 
         foreach (ShapeSegmentData segment in nextShape.segments)

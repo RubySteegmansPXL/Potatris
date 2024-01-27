@@ -45,9 +45,20 @@ public class ShapeSegment : MonoBehaviour
 
     void ColorSprites()
     {
-        spriteRenderers[0].color = spriteData.baseColor;
-        spriteRenderers[1].color = spriteData.accentColor;
-        spriteRenderers[2].color = spriteData.lightColor;
+        if (spriteData != null)
+        {
+            spriteRenderers[0].color = spriteData.baseColor;
+            spriteRenderers[1].color = spriteData.accentColor;
+            spriteRenderers[2].color = spriteData.lightColor;
+        }
+        else
+        {
+            Debug.LogWarning("SpriteData is null, coloring sprites white.");
+            spriteRenderers[0].color = Color.white;
+            spriteRenderers[1].color = Color.white;
+            spriteRenderers[2].color = Color.white;
+        }
+
 
         for (int i = 0; i < spriteRenderers.Length - 1; i++)
         {
