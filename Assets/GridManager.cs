@@ -39,7 +39,7 @@ public class GridManager : MonoBehaviour
             for (int y = 0; y < gridSize.y; y++)
             {
                 grid[x, y] = Instantiate(blockPrefab, new Vector3(x, y, 0), Quaternion.identity).GetComponent<Block>();
-                grid[x, y].SetPosition(x, y);
+                grid[x, y].SetBlockPosition(x, y);
             }
         }
 
@@ -56,82 +56,6 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public bool CheckForLowerCollision(int x, int y)
-    {
-        if (y <= 0) return true;
-        return grid[x, y - 1].isOccupied;
-    }
-
-    public bool CheckForLeftCollision(int x, int y)
-    {
-        if (x <= 0) return true;
-        return grid[x - 1, y].isOccupied;
-    }
-
-    public bool CheckForRightCollision(int x, int y)
-    {
-        if (x >= gridSize.x - 1) return true;
-        return grid[x + 1, y].isOccupied;
-    }
-
-    public Block GetBlockBelow(int x, int y)
-    {
-        if (y <= 0) return null;
-        return grid[x, y - 1];
-    }
-
-    public void MoveBlock(ShapeSegment segment, int originalX, int originalY, int newX, int newY)
-    {
-        if (!IsInsideBounds(newX, newY))
-        {
-            return;
-        }
-
-        Block originalBlock = null;
-
-        if (IsInsideBounds(originalX, originalY))
-        {
-            originalBlock = grid[originalX, originalY];
-        }
-        Block newBlock = grid[newX, newY];
-
-        if (newBlock == null)
-        {
-            Debug.LogError("Block is null");
-            return;
-        }
-
-        if (originalBlock == newBlock) return;
-
-        if (originalBlock != null && originalBlock.segment == segment)
-        {
-            originalBlock.SetUnoccupied();
-
-        }
-
-
-        newBlock.SetOccupied(segment);
-    }
-
-    public void CreateBlock(ShapeSegment segment, int x, int y)
-    {
-        grid[x, y].SetOccupied(segment);
-    }
-
-    public Block GetBlockRight(int x, int y)
-    {
-        x += 1;
-        if (x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y) return null;
-        return grid[x, y];
-    }
-
-    public Block GetBlockLeft(int x, int y)
-    {
-        x -= 1;
-        if (x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y) return null;
-        return grid[x, y];
-    }
-
     public Block GetBlockAt(int x, int y)
     {
         if (x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y) return null;
@@ -139,116 +63,21 @@ public class GridManager : MonoBehaviour
         return grid[x, y];
     }
 
-    public List<int> CheckForLines()
-    {
-        List<int> lines = new List<int>();
-        for (int y = 0; y < gridSize.y; y++)
-        {
-            bool line = true;
-            for (int x = 0; x < gridSize.x; x++)
-            {
-                if (!grid[x, y].isOccupied)
-                {
-                    line = false;
-                    break;
-                }
-            }
-
-            if (line)
-            {
-                lines.Add(y);
-            }
-        }
-
-        foreach (int line in lines)
-        {
-            for (int x = 0; x < gridSize.x; x++)
-            {
-                grid[x, line].SetLine();
-            }
-
-            // Move all blocks above the line down
-            for (int y = line + 1; y < gridSize.y; y++)
-            {
-                for (int x = 0; x < gridSize.x; x++)
-                {
-                    grid[x, y].MoveDownSegment();
-                }
-            }
-        }
-
-        EventManager.FullRow(new CustomEventArgs(gameObject), lines.Count);
-        return lines;
-    }
-
     public bool IsInsideBounds(int x, int y)
     {
         return x >= 0 && x < gridSize.x && y >= 0 && y < gridSize.y;
     }
 
-    public int SideOfBoard(int x)
+    public void AttachSegmentToBlock(ShapeSegment segment, int x, int y)
     {
-        if (x < gridSize.x / 2)
-            return -1;
-        else if (x > gridSize.x / 2)
-            return 1;
+        if (IsInsideBounds(x, y))
+        {
+            grid[x, y].AttachSegment(segment);
+        }
+
         else
-            return 0;
-    }
-
-    public void CheckForGameOver()
-    {
-        // If the middle 5 squares of line 17 or higher are reached
-        for (int x = 3; x < 7; x++)
         {
-            if (grid[x, 16].isOccupied)
-            {
-                EventManager.GameOver(new CustomEventArgs(gameObject));
-                Debug.LogWarning("Game Over");
-                StartCoroutine(ResetGame());
-                return;
-            }
+            Debug.LogWarning("Tried to attach segment to block outside of bounds.");
         }
     }
-
-    IEnumerator ResetGame()
-    {
-        isResetting = true;
-        // for every line, set all blocks to unoccupied
-        for (int y = 0; y < gridSize.y; y++)
-        {
-            for (int x = 0; x < gridSize.x; x++)
-            {
-                grid[x, y].StartReset();
-            }
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        yield return new WaitForSeconds(0.5f);
-
-        for (int x = 0; x < gridSize.x; x++)
-        {
-            for (int y = 0; y < gridSize.y; y++)
-            {
-                grid[x, y].Reset();
-            }
-        }
-
-        RemoveBrokenBlocks();
-        isResetting = false;
-
-
-        ShapeFactory.instance.StartNewShape();
-    }
-
-    public void RemoveBrokenBlocks()
-    {
-        // Check if any blocks are floating 
-        GameObject[] blocks = GameObject.FindGameObjectsWithTag("TetrisBlock");
-        foreach (GameObject block in blocks)
-        {
-            Destroy(block);
-        }
-    }
-
 }

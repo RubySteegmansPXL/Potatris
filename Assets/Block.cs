@@ -10,13 +10,7 @@ public class Block : MonoBehaviour
     public bool isOccupied = false;
     public ShapeSegment segment;
 
-    public Block(int x, int y)
-    {
-        this.x = x;
-        this.y = y;
-    }
-
-    public void SetPosition(int x, int y)
+    public void SetBlockPosition(int x, int y)
     {
         this.x = x;
         this.y = y;
@@ -24,59 +18,20 @@ public class Block : MonoBehaviour
         transform.position = new Vector3(x, y, 0);
     }
 
-    public void UpdatePosition()
+    public void AttachSegment(ShapeSegment segment)
     {
-        transform.position = new Vector3(x, y, 0);
-    }
-
-    public void SetOccupied(ShapeSegment segment)
-    {
-        GetComponent<SpriteRenderer>().color = Color.red;
         this.segment = segment;
         isOccupied = true;
     }
 
-    public void SetUnoccupied()
+    public void DetachSegment()
     {
-        GetComponent<SpriteRenderer>().color = Color.white;
+        segment = null;
         isOccupied = false;
-        this.segment = null;
     }
 
-    public void MoveDownSegment()
+    public ShapeSegment GetCurrentSegment()
     {
-        if (segment != null)
-        {
-            segment.MoveDown();
-            SetUnoccupied();
-        }
-    }
-
-    public void SetLine()
-    {
-        GetComponent<SpriteRenderer>().color = Color.green;
-        if (segment != null)
-        {
-            Destroy(segment.gameObject);
-            segment = null;
-        }
-        SetUnoccupied();
-    }
-
-    public void StartReset()
-    {
-        GetComponent<SpriteRenderer>().color = Color.red;
-        if (segment != null)
-        {
-            Destroy(segment.gameObject);
-            segment = null;
-        }
-
-    }
-
-    public void Reset()
-    {
-        GetComponent<SpriteRenderer>().color = Color.white;
-        SetUnoccupied();
+        return segment;
     }
 }

@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: J
   m_EditorClassIdentifier: 
   segments:
-  - x: 1
-    y: 0
-    isCenter: 0
   - x: 0
     y: 0
-    isCenter: 1
-  - x: 1
-    y: 1
     isCenter: 0
   - x: 1
     y: 2
+    isCenter: 0
+  - x: 1
+    y: 1
+    isCenter: 1
+  - x: 1
+    y: 0
     isCenter: 0
   canRotate: 1
   spriteData: {fileID: 11400000, guid: 114d8f61a3d4e2541a71e47b6b2153ae, type: 2}

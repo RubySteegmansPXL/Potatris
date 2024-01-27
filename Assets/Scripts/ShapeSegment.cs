@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class ShapeSegment : MonoBehaviour
 {
-    public int x;
-    public int y;
     public Sprite sprite;
     public bool canMove { get; private set; } = true;
 
@@ -15,7 +13,6 @@ public class ShapeSegment : MonoBehaviour
     private SpriteData spriteData;
     private Sprite[] sprites;
     private Sprite[] faces;
-
 
     private void Awake()
     {
@@ -33,35 +30,12 @@ public class ShapeSegment : MonoBehaviour
 
     public void Create(int x, int y)
     {
-        this.x = x;
-        this.y = y;
-
         transform.localPosition = new Vector3(x, y, 0);
+        GridManager.instance.AttachSegmentToBlock(this, x, y);
         ColorSprites();
         FacePicker();
     }
 
-    public void Move(int x, int y)
-    {
-
-        GridManager.instance.MoveBlock(this, this.x, this.y, x, y);
-
-        this.x = x;
-        this.y = y;
-
-        transform.localPosition = new Vector3(x, y, 0);
-    }
-
-    public void MoveDown()
-    {
-        GridManager.instance.MoveBlock(this, x, y, x, y - 1);
-        Move(x, y - 1);
-    }
-
-    public void SetMoveable(bool moveable)
-    {
-        canMove = moveable;
-    }
     public void Instantiate(SpriteData spriteData, Sprite[] sprites, Sprite[] faces)
     {
         this.spriteData = spriteData;
