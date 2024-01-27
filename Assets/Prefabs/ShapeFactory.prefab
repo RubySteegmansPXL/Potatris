@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1133904748031659064
+--- !u!1 &7571911418396384599
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,37 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4981565441551488403}
-  - component: {fileID: 5033756091974223217}
+  - component: {fileID: 32266545160525943}
+  - component: {fileID: 3827483772796408039}
   m_Layer: 0
-  m_Name: ShapeFactorio
+  m_Name: ShapeFactory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4981565441551488403
+--- !u!4 &32266545160525943
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133904748031659064}
+  m_GameObject: {fileID: 7571911418396384599}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.81170386, y: 1.3687396, z: 0.08808787}
+  m_LocalPosition: {x: 2.281855, y: 17.0215, z: 0.8653953}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5033756091974223217
+--- !u!114 &3827483772796408039
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133904748031659064}
+  m_GameObject: {fileID: 7571911418396384599}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6abd976a404ea14092ea5373053f304, type: 3}
@@ -55,10 +55,6 @@ MonoBehaviour:
   shapePrefab: {fileID: 3609273577574163131, guid: ed4b9c7e35319ce468a4c77d7e3a2f4a,
     type: 3}
   shapes:
-  - {fileID: 11400000, guid: 547eee7437ea3a64e8d9a33886f38656, type: 2}
-  - {fileID: 11400000, guid: 1cc7f6e0fc314994da732bdbd25ae2b6, type: 2}
-  - {fileID: 11400000, guid: e4166cea1a7b3c5438eeba6e37cac00e, type: 2}
-  sprites:
-  - {fileID: 11400000, guid: f36e732088f00c140a3e05f74fe5a6e3, type: 2}
-  - {fileID: 11400000, guid: c600a9dc7d86f6c489f31c8758e8338f, type: 2}
-  - {fileID: 11400000, guid: 73800834c71a1264d9076ec08dec0579, type: 2}
+  - {fileID: 11400000, guid: afc088e857b97ee46ba7f119c6d44fd3, type: 2}
+  upcomingShapes: []
+  centerStartingPosition: {x: 5, y: 18}

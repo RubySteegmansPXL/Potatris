@@ -18,6 +18,16 @@ public class Block : MonoBehaviour
         transform.position = new Vector3(x, y, 0);
     }
 
+    private void OnDestroy()
+    {
+        DetachSegment();
+    }
+
+    private void OnDisable()
+    {
+        DetachSegment();
+    }
+
     public void AttachSegment(ShapeSegment segment)
     {
         this.segment = segment;
