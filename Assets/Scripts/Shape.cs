@@ -107,6 +107,11 @@ public class Shape : MonoBehaviour
 
     public void RotateShape()
     {
+        if (!canRotate)
+        {
+            return;
+        }
+
         foreach (ShapeSegment segment in segments)
         {
             if (segment == centerSegment)
@@ -119,11 +124,19 @@ public class Shape : MonoBehaviour
                 Debug.LogWarning("Invalid position, so not rotating.");
                 return;
             }
-
-            GridManager.instance.DetachSegmentFromBlock((int)segment.position.x, (int)segment.position.y);
-            segment.position = newPosition;
-            GridManager.instance.AttachSegmentToBlock(segment, (int)segment.position.x, (int)segment.position.y);
         }
+
+        // TODO: Check for possible nudges
+
+        DetachAllSegments();
+        foreach (ShapeSegment segment in segments)
+        {
+            Vector2 newPosition = RotateAroundCenter(segment);
+            segment.position = newPosition;
+
+        }
+        AttachAllSegments();
+
     }
 
     public Vector2 RotateAroundCenter(ShapeSegment segment, bool clockWise = true)
