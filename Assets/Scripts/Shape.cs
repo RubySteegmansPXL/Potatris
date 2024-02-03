@@ -11,10 +11,13 @@ public class Shape : MonoBehaviour
     public Sprite bodySprite;
     public float defaultMoveSpeed = 1f;
     public float holdMoveSpeed = 0.2f;
+    public float timeToHoldBeforeSpeedup = 0.5f;
     public bool canRotate;
 
     public bool pauseMovement;
 
+    private float timeHeld;
+    private float sidewaysMoveTimer;
     private bool isHoldingDown;
 
     private void Start()
@@ -80,7 +83,6 @@ public class Shape : MonoBehaviour
 
     private void Update()
     {
-        // DEBUGGING
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             Move(Vector2.right);
@@ -89,6 +91,27 @@ public class Shape : MonoBehaviour
         {
             Move(Vector2.left);
         }
+
+        // Check for holding down left and right arrow keys
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+        {
+            timeHeld += Time.deltaTime;
+            if (timeHeld > timeToHoldBeforeSpeedup)
+            {
+                sidewaysMoveTimer += Time.deltaTime;
+                if (sidewaysMoveTimer > holdMoveSpeed)
+                {
+                    Move(Input.GetKey(KeyCode.LeftArrow) ? Vector2.left : Vector2.right);
+                    sidewaysMoveTimer = 0;
+                }
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            sidewaysMoveTimer = 0;
+            timeHeld = 0;
+        }
+
 
         if (Input.GetKey(KeyCode.DownArrow))
         {

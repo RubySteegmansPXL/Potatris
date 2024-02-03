@@ -48,7 +48,7 @@ MonoBehaviour:
   centerSegment: {fileID: 0}
   bodySprite: {fileID: 21300000, guid: a289e0d5e3eb7ce458635e074700e6f0, type: 3}
   defaultMoveSpeed: 1
-  holdMoveSpeed: 0.15
+  holdMoveSpeed: 0.1
   canRotate: 0
+  timeToHoldBeforeSpeedup: 0.3
   pauseMovement: 0
-  isHolding: 0
