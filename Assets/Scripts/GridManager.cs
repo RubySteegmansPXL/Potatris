@@ -59,7 +59,6 @@ public class GridManager : MonoBehaviour
     public Block GetBlockAt(int x, int y)
     {
         if (x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y) return null;
-        grid[x, y].GetComponent<SpriteRenderer>().color = Color.yellow;
         return grid[x, y];
     }
 

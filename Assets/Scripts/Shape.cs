@@ -14,8 +14,16 @@ public class Shape : MonoBehaviour
 
     public bool pauseMovement;
 
-    public bool isMoving = false;
 
+    private void Start()
+    {
+        InvokeRepeating("MoveDown", defaultMoveSpeed, defaultMoveSpeed);
+    }
+
+    public void MoveDown()
+    {
+        Move(Vector2.down);
+    }
 
     public void CreateSegment(int x, int y, bool isCenter, SpriteData data, Sprite[] sprites, Sprite[] faces)
     {
@@ -116,5 +124,49 @@ public class Shape : MonoBehaviour
         }
 
         return newPosition;
+    }
+
+    public void Move(Vector2 direction)
+    {
+        if (pauseMovement)
+        {
+            return;
+        }
+
+        foreach (ShapeSegment segment in segments)
+        {
+            if (segment == centerSegment)
+            {
+                continue;
+            }
+
+            if (!IsValidPosition((int)segment.position.x + (int)direction.x, (int)segment.position.y + (int)direction.y))
+            {
+                return;
+            }
+        }
+
+        DetachAllSegments();
+        foreach (ShapeSegment segment in segments)
+        {
+            segment.position = new Vector2(segment.position.x + direction.x, segment.position.y + direction.y);
+        }
+        AttachAllSegments();
+    }
+
+    public void DetachAllSegments()
+    {
+        foreach (ShapeSegment segment in segments)
+        {
+            GridManager.instance.DetachSegmentFromBlock((int)segment.position.x, (int)segment.position.y);
+        }
+    }
+
+    public void AttachAllSegments()
+    {
+        foreach (ShapeSegment segment in segments)
+        {
+            GridManager.instance.AttachSegmentToBlock(segment, (int)segment.position.x, (int)segment.position.y);
+        }
     }
 }

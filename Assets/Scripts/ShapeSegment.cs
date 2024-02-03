@@ -53,6 +53,7 @@ public class ShapeSegment : MonoBehaviour
         this.spriteData = spriteData;
         this.sprites = sprites;
         this.faces = faces;
+        spriteRenderers[4].sortingOrder = 10; // Face on top
     }
 
     void ColorSprites()
@@ -85,10 +86,12 @@ public class ShapeSegment : MonoBehaviour
             if (Random.Range(0, 2) == 0)
             {
                 spriteRenderers[4].sprite = faces[0];
+                Debug.Log("Face 0", gameObject);
             }
             else
             {
                 spriteRenderers[4].sprite = faces[1];
+                Debug.Log("Face 1", gameObject);
             }
         }
     }
