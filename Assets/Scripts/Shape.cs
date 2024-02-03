@@ -9,20 +9,30 @@ public class Shape : MonoBehaviour
     public List<ShapeSegment> segments;
     public ShapeSegment centerSegment;
     public Sprite bodySprite;
-    public float defaultMoveSpeed = 3f;
+    public float defaultMoveSpeed = 1f;
+    public float holdMoveSpeed = 0.2f;
     public bool canRotate;
 
     public bool pauseMovement;
+    public bool isHolding;
 
 
     private void Start()
     {
         InvokeRepeating("MoveDown", defaultMoveSpeed, defaultMoveSpeed);
+        InvokeRepeating("SpedUpMoveDown", holdMoveSpeed, holdMoveSpeed);
     }
 
     public void MoveDown()
     {
-        Move(Vector2.down);
+        if (!isHolding)
+            Move(Vector2.down);
+    }
+
+    public void SpedUpMoveDown()
+    {
+        if (isHolding)
+            Move(Vector2.down);
     }
 
     public void CreateSegment(int x, int y, bool isCenter, SpriteData data, Sprite[] sprites, Sprite[] faces)
@@ -71,7 +81,25 @@ public class Shape : MonoBehaviour
     private void Update()
     {
         // DEBUGGING
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Move(Vector2.right);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Move(Vector2.left);
+        }
+
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            isHolding = true;
+        }
+        else
+        {
+            isHolding = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             foreach (ShapeSegment segment in segments)
             {
