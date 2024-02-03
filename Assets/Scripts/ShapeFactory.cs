@@ -8,17 +8,15 @@ public class ShapeFactory : MonoBehaviour
     public Sprite[] spriteBuildingBlocks;
     public Sprite[] faces;
     public GameObject shapePrefab;
-    public List<ShapeData> shapes = new List<ShapeData>();
 
     public List<ShapeData> upcomingShapes = new List<ShapeData>();
 
     private Shape shape;
-    private SpriteData spriteData;
 
     public static ShapeFactory instance;
-    private Coroutine shapeRoutine;
 
-    public Vector2 centerStartingPosition = new Vector2(4, 17);
+    private Settings settings;
+    private Vector2 centerStartingPosition;
 
     private void Awake()
     {
@@ -28,6 +26,19 @@ public class ShapeFactory : MonoBehaviour
             DontDestroyOnLoad(this);
         }
         else Destroy(this);
+
+        settings = GameManager.instance.settings;
+        if (settings == null)
+        {
+            Debug.LogError("Settings not found", gameObject);
+        }
+
+        GetCenterStartingPosition();
+    }
+
+    private void GetCenterStartingPosition()
+    {
+        centerStartingPosition = new Vector2(settings.numberOfColumns / 2, settings.numberOfRows - 1);
     }
 
     private void Start()
@@ -60,8 +71,8 @@ public class ShapeFactory : MonoBehaviour
 
     private ShapeData SelectRandomShape()
     {
-        int randomShapeIndex = Random.Range(0, shapes.Count);
-        ShapeData shapeData = shapes[randomShapeIndex];
+        int randomShapeIndex = Random.Range(0, settings.possibleShapes.Length);
+        ShapeData shapeData = settings.possibleShapes[randomShapeIndex];
         return shapeData;
     }
 
@@ -82,6 +93,8 @@ public class ShapeFactory : MonoBehaviour
 
         // Subtract the highest y value from the center offset, to make sure the shape gets "pushed down" so the entire shape fits on the board
         Vector2 centerOffset = new Vector2(centerSegmentX, highestY);
+
+        Debug.Log("Center Offset: " + centerOffset);
 
 
         bool isValidPosition = true;

@@ -7,10 +7,12 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     public GameObject blockPrefab;
-    public Block[,] grid = new Block[10, 20];
-    public Vector2Int gridSize = new Vector2Int(10, 20);
+    public Block[,] grid;
+    public Vector2Int gridSize = new Vector2Int(11, 20);
 
     public static GridManager instance;
+
+    private Settings settings;
 
 
     public bool isResetting = false;
@@ -27,7 +29,23 @@ public class GridManager : MonoBehaviour
             Destroy(this);
 
         }
+
+        settings = GameManager.instance.settings;
+        if (settings == null)
+        {
+            Debug.LogError("Settings not found", gameObject);
+        }
+
+        Debug.Log(settings);
+
+        gridSize = new Vector2Int(settings.numberOfColumns, settings.numberOfRows);
+        grid = new Block[gridSize.x, gridSize.y];
         CreateGrid();
+    }
+
+    private void Start()
+    {
+
     }
 
 
@@ -48,6 +66,7 @@ public class GridManager : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        if (settings == null) return;
         Gizmos.color = Color.white;
         if (grid == null || grid[0, 0] == null) return;
         foreach (Block block in grid)

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public string languageCode = "en"; // Default language
+    public Settings settings;
 
     private void Awake()
     {
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
- 
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -57,7 +58,7 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<SceneFader>().LoadScene(1);
     }
 
-    public void AchievementsPage() 
+    public void AchievementsPage()
     {
         FindObjectOfType<SceneFader>().LoadScene(2);
         Debug.Log("Achievements Page");

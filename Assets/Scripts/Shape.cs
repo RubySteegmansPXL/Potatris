@@ -9,9 +9,6 @@ public class Shape : MonoBehaviour
     public List<ShapeSegment> segments;
     public ShapeSegment centerSegment;
     public Sprite bodySprite;
-    public float defaultMoveSpeed = 1f;
-    public float holdMoveSpeed = 0.2f;
-    public float timeToHoldBeforeSpeedup = 0.5f;
     public bool canRotate;
 
     public bool pauseMovement;
@@ -20,10 +17,17 @@ public class Shape : MonoBehaviour
     private float sidewaysMoveTimer;
     private bool isHoldingDown;
 
+    private Settings settings;
+
     private void Start()
     {
-        InvokeRepeating("MoveDown", defaultMoveSpeed, defaultMoveSpeed);
-        InvokeRepeating("SpedUpMoveDown", holdMoveSpeed, holdMoveSpeed);
+        settings = GameManager.instance.settings;
+        if (settings == null)
+        {
+            Debug.LogError("Settings not found", gameObject);
+        }
+        InvokeRepeating("MoveDown", settings.defaultMoveSpeed, settings.defaultMoveSpeed);
+        InvokeRepeating("SpedUpMoveDown", settings.holdMoveSpeed, settings.holdMoveSpeed);
     }
 
     public void MoveDown()
@@ -96,10 +100,10 @@ public class Shape : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
         {
             timeHeld += Time.deltaTime;
-            if (timeHeld > timeToHoldBeforeSpeedup)
+            if (timeHeld > settings.timeToHoldBeforeSpeedup)
             {
                 sidewaysMoveTimer += Time.deltaTime;
-                if (sidewaysMoveTimer > holdMoveSpeed)
+                if (sidewaysMoveTimer > settings.holdMoveSpeed)
                 {
                     Move(Input.GetKey(KeyCode.LeftArrow) ? Vector2.left : Vector2.right);
                     sidewaysMoveTimer = 0;
