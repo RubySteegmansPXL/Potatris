@@ -30,6 +30,11 @@ public class Block : MonoBehaviour
 
     public void AttachSegment(ShapeSegment segment)
     {
+        if (isOccupied)
+        {
+            Debug.LogWarning("Tried to attach segment to an occupied block.");
+
+        }
         this.segment = segment;
         isOccupied = true;
     }
@@ -40,8 +45,21 @@ public class Block : MonoBehaviour
         isOccupied = false;
     }
 
+    public void Reset()
+    {
+        if (segment != null)
+            Destroy(segment.gameObject);
+        DetachSegment();
+    }
+
     public ShapeSegment GetCurrentSegment()
     {
         return segment;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (segment != null)
+            Gizmos.DrawWireCube(transform.position, Vector3.one);
     }
 }

@@ -44,7 +44,7 @@ public class ShapeFactory : MonoBehaviour
     private void Start()
     {
         // Generate 3 random shapes to start
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < settings.numberOfShapesInQueue; i++)
         {
             upcomingShapes.Add(SelectRandomShape());
         }
@@ -134,5 +134,24 @@ public class ShapeFactory : MonoBehaviour
 
             shape.CreateSegment(spawnPositionX, spawnPositionY, segment.isCenter, nextShape.spriteData, spriteBuildingBlocks, faces);
         }
+    }
+
+    public void Reset()
+    {
+
+        DissolveShape();
+
+        upcomingShapes.Clear();
+        for (int i = 0; i < settings.numberOfShapesInQueue; i++)
+        {
+            upcomingShapes.Add(SelectRandomShape());
+        }
+    }
+
+    public void DissolveShape()
+    {
+        if (shape != null)
+            Destroy(shape.gameObject);
+        CreateShape();
     }
 }

@@ -15,6 +15,8 @@ public class Shape : MonoBehaviour
 
     private float timeHeld;
     private float sidewaysMoveTimer;
+    private float standardMovedownTimer;
+    private float SpedupDownMoveTimer;
     private bool isHoldingDown;
 
     private Settings settings;
@@ -26,19 +28,11 @@ public class Shape : MonoBehaviour
         {
             Debug.LogError("Settings not found", gameObject);
         }
-        InvokeRepeating("MoveDown", settings.defaultMoveSpeed, settings.defaultMoveSpeed);
-        InvokeRepeating("SpedUpMoveDown", settings.holdMoveSpeed, settings.holdMoveSpeed);
     }
 
     public void MoveDown()
     {
         if (!isHoldingDown)
-            Move(Vector2.down);
-    }
-
-    public void SpedUpMoveDown()
-    {
-        if (isHoldingDown)
             Move(Vector2.down);
     }
 
@@ -87,6 +81,13 @@ public class Shape : MonoBehaviour
 
     private void Update()
     {
+        standardMovedownTimer += Time.deltaTime;
+        if (standardMovedownTimer > settings.defaultMoveSpeed)
+        {
+            MoveDown();
+            standardMovedownTimer = 0;
+        }
+
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             Move(Vector2.right);
@@ -116,14 +117,29 @@ public class Shape : MonoBehaviour
             timeHeld = 0;
         }
 
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            SpedupDownMoveTimer = settings.holdMoveSpeed;
+        }
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
             isHoldingDown = true;
+            SpedupDownMoveTimer += Time.deltaTime;
+            if (SpedupDownMoveTimer > settings.holdMoveSpeed)
+            {
+                Move(Vector2.down);
+                SpedupDownMoveTimer = 0;
+                // Make sure there is some delay before the next move down
+                standardMovedownTimer = settings.defaultMoveSpeed / 2;
+            }
         }
-        else
+
+        if (Input.GetKeyUp(KeyCode.DownArrow))
         {
             isHoldingDown = false;
+            // Make sure there is some delay before the next move down
+            standardMovedownTimer = settings.defaultMoveSpeed / 2;
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -198,25 +214,29 @@ public class Shape : MonoBehaviour
         return newPosition;
     }
 
-    public void Move(Vector2 direction)
+    public bool CanMove(Vector2 direction)
     {
-        if (pauseMovement)
-        {
-            return;
-        }
-
         foreach (ShapeSegment segment in segments)
         {
-            if (segment == centerSegment)
+            Vector2 newPosition = segment.position + direction;
+            if (!IsValidPosition((int)newPosition.x, (int)newPosition.y))
             {
-                continue;
+                return false; // Early exit if any new position is invalid
             }
+        }
+        return true; // All new positions are valid
+    }
 
-            if (!IsValidPosition((int)segment.position.x + (int)direction.x, (int)segment.position.y + (int)direction.y))
+    public void Move(Vector2 direction)
+    {
+        if (pauseMovement || !CanMove(direction))
+        {
+            if (direction == Vector2.down)
             {
-                Debug.LogWarning("Invalid position, so not moving.");
-                return;
+                Dissolve();
             }
+            Debug.LogWarning("Movement is paused or not possible, so not moving.");
+            return; // Early exit if movement is paused or not possible
         }
 
         DetachAllSegments();
@@ -225,6 +245,17 @@ public class Shape : MonoBehaviour
             segment.position = new Vector2(segment.position.x + direction.x, segment.position.y + direction.y);
         }
         AttachAllSegments();
+    }
+
+    public void Dissolve()
+    {
+        foreach (ShapeSegment segment in segments)
+        {
+            segment.transform.parent = null;
+        }
+
+        ShapeFactory.instance.DissolveShape();
+
     }
 
     public void DetachAllSegments()

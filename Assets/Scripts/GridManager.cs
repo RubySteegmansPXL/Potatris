@@ -43,11 +43,28 @@ public class GridManager : MonoBehaviour
         CreateGrid();
     }
 
-    private void Start()
+    private void Update()
     {
-
+        //debugging
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            ResetGrid();
+        }
     }
 
+
+    public void ResetGrid()
+    {
+        isResetting = true;
+        foreach (Block block in grid)
+        {
+            block.Reset();
+        }
+
+        ShapeFactory.instance.Reset();
+
+        isResetting = false;
+    }
 
     private void CreateGrid()
     {

@@ -79,6 +79,7 @@ public static class EventManager
     {
         OnLanguageChanged?.Invoke();
     }
+
 }
 
 
