@@ -7,12 +7,13 @@ public class ShapeSegment : MonoBehaviour
 {
     public Sprite sprite;
     public bool canMove { get; private set; } = true;
-
+    public Vector2 position;
 
     private SpriteRenderer[] spriteRenderers = new SpriteRenderer[5];
     private SpriteData spriteData;
     private Sprite[] sprites;
     private Sprite[] faces;
+
 
     private void Awake()
     {
@@ -28,10 +29,21 @@ public class ShapeSegment : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        // Always move towards position if not already there
+        // Using slerp
+        if (transform.localPosition != new Vector3(position.x, position.y, 0))
+        {
+            transform.localPosition = Vector3.Slerp(transform.localPosition, new Vector3(position.x, position.y, 0), 0.1f);
+        }
+    }
+
     public void Create(int x, int y)
     {
         transform.localPosition = new Vector3(x, y, 0);
         GridManager.instance.AttachSegmentToBlock(this, x, y);
+        position = new Vector2(x, y);
         ColorSprites();
         FacePicker();
     }

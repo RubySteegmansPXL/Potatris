@@ -17,7 +17,6 @@ public class Shape : MonoBehaviour
     public bool isMoving = false;
 
 
-
     public void CreateSegment(int x, int y, bool isCenter, SpriteData data, Sprite[] sprites, Sprite[] faces)
     {
         if (!IsValidPosition(x, y))
@@ -59,5 +58,63 @@ public class Shape : MonoBehaviour
         }
 
         return true;
+    }
+
+    private void Update()
+    {
+        // DEBUGGING
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            foreach (ShapeSegment segment in segments)
+            {
+                if (segment == centerSegment)
+                {
+                    continue;
+                }
+                Vector2 newPosition = RotateAroundCenter(segment);
+                if (newPosition == Vector2.zero)
+                {
+                    Debug.LogWarning("Invalid position, so not rotating.");
+                    return;
+                }
+
+                GridManager.instance.DetachSegmentFromBlock((int)segment.position.x, (int)segment.position.y);
+                segment.position = newPosition;
+                GridManager.instance.AttachSegmentToBlock(segment, (int)segment.position.x, (int)segment.position.y);
+            }
+        }
+    }
+
+
+    public Vector2 RotateAroundCenter(ShapeSegment segment, bool clockWise = true)
+    {
+        if (centerSegment == null)
+        {
+            Debug.LogWarning("Center segment is null, so not rotating.");
+            return Vector2.zero;
+        }
+
+        Vector2 center = centerSegment.position;
+        Vector2 position = segment.position;
+
+        Vector2 direction = position - center;
+
+        if (clockWise)
+        {
+            direction = new Vector2(direction.y, -direction.x);
+        }
+        else
+        {
+            direction = new Vector2(-direction.y, direction.x);
+        }
+
+        Vector2 newPosition = center + direction;
+
+        if (!IsValidPosition((int)newPosition.x, (int)newPosition.y))
+        {
+            return Vector2.zero;
+        }
+
+        return newPosition;
     }
 }

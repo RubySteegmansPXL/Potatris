@@ -92,7 +92,8 @@ public class ShapeFactory : MonoBehaviour
             int spawnPositionY = (int)centerBlockPosition.y + segment.y - (int)centerOffset.y;
 
             // If any of the blocks are occupied, the shape is not in a valid position
-            if (GridManager.instance.GetBlockAt(spawnPositionX, spawnPositionY).isOccupied)
+            Block currentBlock = GridManager.instance.GetBlockAt(spawnPositionX, spawnPositionY);
+            if (currentBlock != null && currentBlock.isOccupied)
             {
                 isValidPosition = false;
                 break;

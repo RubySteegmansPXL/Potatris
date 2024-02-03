@@ -80,4 +80,16 @@ public class GridManager : MonoBehaviour
             Debug.LogWarning("Tried to attach segment to block outside of bounds.");
         }
     }
+
+    public void DetachSegmentFromBlock(int x, int y)
+    {
+        if (IsInsideBounds(x, y))
+        {
+            grid[x, y].DetachSegment();
+        }
+        else
+        {
+            Debug.LogWarning("Tried to detach segment from block outside of bounds.");
+        }
+    }
 }
