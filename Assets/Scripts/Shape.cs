@@ -14,8 +14,8 @@ public class Shape : MonoBehaviour
     public bool canRotate;
 
     public bool pauseMovement;
-    public bool isHolding;
 
+    private bool isHoldingDown;
 
     private void Start()
     {
@@ -25,13 +25,13 @@ public class Shape : MonoBehaviour
 
     public void MoveDown()
     {
-        if (!isHolding)
+        if (!isHoldingDown)
             Move(Vector2.down);
     }
 
     public void SpedUpMoveDown()
     {
-        if (isHolding)
+        if (isHoldingDown)
             Move(Vector2.down);
     }
 
@@ -92,35 +92,39 @@ public class Shape : MonoBehaviour
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            isHolding = true;
+            isHoldingDown = true;
         }
         else
         {
-            isHolding = false;
+            isHoldingDown = false;
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            foreach (ShapeSegment segment in segments)
-            {
-                if (segment == centerSegment)
-                {
-                    continue;
-                }
-                Vector2 newPosition = RotateAroundCenter(segment);
-                if (newPosition == Vector2.zero)
-                {
-                    Debug.LogWarning("Invalid position, so not rotating.");
-                    return;
-                }
-
-                GridManager.instance.DetachSegmentFromBlock((int)segment.position.x, (int)segment.position.y);
-                segment.position = newPosition;
-                GridManager.instance.AttachSegmentToBlock(segment, (int)segment.position.x, (int)segment.position.y);
-            }
+            RotateShape();
         }
     }
 
+    public void RotateShape()
+    {
+        foreach (ShapeSegment segment in segments)
+        {
+            if (segment == centerSegment)
+            {
+                continue;
+            }
+            Vector2 newPosition = RotateAroundCenter(segment);
+            if (newPosition == Vector2.zero)
+            {
+                Debug.LogWarning("Invalid position, so not rotating.");
+                return;
+            }
+
+            GridManager.instance.DetachSegmentFromBlock((int)segment.position.x, (int)segment.position.y);
+            segment.position = newPosition;
+            GridManager.instance.AttachSegmentToBlock(segment, (int)segment.position.x, (int)segment.position.y);
+        }
+    }
 
     public Vector2 RotateAroundCenter(ShapeSegment segment, bool clockWise = true)
     {
@@ -170,6 +174,7 @@ public class Shape : MonoBehaviour
 
             if (!IsValidPosition((int)segment.position.x + (int)direction.x, (int)segment.position.y + (int)direction.y))
             {
+                Debug.LogWarning("Invalid position, so not moving.");
                 return;
             }
         }
