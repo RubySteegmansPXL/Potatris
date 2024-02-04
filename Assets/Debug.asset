@@ -16,8 +16,9 @@ MonoBehaviour:
   holdMoveSpeed: 0.1
   timeToHoldBeforeSpeedup: 0.15
   possibleShapes:
-  - {fileID: 11400000, guid: ce26368460e129742a804bc1390d58db, type: 2}
   - {fileID: 11400000, guid: 1cc7f6e0fc314994da732bdbd25ae2b6, type: 2}
+  - {fileID: 11400000, guid: ce26368460e129742a804bc1390d58db, type: 2}
+  maximumNudgeTries: 5
   numberOfShapesInQueue: 3
   numberOfRows: 20
   numberOfColumns: 11

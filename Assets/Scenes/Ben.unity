@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   languageCode: en
-  settings: {fileID: 11400000, guid: 31a2080ca4126c44a89f98ae721effdb, type: 2}
+  settings: {fileID: 11400000, guid: cd76497dfb04ff64fba54c16a659cbb5, type: 2}
   gameState: 0
 --- !u!4 &2044779556
 Transform:

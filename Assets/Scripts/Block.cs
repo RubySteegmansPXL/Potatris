@@ -48,7 +48,12 @@ public class Block : MonoBehaviour
     public void Reset()
     {
         if (segment != null)
-            Destroy(segment.gameObject);
+        {
+            // Test to see if we can do a funny
+            //Destroy(segment.gameObject);
+
+            segment.DeathAnimation();
+        }
         DetachSegment();
     }
 

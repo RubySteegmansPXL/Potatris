@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0bb9753fb81c144cbe15d0986adaa6b, type: 3}
   m_Name: Pink
   m_EditorClassIdentifier: 
-  baseColor: {r: 1, g: 0.9272853, b: 0.31760997, a: 1}
-  accentColor: {r: 1, g: 0.84332883, b: 0.2216981, a: 1}
-  lightColor: {r: 1, g: 0.97929764, b: 0.70440245, a: 1}
+  baseColor: {r: 1, g: 0.43867922, b: 0.75528884, a: 1}
+  accentColor: {r: 1, g: 0.39999998, b: 0.9288961, a: 1}
+  lightColor: {r: 1, g: 0.75, b: 0.9916444, a: 1}

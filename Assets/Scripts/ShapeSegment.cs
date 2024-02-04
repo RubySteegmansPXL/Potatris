@@ -33,7 +33,7 @@ public class ShapeSegment : MonoBehaviour
     {
         // Always move towards position if not already there
         // Using slerp
-        if (transform.localPosition != new Vector3(position.x, position.y, 0))
+        if (transform.localPosition != new Vector3(position.x, position.y, 0) && canMove)
         {
             transform.localPosition = Vector3.Slerp(transform.localPosition, new Vector3(position.x, position.y, 0), 0.1f);
         }
@@ -94,5 +94,47 @@ public class ShapeSegment : MonoBehaviour
                 Debug.Log("Face 1", gameObject);
             }
         }
+    }
+
+    [ContextMenu("DeathAnimation")]
+    public void DeathAnimation()
+    {
+        StartCoroutine(DeathAnimationCoroutine());
+    }
+
+    IEnumerator DeathAnimationCoroutine()
+    {
+        canMove = false;
+
+        // Add rigidbody
+        Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>();
+
+        // Add collider
+        BoxCollider2D col = gameObject.AddComponent<BoxCollider2D>();
+
+        // Change sprite layers to high
+        foreach (SpriteRenderer rend in spriteRenderers)
+        {
+            rend.sortingOrder = 12;
+        }
+
+        // Change the last one to 13
+        spriteRenderers[4].sortingOrder = 13;
+
+        // Add random upward force
+        rb.AddForce(new Vector2(Random.Range(-1, 1), 1) * 400);
+
+        // Add random rotation force
+        rb.AddTorque(Random.Range(-1, 1) * 30);
+
+        // Slowly shrink the scale
+        while (transform.localScale.x > 0.01f)
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 0.02f);
+            yield return null;
+        }
+
+
+        Destroy(gameObject);
     }
 }
