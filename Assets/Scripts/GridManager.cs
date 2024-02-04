@@ -143,6 +143,7 @@ public class GridManager : MonoBehaviour
                 Debug.Log("Line cleared");
                 ClearLine(y);
                 MoveDown(y);
+                EventManager.FullRow(new CustomEventArgs(gameObject), 1);
                 yield return new WaitForSeconds(settings.lineClearDelay);
                 CheckForLine();
             }
