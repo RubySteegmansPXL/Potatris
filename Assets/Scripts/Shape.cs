@@ -64,7 +64,7 @@ public class Shape : MonoBehaviour
         // If the block is null, something went wrong, or we went outside the bounds, so return false
         if (block == null)
         {
-            Debug.LogWarning("Block is null, so not a valid position.");
+            Debug.LogWarning("Block is null, so not a valid position. " + x + ", " + y + " is outside the bounds.");
             return false;
         }
 
@@ -148,39 +148,67 @@ public class Shape : MonoBehaviour
 
     public void RotateShape()
     {
-        if (!canRotate)
+        if (!canRotate || settings == null)
         {
             return;
         }
 
-        foreach (ShapeSegment segment in segments)
+        bool rotationApplied = false;
+        int nudgeDirection = -1; // Start with nudging to the left
+        int nudgeAmount = 0;
+        Vector2[] newPositions = new Vector2[segments.Count];
+
+        while (!rotationApplied && nudgeAmount <= settings.maximumNudgeTries)
         {
-            if (segment == centerSegment)
+            bool validRotation = true;
+
+
+            // Get the rotation coordinates of all the segments
+            for (int i = 0; i < segments.Count; i++)
             {
-                continue;
+                newPositions[i] = RotateAroundCenter(segments[i].position, true) + new Vector2(nudgeAmount * nudgeDirection, 0);
+                if (!IsValidPosition((int)newPositions[i].x, (int)newPositions[i].y))
+                {
+                    validRotation = false;
+                    break; // Exit if any position is invalid
+                }
             }
-            Vector2 newPosition = RotateAroundCenter(segment);
-            if (newPosition == Vector2.zero)
+
+            if (validRotation)
             {
-                Debug.LogWarning("Invalid position, so not rotating.");
-                return;
+                rotationApplied = true;
+            }
+            else
+            {
+                // Switch between nudging to the left and right
+                if (nudgeDirection == -1)
+                {
+                    nudgeDirection = 1; // Switch to nudging to the right
+                }
+                else
+                {
+                    nudgeDirection = -1; // Switch back to nudging to the left
+                    nudgeAmount++; // Increase nudge amount after trying both directions
+                }
             }
         }
 
-        // TODO: Check for possible nudges
-
-        DetachAllSegments();
-        foreach (ShapeSegment segment in segments)
+        if (!rotationApplied)
         {
-            Vector2 newPosition = RotateAroundCenter(segment);
-            segment.position = newPosition;
+            Debug.LogWarning("Rotation not applied after maximum nudge attempts.");
+            return;
+        }
 
+        // Detach, set new positions, and re-attach
+        DetachAllSegments();
+        for (int i = 0; i < segments.Count; i++)
+        {
+            segments[i].position = newPositions[i];
         }
         AttachAllSegments();
-
     }
 
-    public Vector2 RotateAroundCenter(ShapeSegment segment, bool clockWise = true)
+    private Vector2 RotateAroundCenter(Vector2 position, bool clockWise)
     {
         if (centerSegment == null)
         {
@@ -189,8 +217,6 @@ public class Shape : MonoBehaviour
         }
 
         Vector2 center = centerSegment.position;
-        Vector2 position = segment.position;
-
         Vector2 direction = position - center;
 
         if (clockWise)
@@ -203,14 +229,10 @@ public class Shape : MonoBehaviour
         }
 
         Vector2 newPosition = center + direction;
-
-        if (!IsValidPosition((int)newPosition.x, (int)newPosition.y))
-        {
-            return Vector2.zero;
-        }
-
-        return newPosition;
+        return newPosition; // Return new position regardless of validity
     }
+
+
 
     public bool CanMove(Vector2 direction)
     {
@@ -234,10 +256,14 @@ public class Shape : MonoBehaviour
         }
         if (!CanMove(direction))
         {
+            // This means we've reached the bottom
             if (direction == Vector2.down)
             {
                 Dissolve();
             }
+
+
+
             Debug.LogWarning("Movement is not possible: " + direction);
             return; // Early exit if movement is paused or not possible
         }

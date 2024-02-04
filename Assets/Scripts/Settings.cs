@@ -10,6 +10,7 @@ public class Settings : ScriptableObject
     public float holdMoveSpeed = 0.1f;
     public float timeToHoldBeforeSpeedup = 0.3f;
     public ShapeData[] possibleShapes;
+    public int maximumNudgeTries = 5; // How many times the shape can be attempted to nudge before placement is cancelled
 
     [Header("Game Settings")]
     public int numberOfShapesInQueue = 3;
