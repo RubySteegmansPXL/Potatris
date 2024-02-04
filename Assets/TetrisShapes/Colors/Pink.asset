@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0bb9753fb81c144cbe15d0986adaa6b, type: 3}
-  m_Name: R_SpriteData
+  m_Name: Pink
   m_EditorClassIdentifier: 
-  baseColor: {r: 1, g: 0.47798735, b: 0.89878565, a: 1}
-  accentColor: {r: 1, g: 0.10062885, b: 0.82418287, a: 1}
-  lightColor: {r: 0.9622642, g: 0.7050552, b: 0.91198266, a: 0}
+  baseColor: {r: 1, g: 0.9272853, b: 0.31760997, a: 1}
+  accentColor: {r: 1, g: 0.84332883, b: 0.2216981, a: 1}
+  lightColor: {r: 1, g: 0.97929764, b: 0.70440245, a: 1}
