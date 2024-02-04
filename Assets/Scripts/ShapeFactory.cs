@@ -8,8 +8,10 @@ public class ShapeFactory : MonoBehaviour
     public Sprite[] spriteBuildingBlocks;
     public Sprite[] faces;
     public GameObject shapePrefab;
+    public GameObject previewShapePrefab;
 
     public List<ShapeData> upcomingShapes = new List<ShapeData>();
+    public List<PreviewShape> previewShapes = new List<PreviewShape>();
 
     private Shape shape;
 
@@ -47,6 +49,7 @@ public class ShapeFactory : MonoBehaviour
         for (int i = 0; i < settings.numberOfShapesInQueue; i++)
         {
             upcomingShapes.Add(SelectRandomShape());
+            previewShapes.Add(CreatePreviewShape(settings.numberOfColumns + 2, settings.numberOfRows - (i * 6) - 6, upcomingShapes[i]));
         }
     }
 
@@ -61,11 +64,36 @@ public class ShapeFactory : MonoBehaviour
     public void CreateShape()
     {
         // Get the next shape, remove it from the list, and add a new random shape to the list
+        if (upcomingShapes.Count == 0)
+        {
+            upcomingShapes.Add(SelectRandomShape());
+        }
         ShapeData nextShape = upcomingShapes[0];
         upcomingShapes.RemoveAt(0);
-        upcomingShapes.Add(SelectRandomShape());
 
-        // Build the shape
+        // Remove the corresponding preview shape
+        if (previewShapes.Count > 0)
+        {
+            previewShapes[0].MoveUp();
+            previewShapes[0].Shrink();
+            previewShapes.RemoveAt(0);
+        }
+
+        // Shift existing previews up
+        foreach (var previewShape in previewShapes)
+        {
+            previewShape.MoveUp(); // Adjust this method to ensure it moves previews to the correct position
+        }
+
+        // Add a new random shape to the upcoming list and its preview
+        ShapeData newShapeData = SelectRandomShape();
+        upcomingShapes.Add(newShapeData);
+        PreviewShape newPreview = CreatePreviewShape(settings.numberOfColumns + 2, settings.numberOfRows - (previewShapes.Count * 6) - 12, newShapeData);
+        previewShapes.Add(newPreview); // Add the new preview shape
+        newPreview.Grow();
+        newPreview.MoveUp();
+
+        // Build the shape that was next in line
         BuildShape(nextShape, centerStartingPosition);
     }
 
@@ -134,6 +162,8 @@ public class ShapeFactory : MonoBehaviour
 
             shape.CreateSegment(spawnPositionX, spawnPositionY, segment.isCenter, nextShape.spriteData, spriteBuildingBlocks, faces);
         }
+
+        EventManager.BlockPlaced(new CustomEventArgs(gameObject));
     }
 
     public void Reset()
@@ -170,4 +200,39 @@ public class ShapeFactory : MonoBehaviour
 
         return false;
     }
+
+    [ContextMenu("TestPreviewShape")]
+    public void TestPreviewShape()
+    {
+        CreatePreviewShape(settings.numberOfColumns + 2, settings.numberOfRows - 6, upcomingShapes[0]);
+        CreatePreviewShape(settings.numberOfColumns + 2, settings.numberOfRows - 12, upcomingShapes[1]);
+        CreatePreviewShape(settings.numberOfColumns + 2, settings.numberOfRows - 18, upcomingShapes[2]);
+
+    }
+
+    public PreviewShape CreatePreviewShape(int x, int y, ShapeData shapeData)
+    {
+        if (shapeData == null || shapeData.segments == null)
+        {
+            Debug.LogError("shapeData or shapeData.segments is null");
+            return null;
+        }
+
+        // Instantiate the shape at the specified world position
+        PreviewShape previewShape = Instantiate(previewShapePrefab, Vector3.zero, Quaternion.identity).GetComponent<PreviewShape>();
+
+        // Generate the shape segments
+        foreach (ShapeSegmentData segment in shapeData.segments)
+        {
+            // For preview, we ignore the grid and just place segments relative to the given x and y
+            int segmentX = x + segment.x;
+            int segmentY = y + segment.y;
+
+            // Create segment without considering block business, simply using world coordinates
+            previewShape.CreateSegment(segmentX, segmentY, shapeData.spriteData, spriteBuildingBlocks, faces);
+        }
+
+        return previewShape;
+    }
+
 }

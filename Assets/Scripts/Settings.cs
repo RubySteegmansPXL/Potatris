@@ -13,6 +13,7 @@ public class Settings : ScriptableObject
     public int maximumNudgeTries = 5; // How many times the shape can be attempted to nudge before placement is cancelled
 
     [Header("Game Settings")]
+    [Range(0, 3)]
     public int numberOfShapesInQueue = 3;
     public int numberOfRows = 20;
     public int numberOfColumns = 11;

@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &57030787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 57030788}
+  m_Layer: 0
+  m_Name: PreviewGridManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &57030788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57030787}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &795668994
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,12 +184,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b0eb042ce5bd474d927dfd43fff00bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSound: {fileID: 0}
+  movementSound: {fileID: 8300000, guid: 5d9d8a99797145148a946b431c8ed415, type: 3}
+  moveDownSound: {fileID: 8300000, guid: db233dbad0d61854fb2441942d3408d4, type: 3}
+  rotateSound: {fileID: 8300000, guid: 61a0e90eb2e3222458e3d7baa7c4089e, type: 3}
   gameStartSound: {fileID: 0}
   gameOverSound: {fileID: 0}
   fullRowSound: {fileID: 8300000, guid: 086a68c1a8017094b93c20e8dbb65d49, type: 3}
-  tetrisSound: {fileID: 8300000, guid: e1bc3b56cc008fb48bd75326b2c43eff, type: 3}
-  blockPlacedSound: {fileID: 0}
+  fullRowSound2: {fileID: 8300000, guid: e1bc3b56cc008fb48bd75326b2c43eff, type: 3}
+  tetrisSound: {fileID: 0}
+  blockPlacedSound: {fileID: 8300000, guid: fa9239b8a503547408d82af8814837e0, type: 3}
   achievementUnlockedSound: {fileID: 0}
 --- !u!4 &795668996
 Transform:
@@ -395,7 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   languageCode: en
-  settings: {fileID: 11400000, guid: cd76497dfb04ff64fba54c16a659cbb5, type: 2}
+  settings: {fileID: 11400000, guid: 31a2080ca4126c44a89f98ae721effdb, type: 2}
   gameState: 0
 --- !u!4 &2044779556
 Transform:
@@ -520,17 +554,17 @@ PrefabInstance:
     - target: {fileID: 7135978206777695317, guid: 4433cafa854edad44b0d11d617f34574,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.281855
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7135978206777695317, guid: 4433cafa854edad44b0d11d617f34574,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.0215
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7135978206777695317, guid: 4433cafa854edad44b0d11d617f34574,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.8653953
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7135978206777695317, guid: 4433cafa854edad44b0d11d617f34574,
         type: 3}
@@ -632,6 +666,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3827483772796408039, guid: 964d5f15b7a5ac34f8554722d009a1e7,
         type: 3}
+      propertyPath: previewShapePrefab
+      value: 
+      objectReference: {fileID: 3609273577574163131, guid: 5d81577f3caa882408fefaef0c1e43b9,
+        type: 3}
+    - target: {fileID: 3827483772796408039, guid: 964d5f15b7a5ac34f8554722d009a1e7,
+        type: 3}
       propertyPath: shapes.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: afc088e857b97ee46ba7f119c6d44fd3,
@@ -656,3 +696,4 @@ SceneRoots:
   - {fileID: 3258728928872957765}
   - {fileID: 2044779556}
   - {fileID: 795668996}
+  - {fileID: 57030788}

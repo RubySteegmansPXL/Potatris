@@ -15,7 +15,7 @@ public class Block : MonoBehaviour
         this.x = x;
         this.y = y;
 
-        transform.position = new Vector3(x, y, 0);
+        transform.localPosition = new Vector3(x, y, 0);
     }
 
     private void OnDestroy()

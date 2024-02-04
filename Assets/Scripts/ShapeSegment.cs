@@ -39,10 +39,11 @@ public class ShapeSegment : MonoBehaviour
         }
     }
 
-    public void Create(int x, int y)
+    public void Create(int x, int y, bool isPreview = false)
     {
-        transform.localPosition = new Vector3(x, y, 0);
-        GridManager.instance.AttachSegmentToBlock(this, x, y);
+        transform.position = new Vector3(x, y, 0);
+        if (!isPreview)
+            GridManager.instance.AttachSegmentToBlock(this, x, y);
         position = new Vector2(x, y);
         ColorSprites();
         FacePicker();

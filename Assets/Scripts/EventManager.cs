@@ -7,8 +7,6 @@ public static class EventManager
 {
     public static event Action OnMove;
     public static event Action OnMoveDown;
-    public static event Action OnMoveLeft;
-    public static event Action OnMoveRight;
     public static event Action OnGameStart;
     public static event Action OnGameOver;
     public static event Action<int> OnFullRow;
@@ -17,6 +15,7 @@ public static class EventManager
     public static event Action OnGridCreate;
     public static event Action OnGridUpdate;
     public static event Action OnLanguageChanged;
+    public static event Action OnBlockRotate;
 
     public static void Movement(CustomEventArgs e)
     {
@@ -26,16 +25,6 @@ public static class EventManager
     public static void MovementDown(CustomEventArgs e)
     {
         OnMoveDown?.Invoke();
-    }
-
-    public static void MovementLeft(CustomEventArgs e)
-    {
-        OnMoveLeft?.Invoke();
-    }
-
-    public static void MovementRight(CustomEventArgs e)
-    {
-        OnMoveRight?.Invoke();
     }
 
     public static void GameStart(CustomEventArgs e)
@@ -78,6 +67,11 @@ public static class EventManager
     public static void LanguageChanged(CustomEventArgs e)
     {
         OnLanguageChanged?.Invoke();
+    }
+
+    public static void BlockRotate(CustomEventArgs e)
+    {
+        OnBlockRotate?.Invoke();
     }
 
 }

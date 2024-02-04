@@ -2,16 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
     public AudioClip movementSound;
+    public AudioClip moveDownSound;
+    public AudioClip rotateSound;
     public AudioClip gameStartSound;
     public AudioClip gameOverSound;
     public AudioClip fullRowSound;
+    public AudioClip fullRowSound2;
     public AudioClip tetrisSound;
     public AudioClip blockPlacedSound;
     public AudioClip achievementUnlockedSound;
 
+    private AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void OnEnable()
     {
@@ -21,6 +31,9 @@ public class AudioManager : MonoBehaviour
         EventManager.OnFullRow += PlayFullRow;
         EventManager.OnBlockPlaced += PlayBlockPlaced;
         EventManager.OnAchievementUnlocked += PlayAchievementUnlocked;
+        EventManager.OnMove += PlayBlockMove;
+        EventManager.OnMoveDown += PlayBlockMoveDown;
+        EventManager.OnBlockRotate += PlayBlockRotate;
 
     }
 
@@ -32,33 +45,51 @@ public class AudioManager : MonoBehaviour
         EventManager.OnFullRow -= PlayFullRow;
         EventManager.OnBlockPlaced -= PlayBlockPlaced;
         EventManager.OnAchievementUnlocked -= PlayAchievementUnlocked;
+        EventManager.OnMove -= PlayBlockMove;
+        EventManager.OnMoveDown -= PlayBlockMoveDown;
+        EventManager.OnBlockRotate -= PlayBlockRotate;
     }
 
     private void PlayMove()
     {
-        AudioSource.PlayClipAtPoint(movementSound, transform.position);
+        audioSource.PlayOneShot(movementSound);
     }
     private void PlayGameStart()
     {
-        AudioSource.PlayClipAtPoint(gameStartSound, transform.position);
+        audioSource.PlayOneShot(gameStartSound);
     }
     private void PlayGameOver()
     {
-        AudioSource.PlayClipAtPoint(gameOverSound, transform.position);
+        audioSource.PlayOneShot(gameOverSound);
     }
     private void PlayFullRow(int lines)
     {
-
-        AudioSource.PlayClipAtPoint(tetrisSound, transform.position);
-
-        AudioSource.PlayClipAtPoint(fullRowSound, transform.position);
+        audioSource.PlayOneShot(fullRowSound);
+        audioSource.PlayOneShot(fullRowSound2);
     }
+
+    private void PlayBlockMove()
+    {
+        audioSource.PlayOneShot(movementSound);
+    }
+
     private void PlayBlockPlaced()
     {
-        AudioSource.PlayClipAtPoint(blockPlacedSound, transform.position);
+        audioSource.PlayOneShot(blockPlacedSound);
     }
+
     private void PlayAchievementUnlocked()
     {
-        AudioSource.PlayClipAtPoint(achievementUnlockedSound, transform.position);
+        audioSource.PlayOneShot(achievementUnlockedSound);
+    }
+
+    private void PlayBlockRotate()
+    {
+        audioSource.PlayOneShot(rotateSound);
+    }
+
+    private void PlayBlockMoveDown()
+    {
+        audioSource.PlayOneShot(moveDownSound);
     }
 }

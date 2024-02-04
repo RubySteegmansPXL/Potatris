@@ -11,6 +11,8 @@ public class Shape : MonoBehaviour
     public Sprite bodySprite;
     public bool canRotate;
 
+    public bool isMockShape;
+
     private float timeHeld;
     private float sidewaysMoveTimer;
     private float standardMovedownTimer;
@@ -205,6 +207,7 @@ public class Shape : MonoBehaviour
             segments[i].position = newPositions[i];
         }
         AttachAllSegments();
+        EventManager.BlockRotate(new CustomEventArgs(gameObject));
     }
 
     private bool TrajectoryClear(Vector2 originalPosition, Vector2 newPosition)
@@ -290,6 +293,16 @@ public class Shape : MonoBehaviour
         {
             segment.position = new Vector2(segment.position.x + direction.x, segment.position.y + direction.y);
         }
+
+        if (direction == Vector2.down)
+        {
+            EventManager.MovementDown(new CustomEventArgs(gameObject));
+        }
+        else if (direction == Vector2.left || direction == Vector2.right)
+        {
+            EventManager.Movement(new CustomEventArgs(gameObject));
+        }
+
         AttachAllSegments();
     }
 
