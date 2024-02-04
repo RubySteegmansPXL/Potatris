@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b37d31aadf0dd9648b290dcc1f3d0633, type: 3}
-  m_Name: Hard
+  m_Name: Debug
   m_EditorClassIdentifier: 
-  defaultMoveSpeed: 0.6
-  holdMoveSpeed: 0.07
-  timeToHoldBeforeSpeedup: 0.2
+  defaultMoveSpeed: 1
+  holdMoveSpeed: 0.1
+  timeToHoldBeforeSpeedup: 0.15
   possibleShapes:
-  - {fileID: 11400000, guid: 20f42d62ace04b349a7bb94ec36ca5bb, type: 2}
-  numberOfShapesInQueue: 1
-  numberOfRows: 16
-  numberOfColumns: 9
-  lineClearDelay: 0.1
+  - {fileID: 11400000, guid: ce26368460e129742a804bc1390d58db, type: 2}
+  - {fileID: 11400000, guid: 1cc7f6e0fc314994da732bdbd25ae2b6, type: 2}
+  numberOfShapesInQueue: 3
+  numberOfRows: 20
+  numberOfColumns: 11
+  lineClearDelay: 0.3

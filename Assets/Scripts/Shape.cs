@@ -11,8 +11,6 @@ public class Shape : MonoBehaviour
     public Sprite bodySprite;
     public bool canRotate;
 
-    public bool pauseMovement;
-
     private float timeHeld;
     private float sidewaysMoveTimer;
     private float standardMovedownTimer;
@@ -229,13 +227,18 @@ public class Shape : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
-        if (pauseMovement || !CanMove(direction))
+        if (GameManager.instance.gameState == GameState.PAUSE)
+        {
+            Debug.LogWarning("Game is paused, so not moving.");
+            return;
+        }
+        if (!CanMove(direction))
         {
             if (direction == Vector2.down)
             {
                 Dissolve();
             }
-            Debug.LogWarning("Movement is paused or not possible, so not moving.");
+            Debug.LogWarning("Movement is not possible: " + direction);
             return; // Early exit if movement is paused or not possible
         }
 

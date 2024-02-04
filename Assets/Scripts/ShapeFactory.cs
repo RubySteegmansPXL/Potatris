@@ -152,6 +152,22 @@ public class ShapeFactory : MonoBehaviour
     {
         if (shape != null)
             Destroy(shape.gameObject);
+        GridManager.instance.CheckForLine();
         CreateShape();
+    }
+
+    // Check if a location is part of the active shape
+    public bool IsLocationPartOfActiveShape(Vector2Int location)
+    {
+        if (shape == null)
+            return false;
+
+        foreach (ShapeSegment segment in shape.segments)
+        {
+            if (segment.position.x == location.x && segment.position.y == location.y)
+                return true;
+        }
+
+        return false;
     }
 }

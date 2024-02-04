@@ -15,5 +15,6 @@ public class Settings : ScriptableObject
     public int numberOfShapesInQueue = 3;
     public int numberOfRows = 20;
     public int numberOfColumns = 11;
+    public float lineClearDelay = 0.1f;
 
 }

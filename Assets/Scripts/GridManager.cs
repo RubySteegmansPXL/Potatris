@@ -127,4 +127,66 @@ public class GridManager : MonoBehaviour
             Debug.LogWarning("Tried to detach segment from block outside of bounds.");
         }
     }
+
+    public void CheckForLine()
+    {
+        StartCoroutine(ICheckForLine());
+    }
+
+    public IEnumerator ICheckForLine()
+    {
+        GameManager.instance.PauseGame();
+        for (int y = 0; y < gridSize.y; y++)
+        {
+            if (IsLineFull(y))
+            {
+                Debug.Log("Line cleared");
+                ClearLine(y);
+                MoveDown(y);
+                yield return new WaitForSeconds(settings.lineClearDelay);
+                CheckForLine();
+            }
+        }
+        GameManager.instance.ResumeGame();
+    }
+
+    private bool IsLineFull(int y)
+    {
+        for (int x = 0; x < gridSize.x; x++)
+        {
+            if (!grid[x, y].isOccupied)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void ClearLine(int y)
+    {
+        for (int x = 0; x < gridSize.x; x++)
+        {
+            grid[x, y].Reset();
+        }
+    }
+
+    private void MoveDown(int y)
+    {
+        for (int i = y; i < gridSize.y - 1; i++)
+        {
+            for (int x = 0; x < gridSize.x; x++)
+            {
+
+
+                if (grid[x, i + 1].isOccupied)
+                {
+                    grid[x, i].AttachSegment(grid[x, i + 1].segment);
+                    grid[x, i + 1].DetachSegment();
+                    // Update segment position
+                    grid[x, i].segment.position = new Vector2Int(x, i);
+                }
+
+            }
+        }
+    }
 }
