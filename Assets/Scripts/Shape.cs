@@ -162,7 +162,6 @@ public class Shape : MonoBehaviour
         {
             bool validRotation = true;
 
-
             // Get the rotation coordinates of all the segments
             for (int i = 0; i < segments.Count; i++)
             {
@@ -174,7 +173,7 @@ public class Shape : MonoBehaviour
                 }
             }
 
-            if (validRotation)
+            if (validRotation && TrajectoryClear(centerSegment.position, newPositions[segments.IndexOf(centerSegment)]))
             {
                 rotationApplied = true;
             }
@@ -207,6 +206,24 @@ public class Shape : MonoBehaviour
         }
         AttachAllSegments();
     }
+
+    private bool TrajectoryClear(Vector2 originalPosition, Vector2 newPosition)
+    {
+        Vector2 direction = newPosition - originalPosition;
+        int steps = Mathf.Max(Mathf.Abs((int)direction.x), Mathf.Abs((int)direction.y));
+        Vector2 step = direction / steps;
+
+        for (int i = 1; i <= steps; i++)
+        {
+            Vector2 currentPosition = originalPosition + step * i;
+            if (!IsValidPosition((int)currentPosition.x, (int)currentPosition.y))
+            {
+                return false; // An intermediate position is occupied
+            }
+        }
+        return true; // All intermediate positions are unoccupied
+    }
+
 
     private Vector2 RotateAroundCenter(Vector2 position, bool clockWise)
     {
