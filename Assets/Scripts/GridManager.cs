@@ -135,6 +135,7 @@ public class GridManager : MonoBehaviour
 
     public IEnumerator ICheckForLine()
     {
+        int linesCleared = 0;
         GameManager.instance.PauseGame();
         for (int y = 0; y < gridSize.y; y++)
         {
@@ -145,11 +146,12 @@ public class GridManager : MonoBehaviour
                 MoveDown(y);
                 EventManager.FullRow(new CustomEventArgs(gameObject), 1);
                 yield return new WaitForSeconds(settings.lineClearDelay);
-                CheckForLine();
-                break; // Break to avoid checking for multiple lines at once
+                y--; // Check the same line again
+                linesCleared++;
             }
         }
         GameManager.instance.ResumeGame();
+        Debug.LogWarning("Lines cleared: " + linesCleared);
     }
 
     private bool IsLineFull(int y)
