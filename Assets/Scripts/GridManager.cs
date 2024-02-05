@@ -146,6 +146,7 @@ public class GridManager : MonoBehaviour
                 EventManager.FullRow(new CustomEventArgs(gameObject), 1);
                 yield return new WaitForSeconds(settings.lineClearDelay);
                 CheckForLine();
+                break; // Break to avoid checking for multiple lines at once
             }
         }
         GameManager.instance.ResumeGame();
