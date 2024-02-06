@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37d31aadf0dd9648b290dcc1f3d0633, type: 3}
   m_Name: Hard
   m_EditorClassIdentifier: 
+  isTutorial: 0
   defaultMoveSpeed: 0.6
   holdMoveSpeed: 0.07
   timeToHoldBeforeSpeedup: 0.2
@@ -22,7 +23,7 @@ MonoBehaviour:
   numberOfShapesInQueue: 1
   numberOfRows: 16
   numberOfColumns: 9
-  lineClearDelay: 0.1
+  lineClearDelay: 0.3
   lineClearMessages:
   - popup_1
   - popup_2

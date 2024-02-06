@@ -11,7 +11,8 @@ public enum GameState
     PAUSE,
     GAMEOVER,
     TUTORIAL,
-    TUTORIAL_USERBLOCK
+    TUTORIAL_MOVEBLOCK,
+    TUTORIAL_TOTALBLOCK
 }
 
 

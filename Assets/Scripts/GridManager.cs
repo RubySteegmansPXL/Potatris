@@ -53,15 +53,15 @@ public class GridManager : MonoBehaviour
     }
 
 
-    public void ResetGrid()
+    public void ResetGrid(bool createStartingShape = true)
     {
         isResetting = true;
+        ShapeFactory.instance.Reset(createStartingShape);
         foreach (Block block in grid)
         {
             block.Reset();
         }
 
-        ShapeFactory.instance.Reset();
 
         isResetting = false;
     }

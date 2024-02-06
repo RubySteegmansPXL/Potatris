@@ -14,16 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTutorial: 1
   defaultMoveSpeed: 1
-  holdMoveSpeed: 0.07
-  timeToHoldBeforeSpeedup: 0.2
+  holdMoveSpeed: 0.1
+  timeToHoldBeforeSpeedup: 0.15
   possibleShapes:
-  - {fileID: 11400000, guid: 526cb33e6fe050a4ea93139815a37a2b, type: 2}
+  - {fileID: 11400000, guid: afc088e857b97ee46ba7f119c6d44fd3, type: 2}
   - {fileID: 11400000, guid: 1cc7f6e0fc314994da732bdbd25ae2b6, type: 2}
+  - {fileID: 11400000, guid: 526cb33e6fe050a4ea93139815a37a2b, type: 2}
+  - {fileID: 11400000, guid: e4166cea1a7b3c5438eeba6e37cac00e, type: 2}
+  - {fileID: 11400000, guid: 791a3e2a6b31a3f4b8fec74112354d43, type: 2}
+  - {fileID: 11400000, guid: 547eee7437ea3a64e8d9a33886f38656, type: 2}
+  - {fileID: 11400000, guid: c53e49054f98ce34d83567fc7187f13c, type: 2}
   maximumNudgeTries: 5
   numberOfShapesInQueue: 0
   numberOfRows: 20
   numberOfColumns: 11
-  lineClearDelay: 0.1
+  lineClearDelay: 0.3
   lineClearMessages:
   - popup_1
   - popup_2

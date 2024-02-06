@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using NaughtyAttributes;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +23,7 @@ public class TutorialManager : MonoBehaviour
     public Vector2Int[] tutorialPositions;
 
     private bool blockPlaced = false;
+    private bool lineCleared = false;
 
     private void Start()
     {
@@ -38,16 +37,24 @@ public class TutorialManager : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnBlockPlaced += OnPlaceBlock;
+        EventManager.OnFullRow += OnLineCleared;
     }
+
 
     private void OnDisable()
     {
         EventManager.OnBlockPlaced -= OnPlaceBlock;
+        EventManager.OnFullRow -= OnLineCleared;
     }
 
     public void OnPlaceBlock()
     {
         blockPlaced = true;
+    }
+
+    public void OnLineCleared(int y)
+    {
+        lineCleared = true;
     }
 
     public IEnumerator IStartTutorial()
@@ -59,7 +66,7 @@ public class TutorialManager : MonoBehaviour
         {
             yield return null;
         }
-        GameManager.instance.gameState = GameState.TUTORIAL_USERBLOCK;
+        GameManager.instance.gameState = GameState.TUTORIAL_TOTALBLOCK;
         tutorialText.text = LocalizationManager.Instance.GetTranslation(tutorial_basic_movement_key);
         yield return new WaitForSeconds(7.1f);
 
@@ -70,7 +77,7 @@ public class TutorialManager : MonoBehaviour
         {
             yield return null;
         }
-        GameManager.instance.gameState = GameState.TUTORIAL_USERBLOCK;
+        GameManager.instance.gameState = GameState.TUTORIAL_MOVEBLOCK;
         blockPlaced = false;
 
         // Wait until the event onblockplaced is called
@@ -91,6 +98,16 @@ public class TutorialManager : MonoBehaviour
 
         GameManager.instance.gameState = GameState.GAME;
 
+        // Move the active shape to the left or right
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            ShapeFactory.instance.MoveActiveShape(Vector2Int.left);
+        }
+        else
+        {
+            ShapeFactory.instance.MoveActiveShape(Vector2Int.right);
+        }
+
         while (!blockPlaced)
         {
             yield return null;
@@ -101,6 +118,11 @@ public class TutorialManager : MonoBehaviour
         GameManager.instance.gameState = GameState.TUTORIAL;
         tutorialText.text = LocalizationManager.Instance.GetTranslation(tutorial_rotate_key);
 
+        ShapeFactory.instance.DestroyShapeImmediate();
+        ShapeFactory.instance.BuildShape(tutorialShapes[0], new Vector2Int(5, 15));
+
+        Debug.Log("Waiting for rotation");
+
         // Check for rotation
         while (!Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -108,6 +130,12 @@ public class TutorialManager : MonoBehaviour
         }
 
         GameManager.instance.gameState = GameState.GAME;
+
+        Debug.Log("Rotated the shape");
+        ShapeFactory.instance.RotateActiveShape();
+
+
+        blockPlaced = false;
 
         while (!blockPlaced)
         {
@@ -118,11 +146,12 @@ public class TutorialManager : MonoBehaviour
 
         GameManager.instance.gameState = GameState.TUTORIAL;
 
-        GridManager.instance.ResetGrid();
+        GridManager.instance.ResetGrid(false);
 
         tutorialText.text = LocalizationManager.Instance.GetTranslation(tutorial_lineclear_key);
 
         ShapeFactory.instance.DestroyShapeImmediate();
+        yield return null;
 
         // Spawn blocks
         for (int i = 0; i < tutorialShapes.Length; i++)
@@ -132,14 +161,18 @@ public class TutorialManager : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
 
+        Debug.LogWarning("Built shapes, now building line fill shape");
+
+        yield return null;
         ShapeFactory.instance.BuildShape(tutorialShapeForLineFill, new Vector2Int(5, 18));
 
-        GameManager.instance.gameState = GameState.TUTORIAL_USERBLOCK;
+        GameManager.instance.gameState = GameState.TUTORIAL_MOVEBLOCK;
 
         blockPlaced = false;
 
+        lineCleared = false;
         // Check for line clear
-        while (!blockPlaced)
+        while (!lineCleared)
         {
             yield return null;
         }
@@ -147,6 +180,11 @@ public class TutorialManager : MonoBehaviour
         GameManager.instance.gameState = GameState.GAME;
 
         tutorialText.text = LocalizationManager.Instance.GetTranslation(tutorial_final_key);
+
+        ShapeFactory.instance.DestroyShapeImmediate();
+        yield return null;
+        yield return new WaitForSeconds(0.5f);
+        ShapeFactory.instance.CreateShape();
     }
 
     [Button]

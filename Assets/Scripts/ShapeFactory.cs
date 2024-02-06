@@ -139,14 +139,21 @@ public class ShapeFactory : MonoBehaviour
             Block currentBlock = GridManager.instance.GetBlockAt(spawnPositionX, spawnPositionY);
             if (currentBlock != null && currentBlock.isOccupied)
             {
+                if (currentBlock == null) Debug.Log("Current block is null");
+                if (currentBlock.isOccupied) Debug.Log("Current block is occupied: " + spawnPositionX + ", " + spawnPositionY);
                 isValidPosition = false;
                 break;
             }
         }
 
+
         // If the shape is not in a valid position (occupied), game over
         if (!isValidPosition)
         {
+            if (!dissolveAfterCreation)
+            {
+                Debug.LogWarning("Game Over, topped out.");
+            }
             // Game over, topped out.
             Debug.Log("Game Over, topped out.");
             EventManager.GameOver(new CustomEventArgs(gameObject));
@@ -176,15 +183,19 @@ public class ShapeFactory : MonoBehaviour
         }
     }
 
-    public void Reset()
+    public void Reset(bool createNew = true)
     {
 
         DissolveShape();
 
         upcomingShapes.Clear();
-        for (int i = 0; i < settings.numberOfShapesInQueue; i++)
+
+        if (createNew)
         {
-            upcomingShapes.Add(SelectRandomShape());
+            for (int i = 0; i < settings.numberOfShapesInQueue; i++)
+            {
+                upcomingShapes.Add(SelectRandomShape());
+            }
         }
     }
 
@@ -218,6 +229,22 @@ public class ShapeFactory : MonoBehaviour
         CreatePreviewShape(settings.numberOfColumns + 2, settings.numberOfRows - 12, upcomingShapes[1]);
         CreatePreviewShape(settings.numberOfColumns + 2, settings.numberOfRows - 18, upcomingShapes[2]);
 
+    }
+
+    public void RotateActiveShape()
+    {
+        if (shape != null)
+        {
+            shape.RotateShape();
+        }
+    }
+
+    public void MoveActiveShape(Vector2Int direction)
+    {
+        if (shape != null)
+        {
+            shape.Move(direction);
+        }
     }
 
     public PreviewShape CreatePreviewShape(int x, int y, ShapeData shapeData)

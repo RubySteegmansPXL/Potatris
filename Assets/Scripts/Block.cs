@@ -7,7 +7,13 @@ public class Block : MonoBehaviour
     public int x;
     public int y;
 
-    public bool isOccupied = false;
+    public bool isOccupied
+    {
+        get
+        {
+            return segment != null;
+        }
+    }
     public ShapeSegment segment;
 
     public void SetBlockPosition(int x, int y)
@@ -30,19 +36,23 @@ public class Block : MonoBehaviour
 
     public void AttachSegment(ShapeSegment segment)
     {
+        // Double check for missing segments
+        if (this.segment == null)
+        {
+            DetachSegment();
+        }
+
         if (isOccupied)
         {
             Debug.LogWarning("Tried to attach segment to an occupied block.");
 
         }
         this.segment = segment;
-        isOccupied = true;
     }
 
     public void DetachSegment()
     {
         segment = null;
-        isOccupied = false;
     }
 
     public void Reset()

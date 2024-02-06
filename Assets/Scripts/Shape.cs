@@ -79,11 +79,16 @@ public class Shape : MonoBehaviour
 
     private void Update()
     {
+
         standardMovedownTimer += Time.deltaTime;
         if (standardMovedownTimer > settings.defaultMoveSpeed)
         {
             MoveDown();
             standardMovedownTimer = 0;
+        }
+        if (GameManager.instance.gameState == GameState.TUTORIAL_TOTALBLOCK)
+        {
+            return;
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -148,7 +153,7 @@ public class Shape : MonoBehaviour
 
     public void RotateShape()
     {
-        if (!canRotate || settings == null || GameManager.instance.gameState == GameState.PAUSE || GameManager.instance.gameState == GameState.TUTORIAL || GameManager.instance.gameState == GameState.TUTORIAL_USERBLOCK)
+        if (!canRotate || settings == null || GameManager.instance.gameState == GameState.PAUSE || GameManager.instance.gameState == GameState.TUTORIAL || GameManager.instance.gameState == GameState.TUTORIAL_MOVEBLOCK || GameManager.instance.gameState == GameState.TUTORIAL_TOTALBLOCK)
         {
             return;
         }
@@ -274,7 +279,13 @@ public class Shape : MonoBehaviour
         }
 
         // ignore down movement during the user block tutorial
-        if (GameManager.instance.gameState == GameState.TUTORIAL_USERBLOCK && direction != Vector2.down)
+        if (GameManager.instance.gameState == GameState.TUTORIAL_MOVEBLOCK && direction != Vector2.down)
+        {
+            return;
+        }
+
+        // Ignore all movement during the total block tutorial except for natural down movement
+        if (GameManager.instance.gameState == GameState.TUTORIAL_TOTALBLOCK && (isHoldingDown || direction != Vector2.down))
         {
             return;
         }
