@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
     public void SetLanguageCode(string languageName)
     {
         // Convert the language name to a language code.
-        languageCode = LanguageManager.Instance.GetLanguageCode(languageName);
+        languageCode = languageName;
         // Call the LanguageChanged event.
         EventManager.LanguageChanged(new CustomEventArgs(gameObject));
     }

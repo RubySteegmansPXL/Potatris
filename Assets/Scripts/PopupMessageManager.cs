@@ -33,8 +33,10 @@ public class PopupMessageManager : MonoBehaviour
     public void ShowTetrisMessage()
     {
         GameObject popupMessage = Instantiate(popupMessagePrefab, new Vector3(settings.numberOfColumns / 2, lastY + 1, 0), Quaternion.identity, transform);
-        string messageKey = settings.lineClearMessages[Random.Range(0, settings.tetrisMessages.Length)];
+        string messageKey = settings.tetrisMessages[Random.Range(0, settings.tetrisMessages.Length)];
         string translatedMessage = LocalizationManager.Instance.GetTranslation(messageKey);
+        Debug.Log($"Tetris message showed! original: {messageKey}, translated: {translatedMessage}");
+
         popupMessage.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = translatedMessage;
         popupMessage.transform.localScale *= 1.5f;
         popupMessage.GetComponentInChildren<TMPro.TextMeshProUGUI>().color = settings.lineClearColors[Random.Range(0, settings.lineClearColors.Length)];

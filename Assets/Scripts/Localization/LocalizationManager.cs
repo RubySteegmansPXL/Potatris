@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using System.Linq;
 
 /// <summary>
 /// Manages localization and loads translations from a CSV file.
@@ -68,6 +69,8 @@ public class LocalizationManager : MonoBehaviour
                 if (firstLine)
                 {
                     firstLine = false;
+                    // Send the header to the initializer
+                    LanguageManager.Instance.InitializeLanguageDictionary(line);
                     continue; // Skip the header row
                 }
 
@@ -78,16 +81,26 @@ public class LocalizationManager : MonoBehaviour
                 if (parts.Length >= 3)
                 {
                     string key = parts[0].Trim();
-                    string nlTranslation = parts[1].Trim();
-                    string enTranslation = parts[2].Trim();
-                    // Add more languages as needed.
-                    //Debug.Log("Key: " + key + " NL: " + nlTranslation + " EN: " + enTranslation);
-                    
-                    translations[key] = new Dictionary<string, string>
+
+                    // Group translations together and trim them 
+                    string[] allLanguageTranslations = parts.Skip(1).Select(x => x.Trim()).ToArray();
+                    string[] allLanguageCodes = LanguageManager.Instance.GetAvailableLanguageCodes().ToArray();
+
+                    Debug.Log("Translations: " + allLanguageTranslations.Length);
+
+                    // List of translations
+                    Debug.Log(key);
+                    Debug.Log(String.Join(',', allLanguageTranslations));
+
+                    for (int i = 0; i < allLanguageTranslations.Length; i++)
                     {
-                        { "nl", nlTranslation },
-                        { "en", enTranslation }
-                    };
+                        Debug.Log($"Key: {key}, Language: {allLanguageCodes[i]}, Translation: {allLanguageTranslations[i]}");
+                        if (!translations.ContainsKey(key))
+                        {
+                            translations.Add(key, new Dictionary<string, string>());
+                        }
+                        translations[key][allLanguageCodes[i]] = allLanguageTranslations[i];
+                    }
                 }
             }
         }
@@ -140,15 +153,15 @@ public class LocalizationManager : MonoBehaviour
     /// </summary>
     /// <returns>The translated text or "Translation not found" if not found.</returns>
     public string GetTranslation(string key)
+    {
+        string currentLanguageCode = GameManager.instance.languageCode;
+        if (translations.ContainsKey(key) && translations[key].ContainsKey(currentLanguageCode))
         {
-            string currentLanguageCode = GameManager.instance.languageCode; 
-            if (translations.ContainsKey(key) && translations[key].ContainsKey(currentLanguageCode))
-            {
-                return translations[key][currentLanguageCode];
-            }
-            else
-            {
-                return "Translation not found";
-            }
+            return translations[key][currentLanguageCode];
         }
+        else
+        {
+            return "Translation not found";
+        }
+    }
 }

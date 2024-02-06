@@ -37,9 +37,6 @@ public class LanguageManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-
-            // Initialize the language dictionary.
-            InitializeLanguageDictionary();
         }
         else
         {
@@ -49,12 +46,25 @@ public class LanguageManager : MonoBehaviour
 
     /// <summary>
     /// Initializes the language dictionary with language code and name pairs.
+    /// Gets called from LocalizationManager
+    /// Parses the first line from the CSV file to add languages to the language dictionary.
     /// </summary>
-    private void InitializeLanguageDictionary()
+    public void InitializeLanguageDictionary(string firstLine)
     {
-        languageDictionary["en"] = "English";
-        languageDictionary["nl"] = "Dutch";
-        // Add more languages as needed.
+
+        // Split the line into tokens
+        string[] tokens = firstLine.Split(';');
+        // First token can be discarded, this is "Key"
+
+        for (int i = 1; i < tokens.Length; i++)
+        {
+            // This will give us back something like "English(en)" or "Dutch(nl)"
+            string[] languageTokens = tokens[i].Split('(');
+            // We need to remove the last character from the language code, which is the closing parenthesis
+            string languageCode = languageTokens[1].Substring(0, languageTokens[1].Length - 1);
+            // Add the language code and name to the dictionary
+            languageDictionary.Add(languageCode, languageTokens[0]);
+        }
     }
 
     /// <summary>
@@ -105,5 +115,10 @@ public class LanguageManager : MonoBehaviour
         }
 
         return availableLanguages;
+    }
+
+    public List<string> GetAvailableLanguageCodes()
+    {
+        return new List<string>(languageDictionary.Keys);
     }
 }
