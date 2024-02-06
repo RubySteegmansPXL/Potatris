@@ -681,6 +681,7 @@ MonoBehaviour:
   tutorial_side_movement_key: tutorial_side_movement
   tutorial_rotate_key: tutorial_rotate
   tutorial_lineclear_key: tutorial_lineclear
+  tutorial_final_key: tutorial_final
   tutorialShapeForLineFill: {fileID: 11400000, guid: f66ab1c33fcfea841abaf335062cd529,
     type: 2}
   tutorialShapes:

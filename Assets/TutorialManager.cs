@@ -17,6 +17,7 @@ public class TutorialManager : MonoBehaviour
     public string tutorial_side_movement_key = "tutorial_side_movement";
     public string tutorial_rotate_key = "tutorial_rotate";
     public string tutorial_lineclear_key = "tutorial_lineclear";
+    public string tutorial_final_key = "tutorial_final";
 
     public ShapeData tutorialShapeForLineFill;
 
@@ -135,11 +136,17 @@ public class TutorialManager : MonoBehaviour
 
         GameManager.instance.gameState = GameState.TUTORIAL_USERBLOCK;
 
+        blockPlaced = false;
+
         // Check for line clear
         while (!blockPlaced)
         {
             yield return null;
         }
+
+        GameManager.instance.gameState = GameState.GAME;
+
+        tutorialText.text = LocalizationManager.Instance.GetTranslation(tutorial_final_key);
     }
 
     [Button]

@@ -40,3 +40,4 @@ tutorial_fast_movement;;You can make the shapes move down faster, to get more po
 tutorial_side_movement;;Very good! You can also move shapes left and right, to position them where you want with either the [left arrow] or [right arrow] keys;
 tutorial_rotate;;Nice! Another cool trick is being able to rotate a block! Try it out with [up arrow];
 tutorial_lineclear;;You're getting the hang of this! Let's try scoring some points. When you complete a line, it dissapears and you get points!;
+tutorial_final;;That's it! When you're ready, head back to the menu to start a real game!;
