@@ -26,6 +26,8 @@ public class Settings : ScriptableObject
 
     public string[] lineClearMessages = new string[] { "Nice!", "Great!", "Awesome!", "Amazing!" };
     public string[] tetrisMessages = new string[] { "UNBELIEVABLE!", "FANTASTIC!", "BINGOOO!", "WOW!" };
+    public float popupMessageDuration = 1.5f;
+    public float tetrisPopupMessageDuration = 2.5f;
 
     public Color32[] lineClearColors = new Color32[]
     {
