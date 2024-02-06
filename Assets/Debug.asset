@@ -24,15 +24,17 @@ MonoBehaviour:
   numberOfColumns: 11
   lineClearDelay: 0.3
   lineClearMessages:
-  - Nice!
-  - Great!
-  - Awesome!
-  - Amazing!
+  - popup_1
+  - popup_2
+  - popup_3
+  - popup_4
   tetrisMessages:
-  - UNBELIEVABLE!
-  - FANTASTIC!
-  - BINGOOO!
-  - WOW!
+  - popup_tetris_1
+  - popup_tetris_2
+  - popup_tetris_3
+  - popup_tetris_4
+  popupMessageDuration: 1.5
+  tetrisPopupMessageDuration: 2.5
   lineClearColors:
   - serializedVersion: 2
     rgba: 4291611903

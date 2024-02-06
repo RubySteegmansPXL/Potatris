@@ -23,7 +23,9 @@ public class PopupMessageManager : MonoBehaviour
     {
         GameObject popupMessage = Instantiate(popupMessagePrefab, new Vector3(settings.numberOfColumns / 2, y + 1, 0), Quaternion.identity, transform);
         lastY = y;
-        popupMessage.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = settings.lineClearMessages[Random.Range(0, settings.lineClearMessages.Length)];
+        string messageKey = settings.lineClearMessages[Random.Range(0, settings.lineClearMessages.Length)];
+        string translatedMessage = LocalizationManager.Instance.GetTranslation(messageKey);
+        popupMessage.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = translatedMessage;
         popupMessage.GetComponentInChildren<TMPro.TextMeshProUGUI>().color = settings.lineClearColors[Random.Range(0, settings.lineClearColors.Length)];
         StartCoroutine(IPopUpAnimation(popupMessage, settings.popupMessageDuration));
     }
@@ -31,7 +33,9 @@ public class PopupMessageManager : MonoBehaviour
     public void ShowTetrisMessage()
     {
         GameObject popupMessage = Instantiate(popupMessagePrefab, new Vector3(settings.numberOfColumns / 2, lastY + 1, 0), Quaternion.identity, transform);
-        popupMessage.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = settings.tetrisMessages[Random.Range(0, settings.tetrisMessages.Length)];
+        string messageKey = settings.lineClearMessages[Random.Range(0, settings.tetrisMessages.Length)];
+        string translatedMessage = LocalizationManager.Instance.GetTranslation(messageKey);
+        popupMessage.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = translatedMessage;
         popupMessage.transform.localScale *= 1.5f;
         popupMessage.GetComponentInChildren<TMPro.TextMeshProUGUI>().color = settings.lineClearColors[Random.Range(0, settings.lineClearColors.Length)];
         StartCoroutine(IPopUpAnimation(popupMessage, settings.tetrisPopupMessageDuration));

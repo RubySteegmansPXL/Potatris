@@ -16,7 +16,8 @@ MonoBehaviour:
   holdMoveSpeed: 0.07
   timeToHoldBeforeSpeedup: 0.2
   possibleShapes:
-  - {fileID: 11400000, guid: 20f42d62ace04b349a7bb94ec36ca5bb, type: 2}
+  - {fileID: 11400000, guid: 526cb33e6fe050a4ea93139815a37a2b, type: 2}
+  - {fileID: 11400000, guid: 1cc7f6e0fc314994da732bdbd25ae2b6, type: 2}
   maximumNudgeTries: 5
   numberOfShapesInQueue: 1
   numberOfRows: 16
@@ -32,6 +33,8 @@ MonoBehaviour:
   - FANTASTIC!
   - BINGOOO!
   - WOW!
+  popupMessageDuration: 1.5
+  tetrisPopupMessageDuration: 2.5
   lineClearColors:
   - serializedVersion: 2
     rgba: 4291611903
