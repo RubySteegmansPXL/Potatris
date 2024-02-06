@@ -23,3 +23,62 @@ MonoBehaviour:
   numberOfRows: 20
   numberOfColumns: 11
   lineClearDelay: 0.3
+  lineClearMessages:
+  - Nice!
+  - Great!
+  - Awesome!
+  - Amazing!
+  tetrisMessages:
+  - UNBELIEVABLE!
+  - FANTASTIC!
+  - BINGOOO!
+  - WOW!
+  lineClearColors:
+  - serializedVersion: 2
+    rgba: 4291611903
+  - serializedVersion: 2
+    rgba: 4291624908
+  - serializedVersion: 2
+    rgba: 4294954188
+  lineClearTextAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.06367374
+      value: 0.96670187
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7256222
+      value: 0.010670543
+      inSlope: -0.03976167
+      outSlope: -0.03976167
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.10492641
+      outSlope: -0.10492641
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.20000908
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

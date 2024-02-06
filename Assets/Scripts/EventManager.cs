@@ -9,7 +9,8 @@ public static class EventManager
     public static event Action OnMoveDown;
     public static event Action OnGameStart;
     public static event Action OnGameOver;
-    public static event Action<int> OnFullRow;
+    public static event Action<int> OnFullRow; // Event with an integer argument corresponding to the y value (height) of the row that was cleared
+    public static event Action OnTetris;
     public static event Action OnBlockPlaced;
     public static event Action OnAchievementUnlocked;
     public static event Action OnGridCreate;
@@ -72,6 +73,11 @@ public static class EventManager
     public static void BlockRotate(CustomEventArgs e)
     {
         OnBlockRotate?.Invoke();
+    }
+
+    public static void Tetris(CustomEventArgs e)
+    {
+        OnTetris?.Invoke();
     }
 
 }

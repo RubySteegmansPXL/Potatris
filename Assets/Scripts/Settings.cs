@@ -19,4 +19,15 @@ public class Settings : ScriptableObject
     public int numberOfColumns = 11;
     public float lineClearDelay = 0.1f;
 
+    [Header("Feedback Settings")]
+    public string[] lineClearMessages = new string[] { "Nice!", "Great!", "Awesome!", "Amazing!" };
+    public string[] tetrisMessages = new string[] { "UNBELIEVABLE!", "FANTASTIC!", "BINGOOO!", "WOW!" };
+    public Color32[] lineClearColors = new Color32[]
+    {
+        new Color32(255, 204, 204, 255),
+        new Color32(204, 255, 204, 255),
+        new Color32(204, 204, 255, 255)
+    };
+    public AnimationCurve lineClearTextAnimationCurve = AnimationCurve.Linear(0, 0, 1, 1);
+
 }

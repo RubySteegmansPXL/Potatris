@@ -141,17 +141,25 @@ public class GridManager : MonoBehaviour
         {
             if (IsLineFull(y))
             {
+                linesCleared++;
                 Debug.Log("Line cleared");
                 ClearLine(y);
                 MoveDown(y);
-                EventManager.FullRow(new CustomEventArgs(gameObject), 1);
+                // Tetris event
+                if (linesCleared % 4 == 0)
+                {
+                    EventManager.Tetris(new CustomEventArgs(gameObject));
+                }
+                else
+                {
+                    EventManager.FullRow(new CustomEventArgs(gameObject), y);
+                }
                 yield return new WaitForSeconds(settings.lineClearDelay);
                 y--; // Check the same line again
-                linesCleared++;
             }
+
         }
         GameManager.instance.ResumeGame();
-        Debug.LogWarning("Lines cleared: " + linesCleared);
     }
 
     private bool IsLineFull(int y)
