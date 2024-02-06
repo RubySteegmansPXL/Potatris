@@ -46,10 +46,10 @@ public class GridManager : MonoBehaviour
     private void Update()
     {
         //debugging
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            ResetGrid();
-        }
+        // if (Input.GetKeyDown(KeyCode.Backspace))
+        // {
+        //     ResetGrid();
+        // }
     }
 
 

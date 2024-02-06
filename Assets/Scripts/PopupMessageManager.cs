@@ -8,15 +8,21 @@ public class PopupMessageManager : MonoBehaviour
 
     private int lastY = 0;
 
-    private void Start()
+    private void Awake()
     {
         settings = GameManager.instance.settings;
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         EventManager.OnFullRow += ShowPopupMessage;
         EventManager.OnTetris += ShowTetrisMessage;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnFullRow -= ShowPopupMessage;
+        EventManager.OnTetris -= ShowTetrisMessage;
     }
 
     public void ShowPopupMessage(int y)

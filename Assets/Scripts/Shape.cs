@@ -11,8 +11,6 @@ public class Shape : MonoBehaviour
     public Sprite bodySprite;
     public bool canRotate;
 
-    public bool isMockShape;
-
     private float timeHeld;
     private float sidewaysMoveTimer;
     private float standardMovedownTimer;
@@ -150,7 +148,7 @@ public class Shape : MonoBehaviour
 
     public void RotateShape()
     {
-        if (!canRotate || settings == null)
+        if (!canRotate || settings == null || GameManager.instance.gameState == GameState.PAUSE || GameManager.instance.gameState == GameState.TUTORIAL || GameManager.instance.gameState == GameState.TUTORIAL_USERBLOCK)
         {
             return;
         }
@@ -269,11 +267,19 @@ public class Shape : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
-        if (GameManager.instance.gameState == GameState.PAUSE)
+        if (GameManager.instance.gameState == GameState.PAUSE || GameManager.instance.gameState == GameState.TUTORIAL)
         {
             Debug.LogWarning("Game is paused, so not moving.");
             return;
         }
+
+        // ignore down movement during the user block tutorial
+        if (GameManager.instance.gameState == GameState.TUTORIAL_USERBLOCK && direction != Vector2.down)
+        {
+            return;
+        }
+
+
         if (!CanMove(direction))
         {
             // This means we've reached the bottom

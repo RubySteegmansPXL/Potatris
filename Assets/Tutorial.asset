@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37d31aadf0dd9648b290dcc1f3d0633, type: 3}
+  m_Name: Tutorial
+  m_EditorClassIdentifier: 
+  isTutorial: 1
+  defaultMoveSpeed: 1
+  holdMoveSpeed: 0.07
+  timeToHoldBeforeSpeedup: 0.2
+  possibleShapes:
+  - {fileID: 11400000, guid: 526cb33e6fe050a4ea93139815a37a2b, type: 2}
+  - {fileID: 11400000, guid: 1cc7f6e0fc314994da732bdbd25ae2b6, type: 2}
+  maximumNudgeTries: 5
+  numberOfShapesInQueue: 0
+  numberOfRows: 20
+  numberOfColumns: 11
+  lineClearDelay: 0.1
+  lineClearMessages:
+  - popup_1
+  - popup_2
+  - popup_3
+  - popup_4
+  tetrisMessages:
+  - popup_tetris_1
+  - popup_tetris_2
+  - popup_tetris_3
+  - popup_tetris_4
+  popupMessageDuration: 1.5
+  tetrisPopupMessageDuration: 2.5
+  lineClearColors:
+  - serializedVersion: 2
+    rgba: 4291611903
+  - serializedVersion: 2
+    rgba: 4291624908
+  - serializedVersion: 2
+    rgba: 4294954188
+  lineClearTextAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.06367374
+      value: 0.96670187
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7256222
+      value: 0.010670543
+      inSlope: -0.03976167
+      outSlope: -0.03976167
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.10492641
+      outSlope: -0.10492641
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.20000908
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

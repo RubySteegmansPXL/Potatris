@@ -9,7 +9,9 @@ public enum GameState
     MENU,
     GAME,
     PAUSE,
-    GAMEOVER
+    GAMEOVER,
+    TUTORIAL,
+    TUTORIAL_USERBLOCK
 }
 
 
@@ -66,11 +68,13 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        if (gameState == GameState.TUTORIAL) return;
         gameState = GameState.PAUSE;
     }
 
     public void ResumeGame()
     {
+        if (gameState == GameState.TUTORIAL) return;
         gameState = GameState.GAME;
     }
 

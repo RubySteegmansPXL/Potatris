@@ -7,6 +7,7 @@ using UnityEngine;
 public class Settings : ScriptableObject
 {
     [Header("Game Settings")]
+    public bool isTutorial;
     public float defaultMoveSpeed = 1f;
     public float holdMoveSpeed = 0.1f;
     public float timeToHoldBeforeSpeedup = 0.3f;

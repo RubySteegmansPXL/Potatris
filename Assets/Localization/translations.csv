@@ -34,3 +34,9 @@ popup_tetris_4;Ongelofelijk! ;Unbelievable!;Unpeelievable!
 lang_en;Engels (en);English (en);Potatolish (en)
 lang_nl;Nederlands (nl);Dutch (nl);Dutchips (nl)
 lang_pt;Aardappels (pt);Potato (pt);Potato (pt)
+tutorial_welcome;Welkom bij Potatris! Laten we door de basisstappen lopen. Druk op [spatie] om door te gaan.;Welcome to Potatris! Let's go through the basic steps. Press [space] to continue.;Welcome to Potatris! Let's go through the basic stews. Press [space] to continue harvesting.
+tutorial_basic_movement;;In Potatris, random shapes spawn at the top. They will move down periodically until they hit something.;
+tutorial_fast_movement;;You can make the shapes move down faster, to get more points. Hold [down arrow].;
+tutorial_side_movement;;Very good! You can also move shapes left and right, to position them where you want with either the [left arrow] or [right arrow] keys;
+tutorial_rotate;;Nice! Another cool trick is being able to rotate a block! Try it out with [up arrow];
+tutorial_lineclear;;You're getting the hang of this! Let's try scoring some points. When you complete a line, it dissapears and you get points!;

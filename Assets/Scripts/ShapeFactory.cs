@@ -45,6 +45,7 @@ public class ShapeFactory : MonoBehaviour
 
     private void Start()
     {
+        if (settings.isTutorial) return;
         // Generate 3 random shapes to start
         for (int i = 0; i < settings.numberOfShapesInQueue; i++)
         {
@@ -55,10 +56,11 @@ public class ShapeFactory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !settings.isTutorial)
         {
             CreateShape();
         }
+
     }
 
     public void CreateShape()
@@ -85,13 +87,14 @@ public class ShapeFactory : MonoBehaviour
             previewShape.MoveUp(); // Adjust this method to ensure it moves previews to the correct position
         }
 
-        // Add a new random shape to the upcoming list and its preview
-        ShapeData newShapeData = SelectRandomShape();
-        upcomingShapes.Add(newShapeData);
-        PreviewShape newPreview = CreatePreviewShape(settings.numberOfColumns + 2, settings.numberOfRows - (previewShapes.Count * 6) - 12, newShapeData);
-        previewShapes.Add(newPreview); // Add the new preview shape
-        newPreview.Grow();
-        newPreview.MoveUp();
+        if (upcomingShapes.Count < settings.numberOfShapesInQueue)
+        {
+            upcomingShapes.Add(SelectRandomShape());
+            PreviewShape newPreview = CreatePreviewShape(settings.numberOfColumns + 2, settings.numberOfRows - (previewShapes.Count * 6) - 12, upcomingShapes.Last());
+            previewShapes.Add(newPreview); // Add the new preview shape
+            newPreview.Grow();
+            newPreview.MoveUp();
+        }
 
         // Build the shape that was next in line
         BuildShape(nextShape, centerStartingPosition);
@@ -105,7 +108,7 @@ public class ShapeFactory : MonoBehaviour
     }
 
 
-    void BuildShape(ShapeData nextShape, Vector2 centerBlockPosition)
+    public void BuildShape(ShapeData nextShape, Vector2 centerBlockPosition, bool dissolveAfterCreation = false)
     {
 
         if (nextShape == null || nextShape.segments == null)
@@ -162,8 +165,15 @@ public class ShapeFactory : MonoBehaviour
 
             shape.CreateSegment(spawnPositionX, spawnPositionY, segment.isCenter, nextShape.spriteData, spriteBuildingBlocks, faces);
         }
-
-        EventManager.BlockPlaced(new CustomEventArgs(gameObject));
+        if (dissolveAfterCreation)
+        {
+            shape.Dissolve();
+            Destroy(shape.gameObject);
+        }
+        else
+        {
+            EventManager.BlockPlaced(new CustomEventArgs(gameObject));
+        }
     }
 
     public void Reset()
@@ -233,6 +243,15 @@ public class ShapeFactory : MonoBehaviour
         }
 
         return previewShape;
+    }
+
+    public void DestroyShapeImmediate()
+    {
+        if (shape != null)
+        {
+            shape.DetachAllSegments();
+            Destroy(shape.gameObject);
+        }
     }
 
 }
