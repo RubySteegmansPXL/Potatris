@@ -6,6 +6,8 @@ public class PopupMessageManager : MonoBehaviour
     public GameObject popupMessagePrefab;
     private Settings settings;
 
+    private int lastY = 0;
+
     private void Start()
     {
         settings = GameManager.instance.settings;
@@ -19,7 +21,8 @@ public class PopupMessageManager : MonoBehaviour
 
     public void ShowPopupMessage(int y)
     {
-        GameObject popupMessage = Instantiate(popupMessagePrefab, new Vector3(-2, y, 0), Quaternion.identity, transform);
+        GameObject popupMessage = Instantiate(popupMessagePrefab, new Vector3(-4, y, 0), Quaternion.identity, transform);
+        lastY = y;
         popupMessage.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = settings.lineClearMessages[Random.Range(0, settings.lineClearMessages.Length)];
         popupMessage.GetComponentInChildren<TMPro.TextMeshProUGUI>().color = settings.lineClearColors[Random.Range(0, settings.lineClearColors.Length)];
         StartCoroutine(IPopUpAnimation(popupMessage));
@@ -27,8 +30,9 @@ public class PopupMessageManager : MonoBehaviour
 
     public void ShowTetrisMessage()
     {
-        GameObject popupMessage = Instantiate(popupMessagePrefab, new Vector3(-2, 10, 0), Quaternion.identity, transform);
+        GameObject popupMessage = Instantiate(popupMessagePrefab, new Vector3(-6, lastY, 0), Quaternion.identity, transform);
         popupMessage.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = settings.tetrisMessages[Random.Range(0, settings.tetrisMessages.Length)];
+        popupMessage.transform.localScale *= 1.5f;
         popupMessage.GetComponentInChildren<TMPro.TextMeshProUGUI>().color = settings.lineClearColors[Random.Range(0, settings.lineClearColors.Length)];
         StartCoroutine(IPopUpAnimation(popupMessage));
     }
