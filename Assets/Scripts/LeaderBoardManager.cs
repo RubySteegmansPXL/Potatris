@@ -21,7 +21,13 @@ public class LeaderBoardManager : MonoBehaviour
                 Destroy(child.gameObject);
             }
 
-            for (int i = 0; i < leaderboard.Length; i++)
+            int numberOfEntries = leaderboard.Length;
+            if (numberOfEntries > 100)
+            {
+                numberOfEntries = 100;
+            }
+
+            for (int i = 0; i < numberOfEntries; i++)
             {
                 ScoreBoardEntry entry = Instantiate(scoreBoardEntryPrefab, contentParent.transform);
                 entry.SetEntry(i + 1, leaderboard[i].Username, leaderboard[i].Score);
