@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Globalization;
 
 public class ScoreBoardEntry : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class ScoreBoardEntry : MonoBehaviour
 
         foreach (var scoreText in scoreTexts)
         {
-            scoreText.text = score.ToString("N0");
+            scoreText.text = score.ToString("N0", CultureInfo.InvariantCulture);
         }
     }
 }

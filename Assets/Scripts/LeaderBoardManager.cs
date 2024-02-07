@@ -43,7 +43,7 @@ public class LeaderBoardManager : MonoBehaviour
         GetLeaderboard();
     }
 
-    public static void Updateleaderboard(string username, int score)
+    public static void AddEntry(string username, int score)
     {
         LeaderboardCreator.ResetPlayer();
         LeaderboardCreator.UploadNewEntry("5287a9b8517bb9be540e317f1d2f26ca0915770b3f69d92b2d8c916ccb37d253", username, score, (leaderboard) =>
