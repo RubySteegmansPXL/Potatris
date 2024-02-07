@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,6 +23,17 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public string languageCode = "en"; // Default language
     public Settings settings;
+
+    [Scene]
+    public int mainMenu;
+    [Scene]
+    public int gameScene;
+    [Scene]
+    public int tutorialScene;
+    [Scene]
+    public int achievementsScene;
+    [Scene]
+    public int leaderboardScene;
 
     private void Awake()
     {
@@ -64,7 +76,7 @@ public class GameManager : MonoBehaviour
 
     public void AchievementsPage()
     {
-        FindObjectOfType<SceneFader>().LoadScene(2);
+        FindObjectOfType<SceneFader>().LoadScene(achievementsScene);
         Debug.Log("Achievements Page");
     }
 
@@ -88,7 +100,7 @@ public class GameManager : MonoBehaviour
     public void MainMenu()
     {
         gameState = GameState.MENU;
-        FindObjectOfType<SceneFader>().LoadScene(0);
+        FindObjectOfType<SceneFader>().LoadScene(mainMenu);
     }
 
     public void QuitGame()
@@ -102,5 +114,18 @@ public class GameManager : MonoBehaviour
         languageCode = languageName;
         // Call the LanguageChanged event.
         EventManager.LanguageChanged(new CustomEventArgs(gameObject));
+    }
+
+    public void StartTutorial()
+    {
+        settings.isTutorial = true;
+        gameState = GameState.TUTORIAL;
+        FindObjectOfType<SceneFader>().LoadScene(tutorialScene);
+    }
+
+    public void LeaderboardPage()
+    {
+        FindObjectOfType<SceneFader>().LoadScene(leaderboardScene);
+        Debug.Log("Leaderboard Page");
     }
 }

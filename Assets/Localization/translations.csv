@@ -43,3 +43,5 @@ tutorial_lineclear;Je begint het te snappen! Voltooi lijnen om ze te wissen en p
 tutorial_final;Dat is alles! Wanneer je klaar bent, ga terug naar het menu om een echt spel te starten!;That's it! When you're ready, head back to the menu to start a real game!;That's the spirit! When you're ready, roll back to the menu to start a real game!
 tutorial_tetris;Meerdere lijnen tegelijk wissen, vooral 4 in één keer, levert hogere punten op, bekend als een 'Tetris'.;Clearing multiple lines, especially 4 at once, scores higher points, known as a 'Tetris';Clearing multiple lines, especially 4 at once, scores higher points, known as a 'Tetris' - that's potato-perfection!
 tutorial_preview;Aankomende vormen worden aan de rechterkant van het spel weergegeven.;Upcoming shapes are displayed on the right side during the game.;Upcoming shapes are displayed on the right side during the game. Keep your eyes peeled!
+main_menu_tutorial;Basisuitleg;Tutorial;Taterial
+main_menu_leaderboard;Scorebord;Leaderboard;Best potatoes
