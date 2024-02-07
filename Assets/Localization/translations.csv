@@ -34,12 +34,12 @@ popup_tetris_4;Ongelofelijk! ;Unbelievable!;Unpeelievable!
 lang_en;Engels (en);English (en);Potatolish (en)
 lang_nl;Nederlands (nl);Dutch (nl);Dutchips (nl)
 lang_pt;Aardappels (pt);Potato (pt);Potato (pt)
-tutorial_welcome;Welkom bij Potatris! Laten we door de basisstappen lopen. Druk op [spatie] om door te gaan.;Welcome to Potatris! Let's go through the basic steps. Press [space] to continue.;Welcome to Potatris! Let's go through the basic stews. Press [space] to continue harvesting.
-tutorial_basic_movement;;In Potatris, random shapes spawn at the top. They will move down periodically until they hit something.;
-tutorial_fast_movement;;You can make the shapes move down faster, to get more points. Hold [down arrow].;
-tutorial_side_movement;;Very good! You can also move shapes left and right, to position them where you want with either the [left arrow] or [right arrow] keys;
-tutorial_rotate;;Nice! Another cool trick is being able to rotate a block! Try it out with [up arrow];
-tutorial_lineclear;;You're getting the hang of this! Let's try scoring some points. When you complete a line, it dissapears and you get points!;
-tutorial_final;;That's it! When you're ready, head back to the menu to start a real game!;
-tutorial_tetris;;"Finally, the more lines you get, the more points you score! 4 lines is called a ""Tetris""!";
-tutorial_preview;;In a real game, you can see the upcoming shapes on the right.;
+tutorial_welcome;Welkom bij Potatris! Druk op [spatie] om te beginnen.;Welcome to Potatris! Press [Space] to start.;Welcome to Potatris! Mash [Space] to start.
+tutorial_basic_movement;Willekeurige vormen verschijnen bovenaan en bewegen na verloop van tijd naar beneden tot ze landen.;Random shapes spawn at the top and move down over time until they land.;Random spuds spawn at the top and tumble down over time until they land.
+tutorial_fast_movement;Versnel de daling van de vorm voor meer punten door [pijltje omlaag] ingedrukt te houden.;Speed up shape descent for more points by holding [Down Arrow].;Speed up spud descent for more points by holding [Down Arrow]. No couch potatoes allowed!
+tutorial_side_movement;Heel goed! Verplaats vormen naar links of rechts om ze te positioneren met [Linker Pijltje] of [Rechter Pijltje].;Very good! Move shapes left or right to position them with [Left Arrow] or [Right Arrow].;Tuber-ific! Move spuds left or right to position them with [Left Arrow] or [Right Arrow].
+tutorial_rotate;Mooi zo! Draai een vorm met [Pijltje Omhoog] om hem op zijn plaats te krijgen.;Nice! Rotate a shape using [Up Arrow] to fit it into place.;Starch-tastic! Rotate a spud using [Up Arrow] to fit it into the perfect spot.
+tutorial_lineclear;Je begint het te snappen! Voltooi lijnen om ze te wissen en punten te scoren.;You're getting the hang of this! Complete lines to clear them and score points.;You're getting the peel of this! Complete lines to clear them and score points.
+tutorial_final;Dat is alles! Wanneer je klaar bent, ga terug naar het menu om een echt spel te starten!;That's it! When you're ready, head back to the menu to start a real game!;That's the spirit! When you're ready, roll back to the menu to start a real game!
+tutorial_tetris;Meerdere lijnen tegelijk wissen, vooral 4 in één keer, levert hogere punten op, bekend als een 'Tetris'.;Clearing multiple lines, especially 4 at once, scores higher points, known as a 'Tetris';Clearing multiple lines, especially 4 at once, scores higher points, known as a 'Tetris' - that's potato-perfection!
+tutorial_preview;Aankomende vormen worden aan de rechterkant van het spel weergegeven.;Upcoming shapes are displayed on the right side during the game.;Upcoming shapes are displayed on the right side during the game. Keep your eyes peeled!
