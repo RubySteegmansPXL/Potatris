@@ -41,3 +41,5 @@ tutorial_side_movement;;Very good! You can also move shapes left and right, to p
 tutorial_rotate;;Nice! Another cool trick is being able to rotate a block! Try it out with [up arrow];
 tutorial_lineclear;;You're getting the hang of this! Let's try scoring some points. When you complete a line, it dissapears and you get points!;
 tutorial_final;;That's it! When you're ready, head back to the menu to start a real game!;
+tutorial_tetris;;"Finally, the more lines you get, the more points you score! 4 lines is called a ""Tetris""!";
+tutorial_preview;;In a real game, you can see the upcoming shapes on the right.;

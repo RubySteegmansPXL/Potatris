@@ -12,7 +12,8 @@ public enum GameState
     GAMEOVER,
     TUTORIAL,
     TUTORIAL_MOVEBLOCK,
-    TUTORIAL_TOTALBLOCK
+    TUTORIAL_TOTALBLOCK,
+    TUTORIAL_DONE
 }
 
 
@@ -69,13 +70,13 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if (gameState == GameState.TUTORIAL) return;
+        if (settings.isTutorial) return;
         gameState = GameState.PAUSE;
     }
 
     public void ResumeGame()
     {
-        if (gameState == GameState.TUTORIAL) return;
+        if (settings.isTutorial) return;
         gameState = GameState.GAME;
     }
 

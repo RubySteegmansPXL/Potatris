@@ -25,7 +25,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 547eee7437ea3a64e8d9a33886f38656, type: 2}
   - {fileID: 11400000, guid: c53e49054f98ce34d83567fc7187f13c, type: 2}
   maximumNudgeTries: 5
-  numberOfShapesInQueue: 0
+  numberOfShapesInQueue: 3
   numberOfRows: 20
   numberOfColumns: 11
   lineClearDelay: 0.3

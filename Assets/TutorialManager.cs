@@ -16,8 +16,11 @@ public class TutorialManager : MonoBehaviour
     public string tutorial_rotate_key = "tutorial_rotate";
     public string tutorial_lineclear_key = "tutorial_lineclear";
     public string tutorial_final_key = "tutorial_final";
+    public string tutorial_tetris_key = "tutorial_tetris";
+    public string tutorial_preview_key = "tutorial_preview";
 
     public ShapeData tutorialShapeForLineFill;
+    public ShapeData bigboi;
 
     public ShapeData[] tutorialShapes;
     public Vector2Int[] tutorialPositions;
@@ -177,14 +180,43 @@ public class TutorialManager : MonoBehaviour
             yield return null;
         }
 
-        GameManager.instance.gameState = GameState.GAME;
 
-        tutorialText.text = LocalizationManager.Instance.GetTranslation(tutorial_final_key);
+        tutorialText.text = LocalizationManager.Instance.GetTranslation(tutorial_tetris_key);
+
+        GridManager.instance.ResetGrid(false);
+
+        ShapeFactory.instance.BuildShape(bigboi, new Vector2Int(0, 4), true);
+        yield return new WaitForSeconds(0.3f);
+        ShapeFactory.instance.BuildShape(bigboi, new Vector2Int(6, 4), true);
+        yield return new WaitForSeconds(0.3f);
+        ShapeFactory.instance.BuildShape(tutorialShapeForLineFill, new Vector2Int(5, 17));
+
+        GameManager.instance.gameState = GameState.TUTORIAL_MOVEBLOCK;
+
+
+        lineCleared = false;
+        while (!lineCleared)
+        {
+            yield return null;
+        }
+
+        tutorialText.text = LocalizationManager.Instance.GetTranslation(tutorial_preview_key);
 
         ShapeFactory.instance.DestroyShapeImmediate();
         yield return null;
         yield return new WaitForSeconds(0.5f);
         ShapeFactory.instance.CreateShape();
+
+        GameManager.instance.gameState = GameState.TUTORIAL_DONE;
+
+        blockPlaced = false;
+
+        while (!blockPlaced)
+        {
+            yield return null;
+        }
+
+        tutorialText.text = LocalizationManager.Instance.GetTranslation(tutorial_final_key);
     }
 
     [Button]

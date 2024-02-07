@@ -87,13 +87,16 @@ public class ShapeFactory : MonoBehaviour
             previewShape.MoveUp(); // Adjust this method to ensure it moves previews to the correct position
         }
 
-        if (upcomingShapes.Count < settings.numberOfShapesInQueue)
+        if (upcomingShapes.Count < settings.numberOfShapesInQueue && (!settings.isTutorial || GameManager.instance.gameState == GameState.TUTORIAL_DONE))
         {
-            upcomingShapes.Add(SelectRandomShape());
-            PreviewShape newPreview = CreatePreviewShape(settings.numberOfColumns + 2, settings.numberOfRows - (previewShapes.Count * 6) - 12, upcomingShapes.Last());
-            previewShapes.Add(newPreview); // Add the new preview shape
-            newPreview.Grow();
-            newPreview.MoveUp();
+            for (int i = 0; i < settings.numberOfShapesInQueue - upcomingShapes.Count + 1; i++)
+            {
+                upcomingShapes.Add(SelectRandomShape());
+                PreviewShape newPreview = CreatePreviewShape(settings.numberOfColumns + 2, settings.numberOfRows - (previewShapes.Count * 6) - 12, upcomingShapes.Last());
+                previewShapes.Add(newPreview); // Add the new preview shape
+                newPreview.Grow();
+                newPreview.MoveUp();
+            }
         }
 
         // Build the shape that was next in line

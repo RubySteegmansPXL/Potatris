@@ -682,8 +682,10 @@ MonoBehaviour:
   tutorial_rotate_key: tutorial_rotate
   tutorial_lineclear_key: tutorial_lineclear
   tutorial_final_key: tutorial_final
+  tutorial_tetris_key: tutorial_tetris
   tutorialShapeForLineFill: {fileID: 11400000, guid: f66ab1c33fcfea841abaf335062cd529,
     type: 2}
+  bigboi: {fileID: 11400000, guid: 1d1f9ffc0ea724a4baca61343a51a223, type: 2}
   tutorialShapes:
   - {fileID: 11400000, guid: 1cc7f6e0fc314994da732bdbd25ae2b6, type: 2}
   - {fileID: 11400000, guid: e4166cea1a7b3c5438eeba6e37cac00e, type: 2}
