@@ -313,7 +313,7 @@ public class Shape : MonoBehaviour
 
         if (direction == Vector2.down)
         {
-            EventManager.MovementDown(new CustomEventArgs(gameObject));
+            EventManager.MovementDown(new CustomEventArgs(gameObject), isHoldingDown);
         }
         else if (direction == Vector2.left || direction == Vector2.right)
         {

@@ -6,26 +6,27 @@ using UnityEngine;
 public static class EventManager
 {
     public static event Action OnMove;
-    public static event Action OnMoveDown;
+    public static event Action<bool> OnMoveDown;
     public static event Action OnGameStart;
     public static event Action OnGameOver;
-    public static event Action<int> OnFullRow; // Event with an integer argument corresponding to the y value (height) of the row that was cleared
+    public static event Action<int, int> OnFullRow; // Event with an integer argument corresponding to the y value (height) of the row that was cleared
     public static event Action OnTetris;
-    public static event Action OnBlockPlaced;
+    public static event Action<Shape> OnBlockPlaced;
     public static event Action OnAchievementUnlocked;
     public static event Action OnGridCreate;
     public static event Action OnGridUpdate;
     public static event Action OnLanguageChanged;
     public static event Action OnBlockRotate;
+    public static event Action<int> OnScoreUpdates;
 
     public static void Movement(CustomEventArgs e)
     {
         OnMove?.Invoke();
     }
 
-    public static void MovementDown(CustomEventArgs e)
+    public static void MovementDown(CustomEventArgs e, bool isHolding)
     {
-        OnMoveDown?.Invoke();
+        OnMoveDown?.Invoke(isHolding);
     }
 
     public static void GameStart(CustomEventArgs e)
@@ -38,15 +39,15 @@ public static class EventManager
         OnGameOver?.Invoke();
     }
 
-    public static void FullRow(CustomEventArgs e, int lines)
+    public static void FullRow(CustomEventArgs e, int height, int lines)
     {
-        OnFullRow?.Invoke(lines);
+        OnFullRow?.Invoke(height, lines);
         Debug.Log("FullRow called by " + e.Sender.name, e.Sender);
     }
 
-    public static void BlockPlaced(CustomEventArgs e)
+    public static void BlockPlaced(CustomEventArgs e, Shape shape)
     {
-        OnBlockPlaced?.Invoke();
+        OnBlockPlaced?.Invoke(shape);
     }
 
     public static void AchievementUnlocked(CustomEventArgs e)
@@ -78,6 +79,11 @@ public static class EventManager
     public static void Tetris(CustomEventArgs e)
     {
         OnTetris?.Invoke();
+    }
+
+    public static void ScoreUpdates(CustomEventArgs e, int scoreAdded)
+    {
+        OnScoreUpdates?.Invoke(scoreAdded);
     }
 
 }

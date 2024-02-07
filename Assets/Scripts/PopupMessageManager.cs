@@ -25,7 +25,7 @@ public class PopupMessageManager : MonoBehaviour
         EventManager.OnTetris -= ShowTetrisMessage;
     }
 
-    public void ShowPopupMessage(int y)
+    public void ShowPopupMessage(int y, int lines)
     {
         GameObject popupMessage = Instantiate(popupMessagePrefab, new Vector3(settings.numberOfColumns / 2, y + 1, 0), Quaternion.identity, transform);
         lastY = y;
