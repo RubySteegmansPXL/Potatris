@@ -1,47 +1,47 @@
-Key;Dutch(nl);English(en);Potato(pt),,,,,,,,,
-main_menu_credits;Door Ben, Ruby en Kaylie;By Ben, Ruby and Kaylie;Potato Ben, Ruby, and Kaylie,,,,,
-main_menu_start;Start;Start;Starch,,,,,,,,,
-main_menu_quit;Stop;Quit;Mash,,,,,,,,,
-ach_title_1;Beginnende Bouwer;Novice Builder;Tater Apprentice,,,,,,,,,
-ach_desc_1;Speel 5 spellen waarin je minstens 1 lijn leeg hebt gemaakt;Play 5 games and clear at least one line in each game;Plant 5 Spuds and Harvest a Row in Each,,,,,,,,,
-ach_title_2;Betrouwbare Opruimer;Consistent Clearer;Reliable Reaper,,,,,,,,,
-ach_desc_2;Verwijder in totaal 50 lijnen over meerdere spellen.;Clear a total of 50 lines across multiple games.;Harvest 50 Rows Across Multiple Seasons,,,,,,,,,
-ach_title_3;Versnellen;Speeding up;Mashing things up,,,,,,,,,
-ach_desc_3;Doe 50 quickdrops.;Place 50 shapes with a quickdrop.;Mash a total of 50 taters,,,,,,,,,
-ach_title_4;Snelle Jelle;Speed Devil;Potato Masher,,,,,,,,,
-ach_desc_4;Plaats 10 blokken met een quickdrop achter elkaar.;Place 10 blocks with a quickdrop in a row;Mash 10 taters consecutively,,,,,,,,,
-ach_title_5;Topscorer;High Scorer;High Spudder,,,,,,,,,
-ach_desc_5;Behaal een score van 500 of meer in 5 opeenvolgende spellen.;Achieve a score of 500 or more in 5 consecutive games.;Reap 500 Spuds in 5 Straight Harvests,,,,,,,,,
-ach_title_6;Rotatie Expert;Rotational Expert;Tuber Turner,,,,,,,,,
-ach_desc_6;Draai Tetrimino's in totaal 100 keer over alle spellen;Rotate Tetriminos a total of 100 times across all games.;Turn Tubers 100 Twists Across All Fields,,,,,,,,,
-ach_title_7;Combo Initiator;Combo Initiate;Combo Cultivator,,,,,,,,,
-ach_desc_7;Voer een combo uit (twee of meer lijnen wissen met één Tetrimino) in 3 verschillende spellen.;Perform a combo (clearing two or more lines with a single Tetrimino) in 3 different games.;Cultivate a Combo (Harvest Two or More Rows with a Single Seed) in 3 Different Plantings,,,,,,,,,
-ach_title_8;Punt Verzamelaar;Point Collector;Spud Stockpiler,,,,,,,,,
-ach_desc_8;Bereik een totaalscore van 5.000 punten.;Reach a lifetime score of 5,000 points.;Store 5,000 Potatoes for Life,,,,,,,
-ach_title_9;Meester van de Punten;Master of Points;Lord of the Fries,,,,,,,,,
-ach_desc_9;Verzamel een grandioze totaalscore van 20.000 punten.;Accumulate a grand total of 20,000 points. ;Amass a Mountain of 20,000 Potatoes,,,,,,,
-ach_title_10;Tetris Meester;Master of Tetris;Tater Royalty,,,,,,,,,
-ach_desc_10;Haal 3 opeenvolgende tetrissen.;Play 3 consecutive tetrisses.;Clear 3 fields of taters in a row.,,,,,,,,,
-ach;Prestaties;Achievements;Spudchievements,,,,,,,,,
-popup_1;Geweldig!;Amazing!;A-mashing!,,,,,,,,,
-popup_2;Mooizo!;Great!;Gratin!,,,,,,,,,
-popup_3;Super!;Super!;Souper-Spud!,,,,,,,,,
-popup_4;Wow!;Wow!;Pow-tato!,,,,,,,,,
-popup_tetris_1;Goed gedaan!;Good job!;Good joba (as in Gob tuber)!,,,,,,,,,
-popup_tetris_2;Tetris!!!;Tetris!!!!;Potatris!!!!,,,,,,,,,
-popup_tetris_3;Joepie!!;WooHooo!;WooHootato!,,,,,,,,,
-popup_tetris_4;Ongelofelijk! ;Unbelievable!;Unpeelievable!,,,,,,,,,
-lang_en;Engels (en);English (en);Potatolish (en),,,,,,,,,
-lang_nl;Nederlands (nl);Dutch (nl);Dutchips (nl),,,,,,,,,
-lang_pt;Aardappels (pt);Potato (pt);Potato (pt),,,,,,,,,
-tutorial_welcome;Welkom bij Potatris! Druk op [spatie] om te beginnen.;Welcome to Potatris! Press [Space] to start.;Welcome to Potatris! Mash [Space] to start.,,,,,,,,,
-tutorial_basic_movement;Willekeurige vormen verschijnen bovenaan en bewegen na verloop van tijd naar beneden tot ze landen.;Random shapes spawn at the top and move down over time until they land.;Random spuds spawn at the top and tumble down over time until they land.,,,,,,,,,
-tutorial_fast_movement;Versnel de daling van de vorm voor meer punten door [pijltje omlaag] ingedrukt te houden.;Speed up shape descent for more points by holding [Down Arrow].;Speed up spud descent for more points by holding [Down Arrow]. No couch potatoes allowed!,,,,,,,,,
-tutorial_side_movement;Heel goed! Verplaats vormen naar links of rechts om ze te positioneren met [Linker Pijltje] of [Rechter Pijltje].;Very good! Move shapes left or right to position them with [Left Arrow] or [Right Arrow].;Tuber-ific! Move spuds left or right to position them with [Left Arrow] or [Right Arrow].,,,,,,,,,
-tutorial_rotate;Mooi zo! Draai een vorm met [Pijltje Omhoog] om hem op zijn plaats te krijgen.;Nice! Rotate a shape using [Up Arrow] to fit it into place.;Starch-tastic! Rotate a spud using [Up Arrow] to fit it into the perfect spot.,,,,,,,,,
-tutorial_lineclear;Je begint het te snappen! Voltooi lijnen om ze te wissen en punten te scoren.;You're getting the hang of this! Complete lines to clear them and score points.;You're getting the peel of this! Complete lines to clear them and score points.,,,,,,,,,
-tutorial_final;Dat is alles! Wanneer je klaar bent, ga terug naar het menu om een echt spel te starten!;That's it! When you're ready, head back to the menu to start a real game!;That's the spirit! When you're ready, roll back to the menu to start a real game!,,,,,,
-tutorial_tetris;Meerdere lijnen tegelijk wissen, vooral 4 in één keer, levert hogere punten op, bekend als een 'Tetris'.;Clearing multiple lines, especially 4 at once, scores higher points, known as a 'Tetris';Clearing multiple lines, especially 4 at once, scores higher points, known as a 'Tetris' - that's potato-perfection!
-tutorial_preview;Aankomende vormen worden aan de rechterkant van het spel weergegeven.;Upcoming shapes are displayed on the right side during the game.;Upcoming shapes are displayed on the right side during the game. Keep your eyes peeled!,,,,,,,,,
-main_menu_tutorial;Basisuitleg;Tutorial;Taterial,,,,,,,,,
-main_menu_leaderboard;Scorebord;Leaderboard;Best potatoes,,,,,,,,,
+Key;Dutch(nl);English(en);Potato(pt)
+main_menu_credits;Door Ben, Ruby en Kaylie;By Ben, Ruby and Kaylie;Potato Ben, Ruby, and Kaylie
+main_menu_start;Start;Start;Starch
+main_menu_quit;Stop;Quit;Mash
+ach_title_1;Beginnende Bouwer;Novice Builder;Tater Apprentice
+ach_desc_1;Speel 5 spellen waarin je minstens 1 lijn leeg hebt gemaakt;Play 5 games and clear at least one line in each game;Plant 5 Spuds and Harvest a Row in Each
+ach_title_2;Betrouwbare Opruimer;Consistent Clearer;Reliable Reaper
+ach_desc_2;Verwijder in totaal 50 lijnen over meerdere spellen.;Clear a total of 50 lines across multiple games.;Harvest 50 Rows Across Multiple Seasons
+ach_title_3;Versnellen;Speeding up;Mashing things up
+ach_desc_3;Doe 50 quickdrops.;Place 50 shapes with a quickdrop.;Mash a total of 50 taters
+ach_title_4;Snelle Jelle;Speed Devil;Potato Masher
+ach_desc_4;Plaats 10 blokken met een quickdrop achter elkaar.;Place 10 blocks with a quickdrop in a row;Uproot a Row in Half a Minute for 5 Plantings
+ach_title_5;Topscorer;High Scorer;High Spudder
+ach_desc_5;Behaal een score van 500 of meer in 5 opeenvolgende spellen.;Achieve a score of 500 or more in 5 consecutive games.;Reap 500 Spuds in 5 Straight Harvests
+ach_title_6;Rotatie Expert;Rotational Expert;Tuber Turner
+ach_desc_6;Draai Tetrimino's in totaal 100 keer over alle spellen;Rotate Tetriminos a total of 100 times across all games.;Turn Tubers 100 Twists Across All Fields
+ach_title_7;Universeel;Mister Worldwide;Potato speech
+ach_desc_7;Verander de taal.;Change the language.;Starch the tater, field mash spud.
+ach_title_8;Punt Verzamelaar;Point Collector;Spud Stockpiler
+ach_desc_8;Bereik een totaalscore van 5.000 punten.;Reach a lifetime score of 5,000 points.;Store 5,000 Potatoes for Life
+ach_title_9;Meester van de Punten;Master of Points;Lord of the Fries
+ach_desc_9;Verzamel een grandioze totaalscore van 20.000 punten.;Accumulate a grand total of 20,000 points. ;Amass a Mountain of 20,000 Potatoes
+ach_title_10;Tetris Tovenaar;Tetris Wizard;Tater Royalty
+ach_desc_10;Speel 3 tetrissen op een rij.;Play 3 tetrisses in a row;Clear 3 fields of taters in one season.
+ach;Prestaties;Achievements;Spudchievements
+popup_1;Geweldig!;Amazing!;A-mashing!
+popup_2;Mooizo!;Great!;Gratin!
+popup_3;Super!;Super!;Souper-Spud!
+popup_4;Wow!;Wow!;Pow-tato!
+popup_tetris_1;Goed gedaan!;Good job!;Good joba (as in Gob tuber)!
+popup_tetris_2;Tetris!!!;Tetris!!!!;Potatris!!!!
+popup_tetris_3;Joepie!!;WooHooo!;WooHootato!
+popup_tetris_4;Ongelofelijk! ;Unbelievable!;Unpeelievable!
+lang_en;Engels (en);English (en);Potatolish (en)
+lang_nl;Nederlands (nl);Dutch (nl);Dutchips (nl)
+lang_pt;Aardappels (pt);Potato (pt);Potato (pt)
+tutorial_welcome;Welkom bij Potatris! Druk op [spatie] om te beginnen.;Welcome to Potatris! Press [Space] to start.;Welcome to Potatris! Mash [Space] to start.
+tutorial_basic_movement;Willekeurige vormen verschijnen bovenaan en bewegen na verloop van tijd naar beneden tot ze landen.;Random shapes spawn at the top and move down over time until they land.;Random spuds spawn at the top and tumble down over time until they land.
+tutorial_fast_movement;Versnel de daling van de vorm voor meer punten door [pijltje omlaag] ingedrukt te houden.;Speed up shape descent for more points by holding [Down Arrow].;Speed up spud descent for more points by holding [Down Arrow]. No couch potatoes allowed!
+tutorial_side_movement;Heel goed! Verplaats vormen naar links of rechts om ze te positioneren met [Linker Pijltje] of [Rechter Pijltje].;Very good! Move shapes left or right to position them with [Left Arrow] or [Right Arrow].;Tuber-ific! Move spuds left or right to position them with [Left Arrow] or [Right Arrow].
+tutorial_rotate;Mooi zo! Draai een vorm met [Pijltje Omhoog] om hem op zijn plaats te krijgen.;Nice! Rotate a shape using [Up Arrow] to fit it into place.;Starch-tastic! Rotate a spud using [Up Arrow] to fit it into the perfect spot.
+tutorial_lineclear;Je begint het te snappen! Voltooi lijnen om ze te wissen en punten te scoren.;You're getting the hang of this! Complete lines to clear them and score points.;You're getting the peel of this! Complete lines to clear them and score points.
+tutorial_final;Dat is alles! Wanneer je klaar bent, ga terug naar het menu om een echt spel te starten!;That's it! When you're ready, head back to the menu to start a real game!;That's the spirit! When you're ready, roll back to the menu to start a real game!
+tutorial_tetris;Meerdere lijnen tegelijk wissen, vooral 4 in   n keer, levert hogere punten op, bekend als een 'Tetris'.;Clearing multiple lines, especially 4 at once, scores higher points, known as a 'Tetris';Clearing multiple lines, especially 4 at once, scores higher points, known as a 'Tetris' - that's potato-perfection!
+tutorial_preview;Aankomende vormen worden aan de rechterkant van het spel weergegeven.;Upcoming shapes are displayed on the right side during the game.;Upcoming shapes are displayed on the right side during the game. Keep your eyes peeled!
+main_menu_tutorial;Basisuitleg;Tutorial;Taterial
+main_menu_leaderboard;Scorebord;Leaderboard;Best potatoes
