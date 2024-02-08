@@ -18,6 +18,8 @@ public static class EventManager
     public static event Action OnLanguageChanged;
     public static event Action OnBlockRotate;
     public static event Action<int> OnScoreUpdates;
+    public static event Action OnFadeIn;
+    public static event Action OnFadeOut;
 
     public static void Movement(CustomEventArgs e)
     {
@@ -84,6 +86,16 @@ public static class EventManager
     public static void ScoreUpdates(CustomEventArgs e, int scoreAdded)
     {
         OnScoreUpdates?.Invoke(scoreAdded);
+    }
+
+    public static void FadeIn(CustomEventArgs e)
+    {
+        OnFadeIn?.Invoke();
+    }
+
+    public static void FadeOut(CustomEventArgs e)
+    {
+        OnFadeOut?.Invoke();
     }
 
 }

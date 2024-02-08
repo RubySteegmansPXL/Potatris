@@ -11,9 +11,13 @@ public class SceneFader : MonoBehaviour
     public float fadeTime = 1f;
 
     public static SceneFader instance;
+    private Animator animator;
 
-    void Awake()
+
+
+    void Start()
     {
+        animator = GetComponent<Animator>();
         if (instance == null)
         {
             instance = this;
@@ -56,32 +60,39 @@ public class SceneFader : MonoBehaviour
 
     IEnumerator FadeOut()
     {
-        // Start fade
-        float t = 0f;
+        EventManager.FadeOut(new CustomEventArgs(gameObject));
+        animator.SetTrigger("FadeOut");
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 
-        // For as long as t is less than the fade time, keep fading out
-        while (t < fadeTime)
-        {
-            float a = fadeCurve.Evaluate(t / fadeTime);
-            fadeImage.color = new Color(231f, 243f, 230f, a);
-            t += Time.deltaTime;
-            yield return null;
-        }
+        // // Start fade
+        // float t = 0f;
+
+        // // For as long as t is less than the fade time, keep fading out
+        // while (t < fadeTime)
+        // {
+        //     float a = fadeCurve.Evaluate(t / fadeTime);
+        //     fadeImage.color = new Color(231f, 243f, 230f, a);
+        //     t += Time.deltaTime;
+        //     yield return null;
+        // }
     }
 
     IEnumerator FadeIn()
     {
-        // Start fade
-        float t = 1f;
+        EventManager.FadeIn(new CustomEventArgs(gameObject));
+        animator.SetTrigger("FadeIn");
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        // // Start fade
+        // float t = 1f;
 
-        // For as long as t is less than the fade time, keep fading out
-        while (t > 0f)
-        {
-            float a = fadeCurve.Evaluate(t / fadeTime);
-            fadeImage.color = new Color(231f, 243f, 230f, a);
-            t -= Time.deltaTime;
-            yield return null;
-        }
+        // // For as long as t is less than the fade time, keep fading out
+        // while (t > 0f)
+        // {
+        //     float a = fadeCurve.Evaluate(t / fadeTime);
+        //     fadeImage.color = new Color(231f, 243f, 230f, a);
+        //     t -= Time.deltaTime;
+        //     yield return null;
+        // }
     }
 
     IEnumerator LoadMainMenu()

@@ -16,6 +16,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip tetrisSound2;
     public AudioClip blockPlacedSound;
     public AudioClip achievementUnlockedSound;
+    public AudioClip fadeInSound;
+    public AudioClip fadeOutSound;
 
     private AudioSource audioSource;
 
@@ -36,6 +38,8 @@ public class AudioManager : MonoBehaviour
         EventManager.OnMoveDown += PlayBlockMoveDown;
         EventManager.OnBlockRotate += PlayBlockRotate;
         EventManager.OnTetris += PlayTetris;
+        EventManager.OnFadeIn += PlayFadeIn;
+        EventManager.OnFadeOut += PlayFadeOut;
 
     }
 
@@ -51,6 +55,8 @@ public class AudioManager : MonoBehaviour
         EventManager.OnMoveDown -= PlayBlockMoveDown;
         EventManager.OnBlockRotate -= PlayBlockRotate;
         EventManager.OnTetris -= PlayTetris;
+        EventManager.OnFadeIn -= PlayFadeIn;
+        EventManager.OnFadeOut -= PlayFadeOut;
     }
 
     private void PlayMove()
@@ -101,5 +107,15 @@ public class AudioManager : MonoBehaviour
         PlayFullRow(0, 0);
         audioSource.PlayOneShot(tetrisSound);
         audioSource.PlayOneShot(tetrisSound2);
+    }
+
+    private void PlayFadeIn()
+    {
+        audioSource.PlayOneShot(fadeInSound);
+    }
+
+    private void PlayFadeOut()
+    {
+        audioSource.PlayOneShot(fadeOutSound);
     }
 }

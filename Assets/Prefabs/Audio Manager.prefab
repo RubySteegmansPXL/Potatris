@@ -56,6 +56,8 @@ MonoBehaviour:
   tetrisSound2: {fileID: 8300000, guid: 9e832bffc9bf364419877f4e89c9fd87, type: 3}
   blockPlacedSound: {fileID: 8300000, guid: fa9239b8a503547408d82af8814837e0, type: 3}
   achievementUnlockedSound: {fileID: 0}
+  fadeInSound: {fileID: 8300000, guid: 2ebf74e2f0eac8b4eb9a220548aa1c16, type: 3}
+  fadeOutSound: {fileID: 8300000, guid: c6de3ac22ab9e3b4181f983be0b59839, type: 3}
 --- !u!82 &7582802613581250600
 AudioSource:
   m_ObjectHideFlags: 0
