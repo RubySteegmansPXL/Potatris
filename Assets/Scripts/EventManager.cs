@@ -20,6 +20,8 @@ public static class EventManager
     public static event Action<int> OnScoreUpdates;
     public static event Action OnFadeIn;
     public static event Action OnFadeOut;
+    public static event Action OnButtonHover;
+    public static event Action OnButtonClicked;
 
     public static void Movement(CustomEventArgs e)
     {
@@ -96,6 +98,16 @@ public static class EventManager
     public static void FadeOut(CustomEventArgs e)
     {
         OnFadeOut?.Invoke();
+    }
+
+    public static void ButtonHover(CustomEventArgs e)
+    {
+        OnButtonHover?.Invoke();
+    }
+
+    public static void ButtonClicked(CustomEventArgs e)
+    {
+        OnButtonClicked?.Invoke();
     }
 
 }

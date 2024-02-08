@@ -59,6 +59,8 @@ MonoBehaviour:
     type: 3}
   fadeInSound: {fileID: 8300000, guid: 2ebf74e2f0eac8b4eb9a220548aa1c16, type: 3}
   fadeOutSound: {fileID: 8300000, guid: c6de3ac22ab9e3b4181f983be0b59839, type: 3}
+  buttonHoverSound: {fileID: 8300000, guid: ea5434f5598569743a122100209cd457, type: 3}
+  buttonClickSound: {fileID: 8300000, guid: 4115ed448ae0ca444a04a0b731ebd63d, type: 3}
 --- !u!82 &7582802613581250600
 AudioSource:
   m_ObjectHideFlags: 0

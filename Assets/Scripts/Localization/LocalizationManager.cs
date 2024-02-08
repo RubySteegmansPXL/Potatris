@@ -86,15 +86,8 @@ public class LocalizationManager : MonoBehaviour
                     string[] allLanguageTranslations = parts.Skip(1).Select(x => x.Trim()).ToArray();
                     string[] allLanguageCodes = LanguageManager.Instance.GetAvailableLanguageCodes().ToArray();
 
-                    Debug.Log("Translations: " + allLanguageTranslations.Length);
-
-                    // List of translations
-                    Debug.Log(key);
-                    Debug.Log(String.Join(',', allLanguageTranslations));
-
                     for (int i = 0; i < allLanguageTranslations.Length; i++)
                     {
-                        Debug.Log($"Key: {key}, Language: {allLanguageCodes[i]}, Translation: {allLanguageTranslations[i]}");
                         if (!translations.ContainsKey(key))
                         {
                             translations.Add(key, new Dictionary<string, string>());
