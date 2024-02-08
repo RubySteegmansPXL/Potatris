@@ -49,7 +49,7 @@ MonoBehaviour:
   moveDownSound: {fileID: 8300000, guid: db233dbad0d61854fb2441942d3408d4, type: 3}
   rotateSound: {fileID: 8300000, guid: 61a0e90eb2e3222458e3d7baa7c4089e, type: 3}
   gameStartSound: {fileID: 0}
-  gameOverSound: {fileID: 0}
+  gameOverSound: {fileID: 8300000, guid: eb70def59a7d1414c951aa0456748bcb, type: 3}
   fullRowSound: {fileID: 8300000, guid: 086a68c1a8017094b93c20e8dbb65d49, type: 3}
   fullRowSound2: {fileID: 8300000, guid: e1bc3b56cc008fb48bd75326b2c43eff, type: 3}
   tetrisSound: {fileID: 8300000, guid: 6adcb76f38a72fc499636271ef57b878, type: 3}

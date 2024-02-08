@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     public Button leaderboardButton;
     public Button tutorialButton;
     public Button achievementsButton;
+    public Button mainMenuButton;
 
     public Settings tutorialSettings;
 
@@ -24,12 +25,17 @@ public class MainMenu : MonoBehaviour
             Debug.LogError("No GameManager found in scene!");
         }
 
-        startButton.onClick.AddListener(StartButtonClicked);
-        quitButton.onClick.AddListener(QuitButtonClicked);
-        achievementsButton.onClick.AddListener(AchievementsButtonClicked);
-        leaderboardButton.onClick.AddListener(LeaderboardButtonClicked);
-        tutorialButton.onClick.AddListener(TutorialButtonClicked);
+        startButton?.onClick.AddListener(StartButtonClicked);
+        quitButton?.onClick.AddListener(QuitButtonClicked);
+        achievementsButton?.onClick.AddListener(AchievementsButtonClicked);
+        leaderboardButton?.onClick.AddListener(LeaderboardButtonClicked);
+        tutorialButton?.onClick.AddListener(TutorialButtonClicked);
+        mainMenuButton?.onClick.AddListener(MainMenuButtonClicked);
+    }
 
+    private void MainMenuButtonClicked()
+    {
+        gameManager.MainMenu();
     }
 
     private void StartButtonClicked()

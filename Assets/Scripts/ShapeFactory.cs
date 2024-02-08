@@ -25,7 +25,6 @@ public class ShapeFactory : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this);
         }
         else Destroy(this);
 

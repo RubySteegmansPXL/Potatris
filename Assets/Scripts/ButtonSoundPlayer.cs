@@ -34,7 +34,6 @@ public class ButtonSoundPlayer : MonoBehaviour
 
     public void OnHover()
     {
-        Debug.Log("Hovering over " + gameObject.name);
         EventManager.ButtonHover(new CustomEventArgs(gameObject));
     }
 }
