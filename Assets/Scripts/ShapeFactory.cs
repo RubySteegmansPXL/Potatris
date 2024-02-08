@@ -52,15 +52,11 @@ public class ShapeFactory : MonoBehaviour
             upcomingShapes.Add(SelectRandomShape());
             previewShapes.Add(CreatePreviewShape(settings.numberOfColumns + 2, settings.numberOfRows - (i * 6) - 6, upcomingShapes[i]));
         }
-    }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && !settings.isTutorial)
+        if (!settings.isTutorial)
         {
             CreateShape();
         }
-
     }
 
     public void CreateShape()

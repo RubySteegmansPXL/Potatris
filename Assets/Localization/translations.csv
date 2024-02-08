@@ -15,7 +15,7 @@ ach_desc_5;Behaal een score van 500 of meer in 5 opeenvolgende spellen.;Achieve 
 ach_title_6;Rotatie Expert;Rotational Expert;Tuber Turner
 ach_desc_6;Draai Tetrimino's in totaal 100 keer over alle spellen;Rotate Tetriminos a total of 100 times across all games.;Turn Tubers 100 Twists Across All Fields
 ach_title_7;Universeel;Mister Worldwide;Potato speech
-ach_desc_7;Verander de taal.;Change the language.;Starch the tater, field mash spud.
+ach_desc_7;Verander de taal.;Change the language.;Change the tractor oil.
 ach_title_8;Punt Verzamelaar;Point Collector;Spud Stockpiler
 ach_desc_8;Bereik een totaalscore van 5.000 punten.;Reach a lifetime score of 5,000 points.;Store 5,000 Potatoes for Life
 ach_title_9;Meester van de Punten;Master of Points;Lord of the Fries
@@ -47,3 +47,4 @@ main_menu_tutorial;Basisuitleg;Tutorial;Taterial
 main_menu_leaderboard;Scorebord;Leaderboard;Best potatoes
 leaderboard_loading;Aan het laden... ;Loading...;Unloading potatoes...
 leaderboard_loading_error;Dit duurt nogal lang, controleer je internetverbinding en probeer het opnieuw...;This is taking a while, check your internet connection and try again...;Well, this harvest is taking a while! You might want to check your tractor and try again!
+ach_unlockmessage;Prestatie Ontgrendeld!;Achievement Unlocked!;Spudchievement Mashed!

@@ -45,6 +45,8 @@ public class AchievementsManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        StopAllCoroutines();
+
         Debug.Log("ACHIEVEMENTS" + scene.buildIndex);
         if (scene.buildIndex == 3)
         {
