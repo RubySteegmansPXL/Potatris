@@ -50,19 +50,19 @@ public class TutorialManager : MonoBehaviour
         EventManager.OnFullRow -= OnLineCleared;
     }
 
-    public void OnPlaceBlock()
+    public void OnPlaceBlock(Shape shape)
     {
         blockPlaced = true;
     }
 
-    public void OnLineCleared(int y)
+    public void OnLineCleared(int y, int lines)
     {
         lineCleared = true;
     }
 
     public IEnumerator IStartTutorial()
     {
-        EventManager.FullRow(new CustomEventArgs(gameObject), 16);
+        EventManager.FullRow(new CustomEventArgs(gameObject), 16, 1);
         tutorialText.text = LocalizationManager.Instance.GetTranslation(tutorial_welcome_key);
         ShapeFactory.instance.CreateShape();
         while (!Input.GetKeyDown(KeyCode.Space))
@@ -74,7 +74,7 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSeconds(7.1f);
 
         GameManager.instance.gameState = GameState.TUTORIAL;
-        EventManager.FullRow(new CustomEventArgs(gameObject), 13);
+        EventManager.FullRow(new CustomEventArgs(gameObject), 13, 1);
         tutorialText.text = LocalizationManager.Instance.GetTranslation(tutorial_fast_movement_key);
         while (!Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -160,7 +160,7 @@ public class TutorialManager : MonoBehaviour
         for (int i = 0; i < tutorialShapes.Length; i++)
         {
             ShapeFactory.instance.BuildShape(tutorialShapes[i], tutorialPositions[i], true);
-            EventManager.MovementDown(new CustomEventArgs(gameObject));
+            EventManager.MovementDown(new CustomEventArgs(gameObject), false);
             yield return new WaitForSeconds(0.2f);
         }
 
