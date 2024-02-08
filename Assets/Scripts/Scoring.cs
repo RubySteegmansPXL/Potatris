@@ -29,6 +29,8 @@ public class Scoring : MonoBehaviour
     private void OnDisable()
     {
         EventManager.OnFullRow -= FullRow;
+        EventManager.OnMoveDown -= MovingDown;
+        EventManager.OnBlockPlaced -= BlockPlaced;
     }
     void MovingDown(bool isHolding)
     {

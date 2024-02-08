@@ -36,6 +36,7 @@ public class AchievementTracker : MonoBehaviour
         EventManager.OnGameStart -= HandleGameStart;
         EventManager.OnLanguageChanged -= HandleLanguageChanged;
         EventManager.OnBlockPlaced -= HandleBlockPlaced;
+        EventManager.OnScoreUpdates -= HandleScoreUpdates;
     }
 
     private void HandleGameStart()
@@ -105,8 +106,8 @@ public class AchievementTracker : MonoBehaviour
             AchievementsManager.instance.UpdateAchievement("ach_5", 20);
             fiveHundredThisGame = true;
         }
-        AchievementsManager.instance.UpdateAchievement("ach_8", scoreAdded / 50);
-        AchievementsManager.instance.UpdateAchievement("ach_9", scoreAdded / 200);
+        AchievementsManager.instance.UpdateAchievement("ach_8", scoreAdded);
+        AchievementsManager.instance.UpdateAchievement("ach_9", scoreAdded);
     }
 
     // Additional methods as needed for other achievements

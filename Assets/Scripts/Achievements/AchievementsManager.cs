@@ -74,6 +74,8 @@ public class AchievementsManager : MonoBehaviour
             achievements.Add(achievement);
         }
 
+        achievements[8].goal = 5000;
+        achievements[9].goal = 20000;
         SaveAchievements();
     }
 
@@ -83,7 +85,7 @@ public class AchievementsManager : MonoBehaviour
         if (achievement != null && !achievement.isUnlocked)
         {
             achievement.progress += progressToAdd;
-
+            Debug.Log("progress and goal" + achievement.progress + achievement.goal);
             if (achievement.progress >= achievement.goal)
             {
                 achievement.isUnlocked = true;
@@ -135,14 +137,12 @@ public class AchievementsManager : MonoBehaviour
     {
         AchievementList achievementList = new AchievementList(achievements);
         string json = JsonUtility.ToJson(achievementList);
-        Debug.Log(json + " save");
         PlayerPrefs.SetString("Achievements", json);
     }
 
     public void LoadAchievements()
     {
         string json = PlayerPrefs.GetString("Achievements");
-        Debug.Log(json + " load");
         if (!string.IsNullOrEmpty(json))
         {
             Debug.Log("LoadAchievements json not null");
