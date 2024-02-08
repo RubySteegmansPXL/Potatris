@@ -2185,7 +2185,6 @@ GameObject:
   - component: {fileID: 1065431161}
   - component: {fileID: 1065431160}
   - component: {fileID: 1065431162}
-  - component: {fileID: 1065431163}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2206,7 +2205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   languageCode: en
-  settings: {fileID: 11400000, guid: abf5996b959194545a0770e1e8fabeaa, type: 2}
+  settings: {fileID: 11400000, guid: 31a2080ca4126c44a89f98ae721effdb, type: 2}
   mainMenu: 0
   gameScene: 1
   tutorialScene: 2
@@ -2243,19 +2242,6 @@ MonoBehaviour:
   achievements: []
   achievementPrefab: {fileID: 1530338295085923491, guid: cd6a1b41fdf9a5346bb329529b247510,
     type: 3}
---- !u!114 &1065431163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1065431159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fced09f3e0ca5f54fa4fc833051cd013, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
 --- !u!1 &1160106075
 GameObject:
   m_ObjectHideFlags: 0

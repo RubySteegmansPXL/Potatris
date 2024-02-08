@@ -8,6 +8,7 @@ public class AchievementTracker : MonoBehaviour
     private int consecutiveTetrises = 0;
     private int quickDrops = 0;
     private bool lineClearedThisGame = false;
+    private int score = 0;
 
     private void OnEnable()
     {
@@ -88,7 +89,8 @@ public class AchievementTracker : MonoBehaviour
 
     private void HandleScoreUpdates(int scoreAdded)
     {
-        if(GameManager.instance.GetComponent<Scoring>().Score >= 500)
+        score += scoreAdded;
+        if(score >= 500)
         {
             AchievementsManager.instance.UpdateAchievement("ach_5", 20);
         }
