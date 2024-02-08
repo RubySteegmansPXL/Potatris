@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationKey: ach
+  textMeshPro: {fileID: 0}
 --- !u!1 &113781364
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationKey: main_menu_start
+  textMeshPro: {fileID: 0}
 --- !u!114 &267124042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,6 +747,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationKey: main_menu_start
+  textMeshPro: {fileID: 0}
 --- !u!1 &431433799
 GameObject:
   m_ObjectHideFlags: 0
@@ -1079,6 +1082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationKey: main_menu_quit
+  textMeshPro: {fileID: 0}
 --- !u!114 &509936096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2132,6 +2136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationKey: ach
+  textMeshPro: {fileID: 0}
 --- !u!114 &853801113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2909,6 +2914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationKey: main_menu_quit
+  textMeshPro: {fileID: 0}
 --- !u!1 &1264101324
 GameObject:
   m_ObjectHideFlags: 0
@@ -3323,6 +3329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationKey: main_menu_tutorial
+  textMeshPro: {fileID: 0}
 --- !u!114 &1668976511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3531,6 +3538,7 @@ GameObject:
   - component: {fileID: 1678573866}
   - component: {fileID: 1678573865}
   - component: {fileID: 1678573868}
+  - component: {fileID: 1678573869}
   m_Layer: 5
   m_Name: LanguageDropdown
   m_TagString: Untagged
@@ -3679,6 +3687,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   languageDropdown: {fileID: 1678573865}
+--- !u!114 &1678573869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678573863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5b13b1bd6e48647a8019f4798f5136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1713129091
 GameObject:
   m_ObjectHideFlags: 0
@@ -4160,6 +4180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationKey: main_menu_leaderboard
+  textMeshPro: {fileID: 0}
 --- !u!222 &1853813478
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4487,7 +4508,9 @@ MonoBehaviour:
   leaderboardButton: {fileID: 1853813475}
   tutorialButton: {fileID: 1668976511}
   achievementsButton: {fileID: 853801109}
+  mainMenuButton: {fileID: 0}
   tutorialSettings: {fileID: 11400000, guid: abf5996b959194545a0770e1e8fabeaa, type: 2}
+  easySettings: {fileID: 11400000, guid: 31a2080ca4126c44a89f98ae721effdb, type: 2}
 --- !u!1 &2047514643
 GameObject:
   m_ObjectHideFlags: 0
@@ -4539,6 +4562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationKey: main_menu_tutorial
+  textMeshPro: {fileID: 0}
 --- !u!114 &2047514646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4688,6 +4712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationKey: main_menu_leaderboard
+  textMeshPro: {fileID: 0}
 --- !u!114 &2109388448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4935,6 +4960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationKey: main_menu_credits
+  textMeshPro: {fileID: 0}
 --- !u!1 &2140965565
 GameObject:
   m_ObjectHideFlags: 0

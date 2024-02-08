@@ -62,6 +62,7 @@ public class TutorialManager : MonoBehaviour
 
     public IEnumerator IStartTutorial()
     {
+        GameManager.instance.isInTutorial = true;
         EventManager.FullRow(new CustomEventArgs(gameObject), 16, 1);
         tutorialText.text = LocalizationManager.Instance.GetTranslation(tutorial_welcome_key);
         ShapeFactory.instance.CreateShape();
@@ -217,6 +218,8 @@ public class TutorialManager : MonoBehaviour
         }
 
         tutorialText.text = LocalizationManager.Instance.GetTranslation(tutorial_final_key);
+
+        GameManager.instance.isInTutorial = false;
     }
 
     [Button]

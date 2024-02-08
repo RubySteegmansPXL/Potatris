@@ -47,6 +47,11 @@ public class AchievementsManager : MonoBehaviour
     {
         StopAllCoroutines();
 
+        if (GameManager.instance.settings.isTutorial)
+        {
+            return;
+        }
+
         Debug.Log("ACHIEVEMENTS" + scene.buildIndex);
         if (scene.buildIndex == 3)
         {
@@ -81,6 +86,12 @@ public class AchievementsManager : MonoBehaviour
 
     public void UpdateAchievement(string id, int progressToAdd)
     {
+
+        if (GameManager.instance.settings.isTutorial)
+        {
+            return;
+        }
+
         Achievement achievement = achievements.Find(a => a.id == id);
         if (achievement != null && !achievement.isUnlocked)
         {

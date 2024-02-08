@@ -148,13 +148,11 @@ public class ShapeFactory : MonoBehaviour
         // If the shape is not in a valid position (occupied), game over
         if (!isValidPosition)
         {
-            if (!dissolveAfterCreation)
+            if (!dissolveAfterCreation && !GameManager.instance.isInTutorial)
             {
                 Debug.LogWarning("Game Over, topped out.");
+                EventManager.GameOver(new CustomEventArgs(gameObject));
             }
-            // Game over, topped out.
-            Debug.Log("Game Over, topped out.");
-            EventManager.GameOver(new CustomEventArgs(gameObject));
             return;
         }
 

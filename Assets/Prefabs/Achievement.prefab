@@ -95,6 +95,12 @@ MonoBehaviour:
   descText: {fileID: 2149390221295234525}
   unlockImage: {fileID: 328299398982765636}
   progressText: {fileID: 4168500456133799690}
+  unlockedColor:
+    serializedVersion: 2
+    rgba: 4285726578
+  lockedColor:
+    serializedVersion: 2
+    rgba: 4286019583
 --- !u!1 &1782934549108484489
 GameObject:
   m_ObjectHideFlags: 0

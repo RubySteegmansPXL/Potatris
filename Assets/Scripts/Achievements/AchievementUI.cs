@@ -10,6 +10,9 @@ public class AchievementUI : MonoBehaviour
     public Image unlockImage;
     public TextMeshProUGUI progressText;
 
+    public Color32 unlockedColor = Color.green;
+    public Color32 lockedColor = Color.red;
+
 
     public void SetAchievement(Achievement achievement, bool isPopUp)
     {
@@ -20,9 +23,10 @@ public class AchievementUI : MonoBehaviour
                 titleText.text = LocalizationManager.Instance.GetTranslation(achievement.titleKey);
             }
             descText.text = LocalizationManager.Instance.GetTranslation(achievement.descKey);
-            unlockImage.color = achievement.isUnlocked ? Color.green : Color.red;
+            unlockImage.color = achievement.isUnlocked ? unlockedColor : lockedColor;
             progressText.text = $"{achievement.progress}%";
-        } else
+        }
+        else
         {
             foreach (var titleText in titleTexts)
             {

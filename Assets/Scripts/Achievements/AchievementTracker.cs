@@ -65,7 +65,7 @@ public class AchievementTracker : MonoBehaviour
     private void HandleLanguageChanged()
     {
         Debug.Log("Language changed, achievement");
-        AchievementsManager.instance.UpdateAchievement("ach_7", 100);    
+        AchievementsManager.instance.UpdateAchievement("ach_7", 100);
     }
 
     private void HandleTetris()
@@ -79,12 +79,12 @@ public class AchievementTracker : MonoBehaviour
 
     private void HandleFullRow(int y, int rowsCleared)
     {
-        if(rowsCleared != 4)
+        if (rowsCleared != 4)
         {
             consecutiveTetrises = 0;
         }
 
-        if(lineClearedThisGame == false)
+        if (lineClearedThisGame == false)
         {
             lineClearedThisGame = true;
             AchievementsManager.instance.UpdateAchievement("ach_1", 20);
@@ -101,7 +101,7 @@ public class AchievementTracker : MonoBehaviour
     private void HandleScoreUpdates(int scoreAdded)
     {
         score += scoreAdded;
-        if(score >= 500 && !fiveHundredThisGame)
+        if (score >= 500 && !fiveHundredThisGame)
         {
             AchievementsManager.instance.UpdateAchievement("ach_5", 20);
             fiveHundredThisGame = true;

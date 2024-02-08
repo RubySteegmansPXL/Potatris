@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public string languageCode = "en"; // Default language
     public Settings settings;
 
+    [HideInInspector] public bool isInTutorial = false;
+
     [Scene]
     public int mainMenu;
     [Scene]

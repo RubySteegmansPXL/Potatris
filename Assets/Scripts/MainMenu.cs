@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     public Button mainMenuButton;
 
     public Settings tutorialSettings;
+    public Settings easySettings;
 
     private GameManager gameManager;
 
@@ -40,6 +41,7 @@ public class MainMenu : MonoBehaviour
 
     private void StartButtonClicked()
     {
+        gameManager.settings = easySettings;
         gameManager.StartGame();
     }
 

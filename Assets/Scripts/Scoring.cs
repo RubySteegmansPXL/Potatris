@@ -38,19 +38,20 @@ public class Scoring : MonoBehaviour
     }
     private void BlockPlaced(Shape shape)
     {
-        if(isHoldingDown)
+        if (isHoldingDown)
         {
             Score += shape.segments.Count * 2;
             scoreText.text = Score.ToString();
             EventManager.ScoreUpdates(new CustomEventArgs(gameObject), shape.segments.Count * 2);
-        } else
+        }
+        else
         {
             Score += shape.segments.Count;
             scoreText.text = Score.ToString();
             EventManager.ScoreUpdates(new CustomEventArgs(gameObject), shape.segments.Count);
         }
     }
-    private void FullRow(int y,  int lines)
+    private void FullRow(int y, int lines)
     {
         int baseScore;
         switch (lines)

@@ -117,6 +117,8 @@ public class LanguageDropdownHandler : MonoBehaviour
             return;
         }
 
+        EventManager.ButtonClicked(new CustomEventArgs(gameObject));
+
         // Set the selected language in the GameManager.
         GameManager.instance.SetLanguageCode(languageCode);
     }
