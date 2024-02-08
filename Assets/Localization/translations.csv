@@ -45,3 +45,5 @@ tutorial_tetris;Meerdere lijnen tegelijk wissen, vooral 4 in   n keer, levert ho
 tutorial_preview;Aankomende vormen worden aan de rechterkant van het spel weergegeven.;Upcoming shapes are displayed on the right side during the game.;Upcoming shapes are displayed on the right side during the game. Keep your eyes peeled!
 main_menu_tutorial;Basisuitleg;Tutorial;Taterial
 main_menu_leaderboard;Scorebord;Leaderboard;Best potatoes
+leaderboard_loading;Aan het laden... ;Loading...;Unloading potatoes...
+leaderboard_loading_error;Dit duurt nogal lang, controleer je internetverbinding en probeer het opnieuw...;This is taking a while, check your internet connection and try again...;Well, this harvest is taking a while! You might want to check your tractor and try again!
