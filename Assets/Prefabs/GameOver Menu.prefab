@@ -3103,7 +3103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startButton: {fileID: 0}
-  quitButton: {fileID: 8727339448352700913}
+  quitButton: {fileID: 8900806974231758410}
   leaderboardButton: {fileID: 3480231788525331392}
   tutorialButton: {fileID: 0}
   achievementsButton: {fileID: 0}
