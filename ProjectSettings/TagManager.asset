@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TetrisBlock
   - ScrollViewContent
+  - AchievementPopUp
   layers:
   - Default
   - TransparentFX

@@ -18,6 +18,7 @@ public class AchievementTracker : MonoBehaviour
         EventManager.OnMoveDown += HandleMoveDown;
         EventManager.OnGameStart += HandleGameStart;
         EventManager.OnScoreUpdates += HandleScoreUpdates;
+        EventManager.OnLanguageChanged += HandleLanguageChanged;
         // Initialize other event subscriptions
     }
 
@@ -54,7 +55,8 @@ public class AchievementTracker : MonoBehaviour
 
     private void HandleLanguageChanged()
     {
-        AchievementsManager.instance.UpdateAchievement("ach_7", 100);
+        Debug.Log("Language changed, achievement");
+        AchievementsManager.instance.UpdateAchievement("ach_7", 100);    
     }
 
     private void HandleTetris()

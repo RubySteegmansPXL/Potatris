@@ -1,13 +1,18 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
+
 public class AchievementsManager : MonoBehaviour {
     
     public static AchievementsManager instance;
     public List<Achievement> achievements;
-    public GameObject achievementPrefab; // The Achievement prefab
-    private Transform scrollViewContent; // The Content component of the Scroll View
+    public GameObject achievementPrefab;
+    public GameObject achievementPopUpPrefab;
+    private Transform scrollViewContent;
+    private Transform popUpParent;
 
     private void Awake()
     {
@@ -18,7 +23,6 @@ public class AchievementsManager : MonoBehaviour {
             LoadAchievements();
             if (achievements.Count == 0)
             {
-                Debug.Log("InstantiateAchievements");
                 InstantiateAchievements();
             }
         }
@@ -61,7 +65,7 @@ public class AchievementsManager : MonoBehaviour {
                     descKey = $"ach_desc_{i}",
                     isUnlocked = false,
                     progress = 0,
-                    goal = 100 // Set this to the actual goal for each achievement
+                    goal = 100
                 };
 
                 achievements.Add(achievement);
@@ -80,12 +84,13 @@ public class AchievementsManager : MonoBehaviour {
             if (achievement.progress >= achievement.goal)
             {
                 achievement.isUnlocked = true;
+                UnlockAchievement(achievement.id);
             }
 
             SaveAchievements();
         }
     }
-
+    
     public void PopulateScrollView()
     {
         // Clear the scroll view content
@@ -105,13 +110,21 @@ public class AchievementsManager : MonoBehaviour {
             achievementObject.transform.SetParent(scrollViewContent, false);
             
             AchievementUI achievementUI = achievementObject.GetComponent<AchievementUI>();
-            achievementUI.SetAchievement(achievement);
+            achievementUI.SetAchievement(achievement, false);
         }
     }
 
     public void UnlockAchievement(string id)
     {
-        // Implement unlock logic
+        Debug.Log("UnlockAchievement" + id);
+        Achievement achievement = achievements.Find(a => a.id == id);
+        Debug.Log(achievement.titleKey);
+        popUpParent = GameObject.FindGameObjectWithTag("AchievementPopUp").transform;
+        GameObject achievementPopUp = Instantiate(achievementPopUpPrefab);
+        AchievementUI achievementUI = achievementPopUp.GetComponent<AchievementUI>();
+        achievementUI.SetAchievement(achievement, true);
+        achievementPopUp.transform.SetParent(popUpParent, false);
+        StartCoroutine(DestroyAchievement(achievementPopUp));
     }
 
     public void SaveAchievements()
@@ -147,6 +160,28 @@ public class AchievementsManager : MonoBehaviour {
         return LocalizationManager.Instance.GetTranslation(achievement.descKey);
     }
 
-    
+    IEnumerator DestroyAchievement(GameObject popUp)
+    {
+        float counter = 0;
+        Vector3 originalPosition = popUp.transform.position;
+        popUp.transform.position = new Vector3(popUp.transform.position.x + 500, popUp.transform.position.y, popUp.transform.position.z);
+        while (counter < 10)
+        {
+            counter += Time.deltaTime;
+            popUp.transform.position = Vector3.Lerp(popUp.transform.position, originalPosition, 10);
+            yield return null;
+        }
+        yield return new WaitForSeconds(3);
+        //Move popUp to the right
+        counter = 0;
+        while (counter < 0.7)
+        {
+            counter += Time.deltaTime;
+            popUp.transform.position = Vector3.Lerp(popUp.transform.position, new Vector3(popUp.transform.position.x + 5, popUp.transform.position.y, popUp.transform.position.z), 2);
+            yield return null;
+        }
+        //Destroy popUp
+        Destroy(popUp);
+    }
 
 }
