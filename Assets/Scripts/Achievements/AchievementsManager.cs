@@ -133,19 +133,21 @@ public class AchievementsManager : MonoBehaviour
 
     public void SaveAchievements()
     {
-        string json = JsonUtility.ToJson(achievements);
+        AchievementList achievementList = new AchievementList(achievements);
+        string json = JsonUtility.ToJson(achievementList);
+        Debug.Log(json + " save");
         PlayerPrefs.SetString("Achievements", json);
     }
 
     public void LoadAchievements()
     {
-        Debug.Log("LoadAchievements");
         string json = PlayerPrefs.GetString("Achievements");
+        Debug.Log(json + " load");
         if (!string.IsNullOrEmpty(json))
         {
             Debug.Log("LoadAchievements json not null");
-            achievements = JsonUtility.FromJson<List<Achievement>>(json);
-            Debug.Log(achievements.Count);
+            AchievementList achievementList = JsonUtility.FromJson<AchievementList>(json);
+            achievements = achievementList.achievements;
         }
         else
         {
@@ -188,4 +190,15 @@ public class AchievementsManager : MonoBehaviour
         Destroy(popUp);
     }
 
+}
+
+[Serializable]
+public class AchievementList
+{
+    public List<Achievement> achievements;
+
+    public AchievementList(List<Achievement> achievements)
+    {
+        this.achievements = achievements;
+    }
 }

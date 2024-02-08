@@ -9,6 +9,8 @@ public class AchievementTracker : MonoBehaviour
     private int quickDrops = 0;
     private bool lineClearedThisGame = false;
     private int score = 0;
+    private bool isHolding = false;
+    private bool fiveHundredThisGame = false;
 
     private void OnEnable()
     {
@@ -19,6 +21,7 @@ public class AchievementTracker : MonoBehaviour
         EventManager.OnGameStart += HandleGameStart;
         EventManager.OnScoreUpdates += HandleScoreUpdates;
         EventManager.OnLanguageChanged += HandleLanguageChanged;
+        EventManager.OnBlockPlaced += HandleBlockPlaced;
         // Initialize other event subscriptions
     }
 
@@ -32,15 +35,21 @@ public class AchievementTracker : MonoBehaviour
         EventManager.OnMoveDown -= HandleMoveDown;
         EventManager.OnGameStart -= HandleGameStart;
         EventManager.OnLanguageChanged -= HandleLanguageChanged;
+        EventManager.OnBlockPlaced -= HandleBlockPlaced;
     }
 
     private void HandleGameStart()
     {
         consecutiveTetrises = 0;
         quickDrops = 0;
+        Debug.Log("Game started, achievement");
     }
 
     private void HandleMoveDown(bool isHolding)
+    {
+        this.isHolding = isHolding;
+    }
+    private void HandleBlockPlaced(Shape shape)
     {
         if (isHolding)
         {
@@ -52,7 +61,6 @@ public class AchievementTracker : MonoBehaviour
             AchievementsManager.instance.UpdateAchievement("ach_3", 2);
         }
     }
-
     private void HandleLanguageChanged()
     {
         Debug.Log("Language changed, achievement");
@@ -92,9 +100,10 @@ public class AchievementTracker : MonoBehaviour
     private void HandleScoreUpdates(int scoreAdded)
     {
         score += scoreAdded;
-        if(score >= 500)
+        if(score >= 500 && !fiveHundredThisGame)
         {
             AchievementsManager.instance.UpdateAchievement("ach_5", 20);
+            fiveHundredThisGame = true;
         }
         AchievementsManager.instance.UpdateAchievement("ach_8", scoreAdded / 50);
         AchievementsManager.instance.UpdateAchievement("ach_9", scoreAdded / 200);
