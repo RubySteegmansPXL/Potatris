@@ -565,8 +565,6 @@ GameObject:
   - component: {fileID: 2044779556}
   - component: {fileID: 2044779555}
   - component: {fileID: 2044779557}
-  - component: {fileID: 2044779559}
-  - component: {fileID: 2044779558}
   m_Layer: 0
   m_Name: BackupGameManager
   m_TagString: Untagged
@@ -588,11 +586,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   languageCode: en
   settings: {fileID: 11400000, guid: 31a2080ca4126c44a89f98ae721effdb, type: 2}
-  mainMenu: 0
-  gameScene: 0
-  tutorialScene: 0
-  achievementsScene: 0
-  leaderboardScene: 0
   gameState: 0
 --- !u!4 &2044779556
 Transform:
@@ -622,33 +615,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1797011099}
---- !u!114 &2044779558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044779554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a6266dd71fbbd34c93c621904bc673d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2044779559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044779554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8486a57aab67e0948b281b0952212232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  achievements: []
-  achievementPrefab: {fileID: 1530338295085923491, guid: cd6a1b41fdf9a5346bb329529b247510,
-    type: 3}
 --- !u!1 &2109610294
 GameObject:
   m_ObjectHideFlags: 0

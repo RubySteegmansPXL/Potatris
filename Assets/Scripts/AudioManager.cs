@@ -65,7 +65,7 @@ public class AudioManager : MonoBehaviour
     {
         audioSource.PlayOneShot(gameOverSound);
     }
-    private void PlayFullRow(int y, int lines)
+    private void PlayFullRow(int y)
     {
         audioSource.PlayOneShot(fullRowSound);
         audioSource.PlayOneShot(fullRowSound2);
@@ -76,7 +76,7 @@ public class AudioManager : MonoBehaviour
         audioSource.PlayOneShot(movementSound);
     }
 
-    private void PlayBlockPlaced(Shape shape)
+    private void PlayBlockPlaced()
     {
         audioSource.PlayOneShot(blockPlacedSound);
     }
@@ -91,14 +91,14 @@ public class AudioManager : MonoBehaviour
         audioSource.PlayOneShot(rotateSound);
     }
 
-    private void PlayBlockMoveDown(bool isHoldingDown)
+    private void PlayBlockMoveDown()
     {
         audioSource.PlayOneShot(moveDownSound);
     }
 
     private void PlayTetris()
     {
-        PlayFullRow(0, 0);
+        PlayFullRow(0);
         audioSource.PlayOneShot(tetrisSound);
         audioSource.PlayOneShot(tetrisSound2);
     }

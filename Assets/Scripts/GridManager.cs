@@ -152,7 +152,7 @@ public class GridManager : MonoBehaviour
                 }
                 else
                 {
-                    EventManager.FullRow(new CustomEventArgs(gameObject), y, linesCleared);
+                    EventManager.FullRow(new CustomEventArgs(gameObject), y);
                 }
                 yield return new WaitForSeconds(settings.lineClearDelay);
                 y--; // Check the same line again

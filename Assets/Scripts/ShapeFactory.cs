@@ -182,7 +182,7 @@ public class ShapeFactory : MonoBehaviour
         }
         else
         {
-            EventManager.BlockPlaced(new CustomEventArgs(gameObject), shape);
+            EventManager.BlockPlaced(new CustomEventArgs(gameObject));
         }
     }
 

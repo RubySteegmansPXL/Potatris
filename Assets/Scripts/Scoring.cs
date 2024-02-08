@@ -11,13 +11,10 @@ public class Scoring : MonoBehaviour
     public TextMeshProUGUI scoreText;
 
     private bool lastClearWasTetris;
-    private bool isHoldingDown;
 
     private void OnEnable()
     {
         EventManager.OnFullRow += FullRow;
-        EventManager.OnMoveDown += MovingDown;
-        EventManager.OnBlockPlaced += BlockPlaced;
     }
 
     private void Start()
@@ -30,25 +27,8 @@ public class Scoring : MonoBehaviour
     {
         EventManager.OnFullRow -= FullRow;
     }
-    void MovingDown(bool isHolding)
-    {
-        isHoldingDown = isHolding;
-    }
-    private void BlockPlaced(Shape shape)
-    {
-        if(isHoldingDown)
-        {
-            Score += shape.segments.Count * 2;
-            scoreText.text = Score.ToString();
-            EventManager.ScoreUpdates(new CustomEventArgs(gameObject), shape.segments.Count * 2);
-        } else
-        {
-            Score += shape.segments.Count;
-            scoreText.text = Score.ToString();
-            EventManager.ScoreUpdates(new CustomEventArgs(gameObject), shape.segments.Count);
-        }
-    }
-    private void FullRow(int y,  int lines)
+
+    private void FullRow(int lines)
     {
         int baseScore;
         switch (lines)
@@ -76,6 +56,5 @@ public class Scoring : MonoBehaviour
         }
         Score += baseScore * Level;
         scoreText.text = Score.ToString();
-        EventManager.ScoreUpdates(new CustomEventArgs(gameObject), baseScore * Level);
     }
 }

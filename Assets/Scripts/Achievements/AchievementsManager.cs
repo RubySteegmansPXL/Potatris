@@ -41,7 +41,7 @@ public class AchievementsManager : MonoBehaviour {
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("ACHIEVEMENTS" + scene.buildIndex);
-        if (scene.buildIndex == 3) 
+        if (scene.buildIndex == 2) 
         {
             Debug.Log("OnSceneLoaded Achievements");
             scrollViewContent = GameObject.FindGameObjectWithTag("ScrollViewContent").transform;
