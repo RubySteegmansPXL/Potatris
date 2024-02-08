@@ -22,7 +22,6 @@ public class GridManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this);
         }
         else
         {

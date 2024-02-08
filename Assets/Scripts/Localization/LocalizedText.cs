@@ -7,7 +7,7 @@ using TMPro;
 public class LocalizedText : MonoBehaviour
 {
     public string translationKey; // The key used to retrieve the localized text. (e.g. "main_menu_credits")
-    private TextMeshProUGUI textMeshPro;
+    [HideInInspector] public TextMeshProUGUI textMeshPro;
 
     private void Start()
     {
@@ -20,7 +20,7 @@ public class LocalizedText : MonoBehaviour
         EventManager.OnLanguageChanged += UpdateText;
     }
 
-    void OnDisable() 
+    void OnDisable()
     {
         EventManager.OnLanguageChanged -= UpdateText;
     }
@@ -28,7 +28,7 @@ public class LocalizedText : MonoBehaviour
     /// <summary>
     /// Updates the text content based on the current language and translation key.
     /// </summary>
-    public void UpdateText()
+    public virtual void UpdateText()
     {
         if (textMeshPro != null)
         {

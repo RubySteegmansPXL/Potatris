@@ -87,12 +87,11 @@ public class ShapeSegment : MonoBehaviour
             if (Random.Range(0, 2) == 0)
             {
                 spriteRenderers[4].sprite = faces[0];
-                Debug.Log("Face 0", gameObject);
             }
             else
             {
                 spriteRenderers[4].sprite = faces[1];
-                Debug.Log("Face 1", gameObject);
+
             }
         }
     }
