@@ -54,3 +54,4 @@ gameover_enter_name;Geef je naam op:;Enter username:;Provide potato name:
 gameover_submit;Klaar;Submit;Potato!
 gameover_menu;Menu;Menu;Menu
 gameover_final_score;Eindscore:;Final score: ;Final potato count:
+cancel;Annuleer;Cancel;Stopotato
