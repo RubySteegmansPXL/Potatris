@@ -1,3 +1,0 @@
-1. als we van achievements naar menu gaan moet het languagedropdown
-de huidige taal tonen (DONE!)
-2. hoe variabelen in localizedtext? ("Je hebt 5 punten!")

@@ -11,7 +11,7 @@ using System.Linq;
 public class LocalizationManager : MonoBehaviour
 {
     private Dictionary<string, Dictionary<string, string>> translations;
-    private string csvFilePath = "Assets/Localization/translations.csv";
+    private string csvFilePath = "Localization/translations.csv";
 
     private static LocalizationManager instance;
 
@@ -56,21 +56,26 @@ public class LocalizationManager : MonoBehaviour
     /// </summary>
     public void LoadTranslations()
     {
-        //Debug.Log("Loading translations");
-        // Load translations from the CSV file
+        // Initialize the translations dictionary
         translations = new Dictionary<string, Dictionary<string, string>>();
+
+        // The path to the file in the Resources folder, without the file extension
+        string resourcePath = "Localization/translations";
 
         try
         {
-
-            using (StreamReader file = new StreamReader(csvFilePath))
+            // Load the CSV file from the Resources folder
+            TextAsset csvData = Resources.Load<TextAsset>(resourcePath);
+            if (csvData != null)
             {
+                // Split the file content by new lines to get each line of the CSV
+                string[] lines = csvData.text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+
                 bool firstLine = true;
 
-                while (!file.EndOfStream)
+                foreach (string line in lines)
                 {
-                    string line = file.ReadLine();
-                    //Debug.Log("Line: " + line);
+                    if (string.IsNullOrWhiteSpace(line)) continue; // Skip empty lines
 
                     if (firstLine)
                     {
@@ -80,15 +85,12 @@ public class LocalizationManager : MonoBehaviour
                         continue; // Skip the header row
                     }
 
-                    // Use a custom CSV parsing method to handle quoted strings
                     var parts = ParseCSVLine(line);
-                    //Debug.Log("Parts: " + parts.Length);
 
                     if (parts.Length >= 3)
                     {
                         string key = parts[0].Trim();
 
-                        // Group translations together and trim them 
                         string[] allLanguageTranslations = parts.Skip(1).Select(x => x.Trim()).ToArray();
                         string[] allLanguageCodes = LanguageManager.Instance.GetAvailableLanguageCodes().ToArray();
 
@@ -103,11 +105,16 @@ public class LocalizationManager : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                Debug.LogError("Localization CSV data not found at path: " + resourcePath);
+            }
         }
         catch (Exception e)
         {
             Debug.LogError("Error loading translations: " + e.Message);
         }
+
     }
 
     /// <summary>
