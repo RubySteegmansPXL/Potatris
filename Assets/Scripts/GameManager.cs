@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (settings.isTutorial) isInTutorial = true;
+        else isInTutorial = false;
         Debug.Log("GAMEMANAGER" + scene.buildIndex);
     }
 

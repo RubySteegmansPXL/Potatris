@@ -2,9 +2,10 @@
 ### Wat zit er allemaal in potatris?
 
 - Originele examenopgave: [ExamenOpgave.md](ExamenOpgave.md)
-- Build van het spel: [Potatris.zip](Builds/Potatris_Build.zip)
+- Build van het spel (Builds folder): [Potatris.zip](Builds/Potatris_Build.zip)
 - Documentatie Localization Framework: [LocalizationFramework.pdf](Assets/Documentation/LocalizationDocs.pdf)
 - Documentatie Shape Creator tool: [ShapeCreatorDocs.md](Assets/Documentation/ShapeCreatorDocs.md)
+
 
 #### Minimale vereisten:
 - [x] Polish
