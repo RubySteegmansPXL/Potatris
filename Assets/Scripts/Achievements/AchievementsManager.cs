@@ -79,8 +79,8 @@ public class AchievementsManager : MonoBehaviour
             achievements.Add(achievement);
         }
 
-        achievements[8].goal = 5000;
-        achievements[9].goal = 20000;
+        achievements[7].goal = 5000;
+        achievements[8].goal = 20000;
         SaveAchievements();
     }
 
@@ -96,7 +96,8 @@ public class AchievementsManager : MonoBehaviour
         if (achievement != null && !achievement.isUnlocked)
         {
             achievement.progress += progressToAdd;
-            Debug.Log("progress and goal" + achievement.progress + achievement.goal);
+            // Log progress, achievement and goal
+            Debug.Log($"Achievement: {achievement.titleKey}, Progress: {achievement.progress}, Goal: {achievement.goal}");
             if (achievement.progress >= achievement.goal)
             {
                 achievement.isUnlocked = true;

@@ -175,7 +175,7 @@ public class ShapeFactory : MonoBehaviour
         }
         else
         {
-            EventManager.BlockPlaced(new CustomEventArgs(gameObject), shape);
+            EventManager.BlockCreated(new CustomEventArgs(gameObject));
         }
     }
 
@@ -197,6 +197,7 @@ public class ShapeFactory : MonoBehaviour
 
     public void DissolveShape()
     {
+        EventManager.BlockPlaced(new CustomEventArgs(gameObject), shape);
         if (shape != null)
             Destroy(shape.gameObject);
         GridManager.instance.CheckForLine();

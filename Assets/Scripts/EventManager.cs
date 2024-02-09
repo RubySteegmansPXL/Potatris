@@ -22,6 +22,7 @@ public static class EventManager
     public static event Action OnFadeOut;
     public static event Action OnButtonHover;
     public static event Action OnButtonClicked;
+    public static event Action OnBlockCreated;
 
     public static void Movement(CustomEventArgs e)
     {
@@ -52,6 +53,11 @@ public static class EventManager
     public static void BlockPlaced(CustomEventArgs e, Shape shape)
     {
         OnBlockPlaced?.Invoke(shape);
+    }
+
+    public static void BlockCreated(CustomEventArgs e)
+    {
+        OnBlockCreated?.Invoke();
     }
 
     public static void AchievementUnlocked(CustomEventArgs e)
@@ -88,6 +94,7 @@ public static class EventManager
     public static void ScoreUpdates(CustomEventArgs e, int scoreAdded)
     {
         OnScoreUpdates?.Invoke(scoreAdded);
+        Debug.Log("ScoreUpdates called by " + e.Sender.name, e.Sender);
     }
 
     public static void FadeIn(CustomEventArgs e)

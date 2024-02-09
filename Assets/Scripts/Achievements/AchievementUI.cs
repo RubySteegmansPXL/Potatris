@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -24,7 +25,18 @@ public class AchievementUI : MonoBehaviour
             }
             descText.text = LocalizationManager.Instance.GetTranslation(achievement.descKey);
             unlockImage.color = achievement.isUnlocked ? unlockedColor : lockedColor;
-            progressText.text = $"{achievement.progress}%";
+
+            if (achievement.goal != 100)
+            {
+                Debug.Log("Achievement goal higher than 100, so calculating progress.");
+                Debug.Log($"Achievement {achievement.titleKey} has progress {achievement.progress} and goal {achievement.goal}.");
+                int actualProgress = Mathf.FloorToInt((float)achievement.progress / (float)achievement.goal * 100);
+                progressText.text = $"{actualProgress} %";
+            }
+            else
+            {
+                progressText.text = $"{achievement.progress}%";
+            }
         }
         else
         {

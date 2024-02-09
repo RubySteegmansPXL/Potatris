@@ -33,7 +33,7 @@ public class UserNameInput : MonoBehaviour
             Debug.LogError("Scoring not found");
             gameObject.SetActive(false);
         }
-        LeaderBoardManager.AddEntry(inputField.text, scoring.Score);
+        LeaderBoardManager.AddEntry(inputField.text.ToUpper(), scoring.Score);
 
         Debug.Log("Entry submitted: " + inputField.text.ToUpper() + " - " + scoring.Score);
 

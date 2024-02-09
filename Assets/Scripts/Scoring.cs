@@ -18,6 +18,7 @@ public class Scoring : MonoBehaviour
         EventManager.OnFullRow += FullRow;
         EventManager.OnMoveDown += MovingDown;
         EventManager.OnBlockPlaced += BlockPlaced;
+        EventManager.OnGameOver += GameOver;
     }
 
     private void Start()
@@ -28,9 +29,17 @@ public class Scoring : MonoBehaviour
     }
     private void OnDisable()
     {
+
         EventManager.OnFullRow -= FullRow;
         EventManager.OnMoveDown -= MovingDown;
         EventManager.OnBlockPlaced -= BlockPlaced;
+        EventManager.OnGameOver -= GameOver;
+
+    }
+
+    private void GameOver()
+    {
+        scoreText.text = Score.ToString("N0", System.Globalization.CultureInfo.InvariantCulture);
     }
     void MovingDown(bool isHolding)
     {
@@ -38,16 +47,18 @@ public class Scoring : MonoBehaviour
     }
     private void BlockPlaced(Shape shape)
     {
+
         if (isHoldingDown)
         {
             Score += shape.segments.Count * 2;
-            scoreText.text = Score.ToString();
+            scoreText.text = Score.ToString("N0", System.Globalization.CultureInfo.InvariantCulture);
+
             EventManager.ScoreUpdates(new CustomEventArgs(gameObject), shape.segments.Count * 2);
         }
         else
         {
             Score += shape.segments.Count;
-            scoreText.text = Score.ToString();
+            scoreText.text = Score.ToString("N0", System.Globalization.CultureInfo.InvariantCulture);
             EventManager.ScoreUpdates(new CustomEventArgs(gameObject), shape.segments.Count);
         }
     }
@@ -78,7 +89,8 @@ public class Scoring : MonoBehaviour
                 break;
         }
         Score += baseScore * Level;
-        scoreText.text = Score.ToString();
+        scoreText.text = Score.ToString("N0", System.Globalization.CultureInfo.InvariantCulture);
+        Debug.Log("Score called from fullrow");
         EventManager.ScoreUpdates(new CustomEventArgs(gameObject), baseScore * Level);
     }
 }

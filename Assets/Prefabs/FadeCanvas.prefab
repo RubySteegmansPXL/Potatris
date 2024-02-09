@@ -704,7 +704,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 10000
   m_TargetDisplay: 0
 --- !u!114 &319456849945280631
 MonoBehaviour:
@@ -954,6 +954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationKey: main_menu_credits
+  textMeshPro: {fileID: 0}
 --- !u!1 &9121111681905924250
 GameObject:
   m_ObjectHideFlags: 0

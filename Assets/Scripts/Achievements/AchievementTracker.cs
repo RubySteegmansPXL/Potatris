@@ -106,6 +106,7 @@ public class AchievementTracker : MonoBehaviour
             AchievementsManager.instance.UpdateAchievement("ach_5", 20);
             fiveHundredThisGame = true;
         }
+        Debug.Log("Score updated, achievement, added " + scoreAdded);
         AchievementsManager.instance.UpdateAchievement("ach_8", scoreAdded);
         AchievementsManager.instance.UpdateAchievement("ach_9", scoreAdded);
     }

@@ -34,7 +34,7 @@ public class AudioManager : MonoBehaviour
         EventManager.OnGameStart += PlayGameStart;
         EventManager.OnGameOver += PlayGameOver;
         EventManager.OnFullRow += PlayFullRow;
-        EventManager.OnBlockPlaced += PlayBlockPlaced;
+        EventManager.OnBlockCreated += PlayBlockPlaced;
         EventManager.OnAchievementUnlocked += PlayAchievementUnlocked;
         EventManager.OnMove += PlayBlockMove;
         EventManager.OnMoveDown += PlayBlockMoveDown;
@@ -53,7 +53,7 @@ public class AudioManager : MonoBehaviour
         EventManager.OnGameStart -= PlayGameStart;
         EventManager.OnGameOver -= PlayGameOver;
         EventManager.OnFullRow -= PlayFullRow;
-        EventManager.OnBlockPlaced -= PlayBlockPlaced;
+        EventManager.OnBlockCreated -= PlayBlockPlaced;
         EventManager.OnAchievementUnlocked -= PlayAchievementUnlocked;
         EventManager.OnMove -= PlayBlockMove;
         EventManager.OnMoveDown -= PlayBlockMoveDown;
@@ -88,7 +88,7 @@ public class AudioManager : MonoBehaviour
         audioSource.PlayOneShot(movementSound);
     }
 
-    private void PlayBlockPlaced(Shape shape)
+    private void PlayBlockPlaced()
     {
         audioSource.PlayOneShot(blockPlacedSound);
     }

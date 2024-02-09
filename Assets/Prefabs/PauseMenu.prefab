@@ -287,7 +287,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &6656866129500181140
 MonoBehaviour:
@@ -360,6 +360,7 @@ MonoBehaviour:
   achievementsButton: {fileID: 0}
   mainMenuButton: {fileID: 2917226830319145785}
   tutorialSettings: {fileID: 0}
+  easySettings: {fileID: 0}
 --- !u!1 &4945112248910722789
 GameObject:
   m_ObjectHideFlags: 0
