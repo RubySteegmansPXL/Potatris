@@ -38,8 +38,11 @@ public class LocalizationManager : MonoBehaviour
     {
         if (instance == null)
         {
+            Debug.Log("LocalizationManager instance created");
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            Debug.Log("Loading translations");
             LoadTranslations();
         }
         else
@@ -57,45 +60,53 @@ public class LocalizationManager : MonoBehaviour
         // Load translations from the CSV file
         translations = new Dictionary<string, Dictionary<string, string>>();
 
-        using (StreamReader file = new StreamReader(csvFilePath))
+        try
         {
-            bool firstLine = true;
 
-            while (!file.EndOfStream)
+            using (StreamReader file = new StreamReader(csvFilePath))
             {
-                string line = file.ReadLine();
-                //Debug.Log("Line: " + line);
+                bool firstLine = true;
 
-                if (firstLine)
+                while (!file.EndOfStream)
                 {
-                    firstLine = false;
-                    // Send the header to the initializer
-                    LanguageManager.Instance.InitializeLanguageDictionary(line);
-                    continue; // Skip the header row
-                }
+                    string line = file.ReadLine();
+                    //Debug.Log("Line: " + line);
 
-                // Use a custom CSV parsing method to handle quoted strings
-                var parts = ParseCSVLine(line);
-                //Debug.Log("Parts: " + parts.Length);
-
-                if (parts.Length >= 3)
-                {
-                    string key = parts[0].Trim();
-
-                    // Group translations together and trim them 
-                    string[] allLanguageTranslations = parts.Skip(1).Select(x => x.Trim()).ToArray();
-                    string[] allLanguageCodes = LanguageManager.Instance.GetAvailableLanguageCodes().ToArray();
-
-                    for (int i = 0; i < allLanguageTranslations.Length; i++)
+                    if (firstLine)
                     {
-                        if (!translations.ContainsKey(key))
+                        firstLine = false;
+                        // Send the header to the initializer
+                        LanguageManager.Instance.InitializeLanguageDictionary(line);
+                        continue; // Skip the header row
+                    }
+
+                    // Use a custom CSV parsing method to handle quoted strings
+                    var parts = ParseCSVLine(line);
+                    //Debug.Log("Parts: " + parts.Length);
+
+                    if (parts.Length >= 3)
+                    {
+                        string key = parts[0].Trim();
+
+                        // Group translations together and trim them 
+                        string[] allLanguageTranslations = parts.Skip(1).Select(x => x.Trim()).ToArray();
+                        string[] allLanguageCodes = LanguageManager.Instance.GetAvailableLanguageCodes().ToArray();
+
+                        for (int i = 0; i < allLanguageTranslations.Length; i++)
                         {
-                            translations.Add(key, new Dictionary<string, string>());
+                            if (!translations.ContainsKey(key))
+                            {
+                                translations.Add(key, new Dictionary<string, string>());
+                            }
+                            translations[key][allLanguageCodes[i]] = allLanguageTranslations[i];
                         }
-                        translations[key][allLanguageCodes[i]] = allLanguageTranslations[i];
                     }
                 }
             }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error loading translations: " + e.Message);
         }
     }
 
